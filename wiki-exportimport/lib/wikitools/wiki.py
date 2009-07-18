@@ -73,7 +73,7 @@ class Wiki:
 		"""
 		params = {'action':'query',
 			'meta':'siteinfo',
-			'siprop':'general|namespaces|namespacealiases',
+			'siprop':'general|namespaces',
 		}
 		if self.maxlag < 120:
 			params['maxlag'] = 120
@@ -86,10 +86,6 @@ class Wiki:
 		for ns in nsdata:
 			nsinfo = nsdata[ns]
 			self.namespaces[nsinfo['id']] = nsinfo
-		nsaliasdata = info['query']['namespacealiases']
-		if nsaliasdata:
-			for ns in nsaliasdata:
-				self.NSaliases[ns['*']] = ns['id']
 		if not 'writeapi' in sidata:
 			print "WARNING: Write-API not enabled, you will not be able to edit"
 		version = re.search("\d\.(\d\d)", self.siteinfo['generator'])
@@ -97,7 +93,7 @@ class Wiki:
 			print "WARNING: Some features may not work on older versions of MediaWiki"
 		return self
 	
-	def login(self, username, password=False, remember=False, force=False, verify=True):
+	def login(self, username, password=False, remember=False, force=False, verify=True, domain=None):
 		"""Login to the site
 		
 		remember - saves cookies to a file - the filename will be:
@@ -126,6 +122,8 @@ class Wiki:
 			"lgname" : username,
 			"lgpassword" : password,
 		}
+		if domain is not None:
+			data["lgdomain"] = domain
 		if self.maxlag < 120:
 			data['maxlag'] = 120
 		req = api.APIRequest(self, data)
@@ -150,7 +148,10 @@ class Wiki:
 			params['maxlag'] = 120
 		req = api.APIRequest(self, params)
 		info = req.query()
-		user_rights = info['query']['userinfo']['rights']
+		if 'query' in info.keys():
+			user_rights = info['query']['userinfo']['rights']
+		else:
+			user_rights = info['userinfo']['rights']
 		if 'apihighlimits' in user_rights:
 			self.limit = 5000
 		if remember:
@@ -289,4 +290,4 @@ class WikiCookieJar(cookielib.FileCookieJar):
 			self.set_cookie(cook)
 		exec sitedata
 		f.close()
-		
+	
