@@ -1,0 +1,53 @@
+Prerequisites
+=============
+
+You need 
+
+* A Webserver
+* PHP5 (for Mediawiki)
+* A database (for Mediawiki)
+* Python 2.5 (for the Robots)
+* A Cron daemon or similar job runner (for the Robots)
+
+
+MediaWiki
+=========
+
+Install a current version of Mediawiki.
+
+See http://www.mediawiki.org/wiki/MediaWiki , the INSTALL file in the
+source directory will guide you through the installation.
+
+
+MediaWiki Extensions
+====================
+
+Install the following MediaWiki extensions:
+
+http://www.mediawiki.org/wiki/Extension:Include
+http://www.mediawiki.org/wiki/Extension:StringFunctions
+http://www.mediawiki.org/wiki/Extension:ParserFunctions
+http://www.mediawiki.org/wiki/Extension:SyntaxHighlight_GeSHi
+
+These need to be placed in <WIKIPATH>/extensions/ and referenced in the
+LocalSettings.php file. You can check if they installed fine by checking
+the Special:Version page of your Wiki.
+
+
+Installing SICEKIT
+==================
+
+FIXME
+
+
+Testing the robots
+==================
+
+FIXME
+
+
+Further information
+===================
+
+For further information on customizing your SICEKIT installation see
+https://oss.inqnet.at/trac/sicekit/FIXME .
