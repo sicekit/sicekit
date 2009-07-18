@@ -1,0 +1,4 @@
+syntax: glob
+*.pyc
+login-data
+user-config.py
