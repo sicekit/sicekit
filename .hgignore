@@ -2,3 +2,6 @@ syntax: glob
 *.pyc
 login-data
 user-config.py
+configuration.py
+*.log
+

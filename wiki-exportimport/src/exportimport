@@ -1,0 +1,9 @@
+#!/usr/bin/python
+
+# prepare libs
+import os,sys
+sys.path.append('../lib/')
+
+from sicekit_wiki_exportimport.main import ExportImportMain
+sys.exit(ExportImportMain().run(sys.argv))
+
