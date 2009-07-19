@@ -46,7 +46,9 @@ class Importer(object):
 	def _fetchPageText(self, title):
 		params = {'action':'query', 'titles':title,'export':'1'}
 		request = api.APIRequest(self.wiki, params)
-		xmldump = request.query()['query']['export']['*']
+		result = request.query()['query']
+		if '-1' in result['pages'].keys(): return "" # page does not exist yet
+		xmldump = result['export']['*'].encode('utf-8')
 		doc = xml.etree.ElementTree.XML(xmldump)
 		return doc.find('{http://www.mediawiki.org/xml/export-0.3/}page/{http://www.mediawiki.org/xml/export-0.3/}revision/{http://www.mediawiki.org/xml/export-0.3/}text').text
 
@@ -76,6 +78,10 @@ class Importer(object):
 		request.setMultipart()
 		request.changeParam('xml', page[u'io'])
 		result = request.query()
+
+		if result[u'import'][0][u'revisions'] != 1:
+			print "E: Page import failed. Wiki said:", result
+			return 1
 
 		self.pagecount = self.pagecount + 1
 		self.changecount = self.changecount + result[u'import'][0][u'revisions']
