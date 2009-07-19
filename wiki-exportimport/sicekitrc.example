@@ -1,0 +1,5 @@
+# Example .sicekitrc
+[sicekit]
+wiki_username = sicebot
+wiki_password = PASSWORD
+wiki_apiurl = http://url-to-wiki/wiki/api.php
