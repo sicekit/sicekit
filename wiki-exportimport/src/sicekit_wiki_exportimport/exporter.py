@@ -62,6 +62,7 @@ class Exporter(object):
 		siteinfo.find(u'{http://www.mediawiki.org/xml/export-0.3/}sitename').text = u'SICEKIT'
 		siteinfo.find(u'{http://www.mediawiki.org/xml/export-0.3/}base').text = u'chrome:///sicekit'
 		siteinfo.find(u'{http://www.mediawiki.org/xml/export-0.3/}generator').text = u'SICEKIT'
+                siteinfo.remove(siteinfo.find(u'{http://www.mediawiki.org/xml/export-0.3/}namespaces'))
 
 		self.writeDumpFile(page, xml.etree.ElementTree.tostring(doc.getroot(), 'utf-8'))
 
