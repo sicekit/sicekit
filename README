@@ -1,0 +1,37 @@
+SICEKIT
+=======
+
+The Systems & Infrastructure Encyclopedia Toolkit
+
+
+SICEKIT is a set of tools and templates designed for MediaWiki to aid
+people who maintain systems and infrastructure for a living in their
+daily tasks.
+
+Most infrastructure, operations and sysadmin teams, when faced with a
+documentation task, are constantly troubled by lack of standards, tools
+and methods for properly documenting their changes. More often than not
+the result is a pile of Spreadsheets or plain text documents which are
+hardly usable as configuration management database, seldomly versioned and
+not very user-friendly.
+
+SICEKIT tries to fill in the blanks prevalent in such environments by
+providing structure for item/device classes, version control for the
+stored information as well as automatically generated overviews and
+custom query interfaces.
+
+By basing it on an open Wiki implementation, you still have the
+flexibility you need in your business area.
+
+
+Availability
+============
+
+You can get the latest version of SICEKIT from
+https://oss.inqnet.at/trac/sicekit
+
+
+Installation
+============
+
+See the INSTALL file for installation instructions.
