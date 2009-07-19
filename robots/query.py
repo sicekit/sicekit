@@ -88,9 +88,7 @@ def GetData(params, site = None, verbose = False, useAPI = False, retryCount = 5
 
             # This will also work, but all unicode strings will need to be converted from \u notation
             # decodedObj = eval( jsontext )
-            rv = {}
-	    rv['query'] = simplejson.loads( jsontext )
-	    return rv
+            return simplejson.loads( jsontext )
 
         except ValueError, error:
             retryCount -= 1
