@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:Instance</ns0:title>
+    <ns0:id>399</ns0:id>
+    <ns0:revision>
+      <ns0:id>12628</ns0:id>
+      <ns0:timestamp>2009-07-18T21:43:28Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:comment>SICEKIT!</ns0:comment>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
+| {{TableHeadingStyle}} colspan=2 | Instance
+|-
+| style="width: 120px;" | Usage:
+|{{{USAGE}}}
+&lt;!-- begin puppet --&gt;
+|-
+{{#if:{{{PUPPET|}}}|
+{{!}} valign=top {{!}} &lt;b&gt;Puppet&lt;/b&gt;
+{{!}} Environment: {{{PUPPETENV}}}
+|}}
+&lt;!-- begin os/arch --&gt;
+|-
+|OS:
+|{{OS_{{{OS}}}}}
+|-
+|Architecture:
+|{{ARCH_{{{ARCH}}}}}
+&lt;!-- begin auth --&gt;
+|-
+|Authentication:
+|{{AUTH_{{{AUTH}}}}}{{#ifeq:{{{AUTH}}}|ldap|, Group: {{{LDAPGROUP}}}}}
+|-
+&lt;!-- end auth --&gt;
+|-
+| valign=top | Ethernet:
+| {{{ETH}}}
+&lt;!-- begin vols --&gt;
+|-
+{{#if:{{{VOLS|}}}|
+{{!}} valign=top {{!}} Storage Volumes:
+{{!}} {{{VOLS}}}
+|}}
+|-
+&lt;!-- begin nfs --&gt;
+|-
+{{#if:{{{NFS|}}}|
+{{!}} valign=top {{!}} NFS&lt;br&gt;Remote Paths:
+{{!}} {{{NFS}}}
+|}}
+|-
+|}&lt;includeonly&gt;
+[[Category:Instance]] [[Category:IP-Host]] {{#if:{{{PUPPET|}}}| {{PuppetBanner}} |}}
+&lt;/includeonly&gt;&lt;noinclude&gt;
+
+== The help ==
+
+Use this Instance template. Fill in OS, ARCH, USAGE, AUTH, ETH, NFS, VOLS, PUPPET.
+
+=== AUTH ===
+
+Currently understood:
+
+* localroot -&gt; "local, root only"
+* ldap -&gt; "Inqnet LDAP", also specify LDAPGROUP=hostgroup-foo
+
+
+=== ETH ===
+
+Use templates:
+
+* ETH: real no-vlan ethernet: &lt;pre&gt;{{ETH|eth0|Network/Mask|IP}}&lt;/pre&gt;
+* ETHV: real vlan ethernet: &lt;pre&gt;{{ETHV|eth0|VLAN|Network/Mask|IP}}&lt;/pre&gt;
+
+=== NFS ===
+
+Use one template per server host:
+
+&lt;pre&gt;{{NFSMount|server.host.name|/srv/mountpoint1|/srv/mountpoint2|/srv/mountpoint3}}&lt;/pre&gt;
+
+=== VOLS ===
+
+Use one template per logical volume:
+
+LV "log" on VG "vg1", used for "Web Application Logs":
+&lt;pre&gt;{{LV|vg1|log|Web Application Logs}}&lt;/pre&gt; 
+
+
+=== PUPPET ===
+
+Set PUPPET=1 for puppet managed hosts.
+
+Also set PUPPETENV=production or PUPPETENV=development.
+
+
+== An example ==
+&lt;pre&gt;
+{{Instance
+|OS=etch
+|ARCH=x86_64
+|USAGE=Web
+|AUTH=ldap
+|LDAPGROUP=hostgroup-web
+|ETH={{ETH|eth0|11.22.33.44/26|45}}{{ETH|eth1|10.10.10.0/24|10}}
+|VOLS={{LV|vg1|log|Application Logs}}{{LV|vg1|code|Application Code}}
+|}}
+&lt;/pre&gt;
+
+[[Category:Origin-SICEKIT]]
+&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

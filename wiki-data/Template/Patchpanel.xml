@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:Patchpanel</ns0:title>
+    <ns0:id>238</ns0:id>
+    <ns0:revision>
+      <ns0:id>12682</ns0:id>
+      <ns0:timestamp>2009-07-19T02:24:07Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
+|-
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{{NAME}}}
+&lt;!-- begin picture --&gt;
+{{#if:{{{MODELPICTURE|}}}|
+{{!}}-
+{{!}} colspan=2 align="center" {{!}} {{{MODELPICTURE}}} |}}
+&lt;!-- end picture --&gt;
+|-
+| style="width: 120px;" | Location:
+|[[{{{LOCATION}}}]]
+|-
+|Owner:
+|[[{{{OWNER}}}]]
+|-
+|Model:
+|[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
+|-
+|Kaufdatum:
+|{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
+|-
+| style="background: #b2d8d8; text-align:center;" colspan=2 | Hardware
+|-
+| Dimensions:
+| {{{HE|1}}} HE {{#if:{{{LENGTH|}}}| x {{{LENGTH}}} tief}}
+|-
+| Ports:
+| {{{PORTS}}}x CAT{{{CAT}}}
+&lt;!-- begin Trivia --&gt;
+|-
+{{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
+{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}
+[[Category:Patchpanel]]
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

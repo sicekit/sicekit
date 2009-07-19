@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:RackRack</ns0:title>
+    <ns0:id>21</ns0:id>
+    <ns0:revision>
+      <ns0:id>12688</ns0:id>
+      <ns0:timestamp>2009-07-19T02:25:25Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">&lt;includeonly&gt;
+{| class="prettytable" width="460"
+|-
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | Rackplan für {{{HE}}} HE
+|-
+| width=10 | &lt;b&gt;U&lt;/b&gt; || width=250 | &lt;b&gt;Vorne&lt;/b&gt; || width=250 align=right | &lt;b&gt;Hinten&lt;/b&gt;
+|-
+{{RackUnit|1|{{{V1|}}}|{{{H1|}}}|U={{{U1|}}}|F={{{F1|}}}}}
+{{RackUnit|2|{{{V2|}}}|{{{H2|}}}|U={{{U2|}}}|F={{{F2|}}}}}
+{{RackUnit|3|{{{V3|}}}|{{{H3|}}}|U={{{U3|}}}|F={{{F3|}}}}}
+{{RackUnit|4|{{{V4|}}}|{{{H4|}}}|U={{{U4|}}}|F={{{F4|}}}}}
+{{RackUnit|5|{{{V5|}}}|{{{H5|}}}|U={{{U5|}}}|F={{{F5|}}}}}
+{{RackUnit|6|{{{V6|}}}|{{{H6|}}}|U={{{U6|}}}|F={{{F6|}}}}}
+{{RackUnit|7|{{{V7|}}}|{{{H7|}}}|U={{{U7|}}}|F={{{F7|}}}}}
+{{RackUnit|8|{{{V8|}}}|{{{H8|}}}|U={{{U8|}}}|F={{{F8|}}}}}
+{{RackUnit|9|{{{V9|}}}|{{{H9|}}}|U={{{U9|}}}|F={{{F9|}}}}}
+{{RackUnit|10|{{{V10|}}}|{{{H10|}}}|U={{{U10|}}}|F={{{F10|}}}}}
+{{RackUnit|11|{{{V11|}}}|{{{H11|}}}|U={{{U11|}}}|F={{{F11|}}}}}
+{{#ifexpr:{{{HE}}}&lt;=11||
+{{RackUnit|12|{{{V12|}}}|{{{H12|}}}|U={{{U12|}}}|F={{{F12|}}}}}
+{{RackUnit|13|{{{V13|}}}|{{{H13|}}}|U={{{U13|}}}|F={{{F13|}}}}}
+{{RackUnit|14|{{{V14|}}}|{{{H14|}}}|U={{{U14|}}}|F={{{F14|}}}}}
+{{RackUnit|15|{{{V15|}}}|{{{H15|}}}|U={{{U15|}}}|F={{{F15|}}}}}
+{{RackUnit|16|{{{V16|}}}|{{{H16|}}}|U={{{U16|}}}|F={{{F16|}}}}}
+{{RackUnit|17|{{{V17|}}}|{{{H17|}}}|U={{{U17|}}}|F={{{F17|}}}}}
+{{RackUnit|18|{{{V18|}}}|{{{H18|}}}|U={{{U18|}}}|F={{{F18|}}}}}
+{{RackUnit|19|{{{V19|}}}|{{{H19|}}}|U={{{U19|}}}|F={{{F19|}}}}}
+{{RackUnit|20|{{{V20|}}}|{{{H20|}}}|U={{{U20|}}}|F={{{F20|}}}}}
+{{RackUnit|21|{{{V21|}}}|{{{H21|}}}|U={{{U21|}}}|F={{{F21|}}}}}
+}}
+{{#ifexpr:{{{HE}}}&lt;=21||
+{{RackUnit|22|{{{V22|}}}|{{{H22|}}}|U={{{U22|}}}|F={{{F22|}}}}}
+{{RackUnit|23|{{{V23|}}}|{{{H23|}}}|U={{{U23|}}}|F={{{F23|}}}}}
+{{RackUnit|24|{{{V24|}}}|{{{H24|}}}|U={{{U24|}}}|F={{{F24|}}}}}
+{{RackUnit|25|{{{V25|}}}|{{{H25|}}}|U={{{U25|}}}|F={{{F25|}}}}}
+{{RackUnit|26|{{{V26|}}}|{{{H26|}}}|U={{{U26|}}}|F={{{F26|}}}}}
+{{RackUnit|27|{{{V27|}}}|{{{H27|}}}|U={{{U27|}}}|F={{{F27|}}}}}
+{{RackUnit|28|{{{V28|}}}|{{{H28|}}}|U={{{U28|}}}|F={{{F28|}}}}}
+{{RackUnit|29|{{{V29|}}}|{{{H29|}}}|U={{{U29|}}}|F={{{F29|}}}}}
+{{RackUnit|30|{{{V30|}}}|{{{H30|}}}|U={{{U30|}}}|F={{{F30|}}}}}
+{{RackUnit|31|{{{V31|}}}|{{{H31|}}}|U={{{U31|}}}|F={{{F31|}}}}}
+{{RackUnit|32|{{{V32|}}}|{{{H32|}}}|U={{{U32|}}}|F={{{F32|}}}}}
+{{RackUnit|33|{{{V33|}}}|{{{H33|}}}|U={{{U33|}}}|F={{{F33|}}}}}
+{{RackUnit|34|{{{V34|}}}|{{{H34|}}}|U={{{U34|}}}|F={{{F34|}}}}}
+{{RackUnit|35|{{{V35|}}}|{{{H35|}}}|U={{{U35|}}}|F={{{F35|}}}}}
+{{RackUnit|36|{{{V36|}}}|{{{H36|}}}|U={{{U36|}}}|F={{{F36|}}}}}
+{{RackUnit|37|{{{V37|}}}|{{{H37|}}}|U={{{U37|}}}|F={{{F37|}}}}}
+{{RackUnit|38|{{{V38|}}}|{{{H38|}}}|U={{{U38|}}}|F={{{F38|}}}}}
+{{RackUnit|39|{{{V39|}}}|{{{H39|}}}|U={{{U39|}}}|F={{{F39|}}}}}
+{{RackUnit|40|{{{V40|}}}|{{{H40|}}}|U={{{U40|}}}|F={{{F40|}}}}}
+{{RackUnit|41|{{{V41|}}}|{{{H41|}}}|U={{{U41|}}}|F={{{F41|}}}}}
+{{RackUnit|42|{{{V42|}}}|{{{H42|}}}|U={{{U42|}}}|F={{{F42|}}}}}
+}}
+{{#ifexpr:{{{HE}}}&lt;=42||
+{{RackUnit|43|{{{V43|}}}|{{{H43|}}}|U={{{U43|}}}|F={{{F43|}}}}}
+{{RackUnit|44|{{{V44|}}}|{{{H44|}}}|U={{{U44|}}}|F={{{F44|}}}}}
+{{RackUnit|45|{{{V45|}}}|{{{H45|}}}|U={{{U45|}}}|F={{{F45|}}}}}
+{{RackUnit|46|{{{V46|}}}|{{{H46|}}}|U={{{U46|}}}|F={{{F46|}}}}}
+{{RackUnit|47|{{{V47|}}}|{{{H47|}}}|U={{{U47|}}}|F={{{F47|}}}}}
+{{RackUnit|48|{{{V48|}}}|{{{H48|}}}|U={{{U48|}}}|F={{{F48|}}}}}
+}}
+|}
+&lt;/includeonly&gt;
+&lt;noinclude&gt;
+Dieses Template erzeugt eine Tabelle, für ein Rack mit 10, 21, 42 oder 48 Höheneinheiten.
+
+Parameter:
+
+* HE: gibt die Anzahl der Höheneinheiten an, z.B. HE=48
+
+n = 1...48:
+
+* Vn=: Vorne eingebautes Gerät in der HE n
+* Hn=: Hinten eingebautes Gerät in der HE n
+* Un=X: In der HE n eingebautes Gerät benötigt X HE
+* Fn=: Spezielle Flags für diese Höheneinheit, as follows:
+** f: Full-size: Nur ein Gerät kann eingebaut werden, entweder hinten oder vorne
+** x: eXclude: in die HE kann nichts eingebaut werden, weil schon ein anderes Gerät diese HE blockiert
+[[Category:Origin-SICEKIT]]
+&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

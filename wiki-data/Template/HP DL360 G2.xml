@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:HP DL360 G2</ns0:title>
+    <ns0:id>97</ns0:id>
+    <ns0:revision>
+      <ns0:id>12664</ns0:id>
+      <ns0:timestamp>2009-07-19T02:21:36Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{{GenericServer|
+|NAME={{{NAME}}}
+|LOCATION={{{LOCATION}}}
+|OWNER={{{OWNER}}}
+|MODEL=HP DL360 G2
+|SN={{{SN}}}
+|PN={{{PN}}}
+|CARE={{{CARE|None}}}
+|PURCHASEDATE={{{PURCHASEDATE}}}
+|CONTRACT={{{CONTRACT}}}
+|HE=1
+|LENGTH=65cm
+|OOBTYPE=ILO|OOBIP={{{OOBIP}}}|OOBAUTH={{{OOBAUTH|}}}|OOBVLAN={{{OOBVLAN|}}}|OOBMAC={{{OOBMAC}}}
+|PSU=Single
+|POWER={{{POWER|}}}
+|PMINIDLE=?W
+|PMINBUSY=?W
+|PMAXIDLE=?W
+|PMAXBUSY=?W
+|NICMAX=2
+|NICUSED={{{NICUSED}}}
+|NIC1={{{NIC1|}}}
+|NIC2={{{NIC2|}}}
+|NIC3={{{NIC3|}}}
+|NICMAC1={{{NICMAC1}}}
+|NICMAC2={{{NICMAC2}}}
+|NICMAC3={{{NICMAC3}}}
+|CPUMAX=2x Pentium III 1400MHz
+|CPUUSED={{{CPUUSED}}}
+|RAMMAX=4x, 4GB
+|RAMUSED={{{RAMUSED}}}
+|PCIMAX=2 full length 64bit
+|PCIUSED={{{PCIUSED|}}}
+|USBMAX=2 rear
+|USBUSED={{{USBUSED|}}}
+|VGAMAX=1
+|VGAUSED={{{VGAUSED|}}}
+|SERIALMAX=1 DB9
+|SERIALUSED={{{SERIALUSED|}}}
+|DISKSMAX=2x [[HP U320 SCSI Universal HotPlug]]
+|DISKSUSED={{{DISKSUSED}}}
+|STORCTRL={{{STORCTRL|[[HP SmartArray 5i]]}}}
+|RAID={{{RAID|RAID 1}}}
+|RMMMAX=1x 3.5" Floppy, 1x 24x lowprofile IDE CD
+|RMMUSED={{{RMMUSED|1x 3.5" Floppy, 1x 24x lowprofile IDE CD}}}
+|MOUNTING=19", HP G2 Rails
+|MODELPICTURE=[[Image:Dl360g2_small.gif]]
+|TRIVIA={{{TRIVIA|}}}
+}}
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

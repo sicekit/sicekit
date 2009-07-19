@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:Rack</ns0:title>
+    <ns0:id>17</ns0:id>
+    <ns0:revision>
+      <ns0:id>12689</ns0:id>
+      <ns0:timestamp>2009-07-19T02:25:37Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="370"
+|-
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{{HE}}}HE-Rack:&lt;br&gt;{{{NAME}}}
+|-
+| style="width: 60px;" | Owner:
+|[[{{{OWNER}}}]]
+|-
+|Location:
+|[[{{{LOCATION}}}]]
+|-
+|... genauer:
+|{{{LOCATIONDETAIL}}}
+|-
+|Zutritt:
+|{{{ENTRY}}} (also see [[{{{LOCATION}}}]]!)
+|-
+|Vertrag:
+|[[{{{CONTRACT}}}]]
+|-
+|Dimensions:
+|{{{HE}}} HE&lt;br&gt;{{#if:{{{DIMENSIONS|}}}|{{{DIMENSIONS}}}| {{{LENGTH}}} tief / {{{WIDTH}}} breit}}
+|-
+|Rack Model:
+|{{{MODEL}}}
+|-
+|Power Supply:
+|{{{POWER}}}
+|-
+|Uplink:
+|{{{UPLINK}}}
+|-
+|}
+
+&lt;noinclude&gt;
+AWARENESS:
+
+* Attached Racks (fehlende Trennwände o.ä.)
+* HE-Plan (Nomenklatur Vorne/Hinten!)
+* Color Conventions Plan (wenn abweichend vom Std) 
+
+[[Category:Origin-SICEKIT]]
+&lt;/noinclude&gt;
+
+[[Category:Rack]]</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

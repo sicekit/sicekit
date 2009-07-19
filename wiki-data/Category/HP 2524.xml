@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Category:HP 2524</ns0:title>
+    <ns0:id>134</ns0:id>
+    <ns0:revision>
+      <ns0:id>12723</ns0:id>
+      <ns0:timestamp>2009-07-19T02:32:36Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">[[Image:Hp2524.jpg|right]]
+HP Part Number: J4813A
+
+Specs:
+* 24x 10/100MBit
+* 2 open slots für Transceiver
+
+* [http://www.hp.com/rnd/pdfs/datasheets/switch_2500_series_8_06.pdf Datasheet]
+* [http://www.hp.com/rnd/products/switches/switch2524-2512/overview.htm Procurve 2500 Series Overview]
+* [http://www.hp.com/rnd/products/switches/switch2524-2512/specs.htm Procurve 2500 Series Specifications]
+* [http://www.hp.com/rnd/software/switches.htm Procurve Switch Firmware List]
+
+Capabilities:
+* Nothing special
+
+
+[[Category:HP]]
+[[Category:Origin-SICEKIT]]</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

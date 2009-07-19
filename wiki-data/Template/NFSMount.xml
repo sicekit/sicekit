@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:NFSMount</ns0:title>
+    <ns0:id>413</ns0:id>
+    <ns0:revision>
+      <ns0:id>12675</ns0:id>
+      <ns0:timestamp>2009-07-19T02:23:18Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">[[{{{1}}}]]
+&lt;ul&gt;
+  &lt;li&gt;'''{{{2}}}'''
+{{#if:{{{3|}}}|&lt;li&gt;'''{{{3}}}'''}}
+{{#if:{{{4|}}}|&lt;li&gt;'''{{{4}}}'''}}
+{{#if:{{{5|}}}|&lt;li&gt;'''{{{5}}}'''}}
+{{#if:{{{6|}}}|&lt;li&gt;'''{{{6}}}'''}}
+{{#if:{{{7|}}}|&lt;li&gt;'''{{{7}}}'''}}
+{{#if:{{{8|}}}|&lt;li&gt;'''{{{8}}}'''}}
+&lt;/ul&gt;
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

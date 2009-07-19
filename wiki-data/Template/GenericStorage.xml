@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:GenericStorage</ns0:title>
+    <ns0:id>934</ns0:id>
+    <ns0:revision>
+      <ns0:id>12652</ns0:id>
+      <ns0:timestamp>2009-07-19T02:19:41Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
+|-
+| {{TableHeadingStyle}} colspan=2 | '''{{PAGENAME}}'''
+&lt;!-- begin picture --&gt;
+{{#if:{{{MODELPICTURE|}}}|
+{{!}}-
+{{!}} class="noprint" colspan=2 align="center" {{!}} {{{MODELPICTURE}}} |}}
+&lt;!-- end picture --&gt;
+|-
+| style="width: 120px;" | Location:
+|[[{{{LOCATION}}}]]
+|-
+|Owner:
+|[[{{{OWNER}}}]]
+|-
+|Model:
+|[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
+|-
+| S/N / P/N:
+| {{{SN}}} / P/N: {{{PN}}}
+|-
+|Wartungsvertrag:
+|{{{CARE}}}
+|-
+|Kaufdatum:
+|{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
+|-
+| {{TableHeadingStyle}} colspan=2 | Hardware
+|-
+| Dimensions:
+| {{{HE}}} HE x {{{LENGTH}}} tief
+|-
+{{#if:{{{POWER|}}}{{{PMINIDLE|}}}{{{PMINBUSY|}}}{{{PMAXIDLE|}}}{{{PMAXBUSY|}}}|
+{{!}} Power:&lt;br&gt;min. HW&lt;br&gt;max. HW
+{{!}} {{{POWER|}}}&lt;br&gt;idle: {{{PMINIDLE}}} busy: {{{PMINBUSY}}}&lt;br&gt;idle: {{{PMAXIDLE}}} busy: {{{PMAXBUSY}}}
+}}
+&lt;!-- begin PSU --&gt;
+|-
+| PSU:
+| {{{PSU}}} {{#ifeq:{{{PSU}}}|RPS|Used: {{{RPSUSED}}}/{{{RPSMAX}}}}}
+&lt;!-- end PSU --&gt;
+&lt;!-- begin sas --&gt;
+|-
+{{#if:{{{IOM|}}}|
+{{!}} I/O Modules:
+{{!}} {{{IOM}}}
+|}}
+|-
+{{#if:{{{EXTMAX|}}}|
+{{!}} External I/O Ports:
+{{!}} {{{EXTMAX}}}&lt;br&gt;{{{EXTUSED}}}
+|}}
+|-
+| Connections:
+| {{{CONNS}}}
+&lt;!-- begin storage --&gt;
+|-
+| Disks:
+| Used: {{{DISKSUSED}}}&lt;br&gt;Slots: {{{DISKSMAX}}}
+|-
+&lt;!-- end storage --&gt;
+|-
+| Montage:
+| {{{MOUNTING}}}
+&lt;!-- begin Trivia --&gt;
+|-
+{{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
+{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}&lt;includeonly&gt;[[Category:{{{MODEL}}}]] [[Category:Storage]]&lt;/includeonly&gt;
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

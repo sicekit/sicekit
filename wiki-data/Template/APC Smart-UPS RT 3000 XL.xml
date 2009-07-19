@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:APC Smart-UPS RT 3000 XL</ns0:title>
+    <ns0:id>217</ns0:id>
+    <ns0:revision>
+      <ns0:id>12633</ns0:id>
+      <ns0:timestamp>2009-07-19T02:16:58Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{{GenericUPS|
+|NAME={{{NAME}}}
+|OWNER={{{OWNER}}}
+|LOCATION={{{LOCATION}}}
+|PURCHASEDATE={{{PURCHASEDATE}}}
+|CONTRACT={{{CONTRACT}}}
+|CARE={{{CARE|None}}}
+|SN={{{SN}}}
+|OOB={{{OOB|}}}
+|OOBIP={{{OOBIP|}}}
+|OOBMAC={{{OOBMAC|}}}
+|OOBVLAN={{{OOBVLAN|}}}
+|OOBAUTH={{{OOBAUTH|}}}
+|MODEL=APC Smart-UPS RT 3000 XL
+|HE=3
+|LENGTH=66cm
+|INPUT=1x [[IEC 320 C20]]
+|INNET=230V AC 50Hz
+|OUTPUT=8x [[IEC 320 C13]] + 2x [[IEC 320 C19]]
+|OUTNET=230V AC 50Hz
+|MAXLOAD=2100W
+|BATTERIES=2x [[RBC44]]
+|RUNTIMEHALF=33.9 min @ 1050W
+|RUNTIMEFULL=14.1 min @ 2100W
+|MGMTPORT=1x DB9
+|MGMTPORTCONN={{{MGMTPORTCONN|}}}
+|SLOTSMAX=1x APC SmartSlot
+|SLOTSUSED={{{SLOTSUSED|}}}
+|MOUNTING=19" APC Mounting Kit
+}}
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

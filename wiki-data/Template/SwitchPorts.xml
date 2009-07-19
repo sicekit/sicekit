@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:SwitchPorts</ns0:title>
+    <ns0:id>81</ns0:id>
+    <ns0:revision>
+      <ns0:id>12700</ns0:id>
+      <ns0:timestamp>2009-07-19T02:28:07Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">&lt;noinclude&gt;
+&lt;!-- WARNING: Spaces are important! --&gt;
+&lt;/noinclude&gt;
+&lt;includeonly&gt;
+{| class="prettytable" width="460"
+|-
+{{#if:{{{MODNAME|}}}|
+{{!}} style="background: #b2d8d8; text-align:center;" colspan=3 {{!}} &lt;b&gt;Slot &lt;big&gt;{{{SLOT}}}&lt;/big&gt; &lt;br/&gt;{{{MODNAME}}}&lt;/b&gt;&lt;br/&gt;P/N: {{{MODPN}}} S/N: {{{MODSN}}}
+|
+{{!}} style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 {{!}} Switch-Plan für {{{PORTS}}} Ports
+}}
+|-
+| width=10 | &lt;b&gt;Port&lt;/b&gt; || width=250 | &lt;b&gt;Device&lt;/b&gt; || width=250 | &lt;b&gt;VLANs&lt;/b&gt;
+|-
+{{SwitchPorts_P|1|{{{D1|}}}|{{{I1|}}}|VU={{{VU1|}}}|VT={{{VT1|}}}}}
+{{SwitchPorts_P|2|{{{D2|}}}|{{{I2|}}}|VU={{{VU2|}}}|VT={{{VT2|}}}}}
+{{SwitchPorts_P|3|{{{D3|}}}|{{{I3|}}}|VU={{{VU3|}}}|VT={{{VT3|}}}}}
+{{SwitchPorts_P|4|{{{D4|}}}|{{{I4|}}}|VU={{{VU4|}}}|VT={{{VT4|}}}}}
+{{#ifexpr: {{{PORTS}}} &gt; 4 |
+{{SwitchPorts_P|5|{{{D5|}}}|{{{I5|}}}|VU={{{VU5|}}}|VT={{{VT5|}}}}}
+{{SwitchPorts_P|6|{{{D6|}}}|{{{I6|}}}|VU={{{VU6|}}}|VT={{{VT6|}}}}}
+{{SwitchPorts_P|7|{{{D7|}}}|{{{I7|}}}|VU={{{VU7|}}}|VT={{{VT7|}}}}}
+{{SwitchPorts_P|8|{{{D8|}}}|{{{I8|}}}|VU={{{VU8|}}}|VT={{{VT8|}}}}}
+{{SwitchPorts_P|9|{{{D9|}}}|{{{I9|}}}|VU={{{VU9|}}}|VT={{{VT9|}}}}}
+{{SwitchPorts_P|10|{{{D10|}}}|{{{I10|}}}|VU={{{VU10|}}}|VT={{{VT10|}}}}}
+{{SwitchPorts_P|11|{{{D11|}}}|{{{I11|}}}|VU={{{VU11|}}}|VT={{{VT11|}}}}}
+{{SwitchPorts_P|12|{{{D12|}}}|{{{I12|}}}|VU={{{VU12|}}}|VT={{{VT12|}}}}}
+{{SwitchPorts_P|13|{{{D13|}}}|{{{I13|}}}|VU={{{VU13|}}}|VT={{{VT13|}}}}}
+{{SwitchPorts_P|14|{{{D14|}}}|{{{I14|}}}|VU={{{VU14|}}}|VT={{{VT14|}}}}}
+{{SwitchPorts_P|15|{{{D15|}}}|{{{I15|}}}|VU={{{VU15|}}}|VT={{{VT15|}}}}}
+{{SwitchPorts_P|16|{{{D16|}}}|{{{I16|}}}|VU={{{VU16|}}}|VT={{{VT16|}}}}}
+{{SwitchPorts_P|17|{{{D17|}}}|{{{I17|}}}|VU={{{VU17|}}}|VT={{{VT17|}}}}}
+{{SwitchPorts_P|18|{{{D18|}}}|{{{I18|}}}|VU={{{VU18|}}}|VT={{{VT18|}}}}}
+{{SwitchPorts_P|19|{{{D19|}}}|{{{I19|}}}|VU={{{VU19|}}}|VT={{{VT19|}}}}}
+{{SwitchPorts_P|20|{{{D20|}}}|{{{I20|}}}|VU={{{VU20|}}}|VT={{{VT20|}}}}}
+{{SwitchPorts_P|21|{{{D21|}}}|{{{I21|}}}|VU={{{VU21|}}}|VT={{{VT21|}}}}}
+{{SwitchPorts_P|22|{{{D22|}}}|{{{I22|}}}|VU={{{VU22|}}}|VT={{{VT22|}}}}}
+{{SwitchPorts_P|23|{{{D23|}}}|{{{I23|}}}|VU={{{VU23|}}}|VT={{{VT23|}}}}}
+{{SwitchPorts_P|24|{{{D24|}}}|{{{I24|}}}|VU={{{VU24|}}}|VT={{{VT24|}}}}}
+}}
+{{#ifexpr: {{{PORTS}}} &gt; 24 |
+{{SwitchPorts_P|25|{{{D25|}}}|{{{I25|}}}|VU={{{VU25|}}}|VT={{{VT25|}}}}}
+{{SwitchPorts_P|26|{{{D26|}}}|{{{I26|}}}|VU={{{VU26|}}}|VT={{{VT26|}}}}}
+}}
+{{#ifexpr: {{{PORTS}}} &gt; 26 |
+{{SwitchPorts_P|27|{{{D27|}}}|{{{I27|}}}|VU={{{VU27|}}}|VT={{{VT27|}}}}}
+{{SwitchPorts_P|28|{{{D28|}}}|{{{I28|}}}|VU={{{VU28|}}}|VT={{{VT28|}}}}}
+{{SwitchPorts_P|29|{{{D29|}}}|{{{I29|}}}|VU={{{VU29|}}}|VT={{{VT29|}}}}}
+{{SwitchPorts_P|30|{{{D30|}}}|{{{I30|}}}|VU={{{VU30|}}}|VT={{{VT30|}}}}}
+{{SwitchPorts_P|31|{{{D31|}}}|{{{I31|}}}|VU={{{VU31|}}}|VT={{{VT31|}}}}}
+{{SwitchPorts_P|32|{{{D32|}}}|{{{I32|}}}|VU={{{VU32|}}}|VT={{{VT32|}}}}}
+{{SwitchPorts_P|33|{{{D33|}}}|{{{I33|}}}|VU={{{VU33|}}}|VT={{{VT33|}}}}}
+{{SwitchPorts_P|34|{{{D34|}}}|{{{I34|}}}|VU={{{VU34|}}}|VT={{{VT34|}}}}}
+{{SwitchPorts_P|35|{{{D35|}}}|{{{I35|}}}|VU={{{VU35|}}}|VT={{{VT35|}}}}}
+{{SwitchPorts_P|36|{{{D36|}}}|{{{I36|}}}|VU={{{VU36|}}}|VT={{{VT36|}}}}}
+{{SwitchPorts_P|37|{{{D37|}}}|{{{I37|}}}|VU={{{VU37|}}}|VT={{{VT37|}}}}}
+{{SwitchPorts_P|38|{{{D38|}}}|{{{I38|}}}|VU={{{VU38|}}}|VT={{{VT38|}}}}}
+{{SwitchPorts_P|39|{{{D39|}}}|{{{I39|}}}|VU={{{VU39|}}}|VT={{{VT39|}}}}}
+{{SwitchPorts_P|40|{{{D40|}}}|{{{I40|}}}|VU={{{VU40|}}}|VT={{{VT40|}}}}}
+{{SwitchPorts_P|41|{{{D41|}}}|{{{I41|}}}|VU={{{VU41|}}}|VT={{{VT41|}}}}}
+{{SwitchPorts_P|42|{{{D42|}}}|{{{I42|}}}|VU={{{VU42|}}}|VT={{{VT42|}}}}}
+{{SwitchPorts_P|43|{{{D43|}}}|{{{I43|}}}|VU={{{VU43|}}}|VT={{{VT43|}}}}}
+{{SwitchPorts_P|44|{{{D44|}}}|{{{I44|}}}|VU={{{VU44|}}}|VT={{{VT44|}}}}}
+{{SwitchPorts_P|45|{{{D45|}}}|{{{I45|}}}|VU={{{VU45|}}}|VT={{{VT45|}}}}}
+{{SwitchPorts_P|46|{{{D46|}}}|{{{I46|}}}|VU={{{VU46|}}}|VT={{{VT46|}}}}}
+{{SwitchPorts_P|47|{{{D47|}}}|{{{I47|}}}|VU={{{VU47|}}}|VT={{{VT47|}}}}}
+{{SwitchPorts_P|48|{{{D48|}}}|{{{I48|}}}|VU={{{VU48|}}}|VT={{{VT48|}}}}}
+}}
+|-
+|}
+&lt;/includeonly&gt;&lt;noinclude&gt;
+Usage:
+&lt;pre&gt;&lt;nowiki&gt;
+{{SwitchPorts|PORTS=24
+
+|Dn= device (linkable)
+|In= interface-name on device
+|VUn= untagged vlan
+|VTn= tagged vlans, comma-seperated
+
+}}
+&lt;/nowiki&gt;&lt;/pre&gt;
+
+For modules in modular switches:
+
+&lt;pre&gt;&lt;nowiki&gt;
+{{SwitchPorts|PORTS=24
+|MODPN= partnumber
+|MODSN= serialnumber
+|MODNAME= module name
+
+|Dn= device (linkable)
+|In= interface-name on device
+|VUn= untagged vlan
+|VTn= tagged vlans, comma-seperated
+
+}}
+&lt;/nowiki&gt;&lt;/pre&gt;
+[[Category:Origin-SICEKIT]]
+&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

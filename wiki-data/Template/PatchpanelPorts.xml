@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:PatchpanelPorts</ns0:title>
+    <ns0:id>241</ns0:id>
+    <ns0:revision>
+      <ns0:id>12683</ns0:id>
+      <ns0:timestamp>2009-07-19T02:24:13Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">&lt;includeonly&gt;
+{| class="prettytable" width="460"
+|-
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | Patchpanel-Plan für {{{PORTS}}} Ports
+|-
+| width=10 | &lt;b&gt;Port&lt;/b&gt; || width=60 | &lt;b&gt;ID&lt;/b&gt; || width=450 | &lt;b&gt;Description&lt;/b&gt;
+|-
+{{PatchpanelPorts_P|1|{{{I1|}}}|{{{D1|}}}}}
+{{PatchpanelPorts_P|2|{{{I2|}}}|{{{D2|}}}}}
+{{PatchpanelPorts_P|3|{{{I3|}}}|{{{D3|}}}}}
+{{PatchpanelPorts_P|4|{{{I4|}}}|{{{D4|}}}}}
+{{PatchpanelPorts_P|5|{{{I5|}}}|{{{D5|}}}}}
+{{PatchpanelPorts_P|6|{{{I6|}}}|{{{D6|}}}}}
+{{PatchpanelPorts_P|7|{{{I7|}}}|{{{D7|}}}}}
+{{PatchpanelPorts_P|8|{{{I8|}}}|{{{D8|}}}}}
+{{PatchpanelPorts_P|9|{{{I9|}}}|{{{D9|}}}}}
+{{PatchpanelPorts_P|10|{{{I10|}}}|{{{D10|}}}}}
+{{PatchpanelPorts_P|11|{{{I11|}}}|{{{D11|}}}}}
+{{PatchpanelPorts_P|12|{{{I12|}}}|{{{D12|}}}}}
+{{PatchpanelPorts_P|13|{{{I13|}}}|{{{D13|}}}}}
+{{PatchpanelPorts_P|14|{{{I14|}}}|{{{D14|}}}}}
+{{PatchpanelPorts_P|15|{{{I15|}}}|{{{D15|}}}}}
+{{PatchpanelPorts_P|16|{{{I16|}}}|{{{D16|}}}}}
+{{PatchpanelPorts_P|17|{{{I17|}}}|{{{D17|}}}}}
+{{PatchpanelPorts_P|18|{{{I18|}}}|{{{D18|}}}}}
+{{PatchpanelPorts_P|19|{{{I19|}}}|{{{D19|}}}}}
+{{PatchpanelPorts_P|20|{{{I20|}}}|{{{D20|}}}}}
+{{PatchpanelPorts_P|21|{{{I21|}}}|{{{D21|}}}}}
+{{PatchpanelPorts_P|22|{{{I22|}}}|{{{D22|}}}}}
+{{PatchpanelPorts_P|23|{{{I23|}}}|{{{D23|}}}}}
+{{PatchpanelPorts_P|24|{{{I24|}}}|{{{D24|}}}}}
+|}
+&lt;/includeonly&gt;
+&lt;noinclude&gt;
+
+List of Patchpanel Ports. 24 Ports, statically.
+
+Parameters:
+
+* PORTS ... number of ports
+* In ... port "n": ID
+* Dn ... port "n": Description
+
+&lt;/noinclude&gt;
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

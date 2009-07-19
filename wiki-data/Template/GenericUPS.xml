@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:GenericUPS</ns0:title>
+    <ns0:id>215</ns0:id>
+    <ns0:revision>
+      <ns0:id>12655</ns0:id>
+      <ns0:timestamp>2009-07-19T02:20:22Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
+|-
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | UPS {{{NAME}}}
+&lt;!-- begin picture --&gt;
+{{#if:{{{MODELPICTURE|}}}|
+{{!}}-
+{{!}} colspan=2 align="center" {{!}} {{{MODELPICTURE}}} |}}
+&lt;!-- end picture --&gt;
+|-
+| style="width: 120px;" | Location:
+|[[{{{LOCATION}}}]]
+|-
+|Owner:
+|[[{{{OWNER}}}]]
+|-
+|Model:
+|[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
+|-
+|Serial Number:
+|{{{SN}}}
+|-
+|Wartungsvertrag:
+|{{{CARE}}}
+|-
+|Kaufdatum:
+|{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
+&lt;!-- begin OOB --&gt;
+{{#if:{{{OOBTYPE|}}}|
+{{!}}-
+{{!}} IP Management: [[{{{OOBTYPE}}}]]
+{{!}} {{ {{{OOBTYPE}}}|IP={{{OOBIP}}}|VLAN={{{OOBVLAN|}}}|AUTH={{{OOBAUTH|}}}|MAC={{{OOBMAC}}} }}
+}}
+&lt;!-- end OOB --&gt;
+|-
+| style="background: #b2d8d8; text-align:center;" colspan=2 | Hardware
+|-
+| Dimensions:
+| {{{HE}}} HE x {{{LENGTH}}} tief
+|-
+| Output:
+| Max. {{{MAXLOAD}}} @ {{{OUTNET}}}&lt;br&gt;{{{OUTPUT}}}
+|-
+| Input:
+| Net: {{{INNET}}}&lt;br&gt;{{{INPUT}}}
+|-
+| Batteries:
+| {{{BATTERIES}}}
+|-
+| Typical Runtime:
+| half load: {{{RUNTIMEHALF}}}&lt;br&gt;full load: {{{RUNTIMEFULL}}}
+|-
+{{#if:{{{SLOTSMAX|}}}|
+{{!}} Slots:
+{{!}} {{#if:{{{SLOTSUSED|}}}|Used: {{{SLOTSUSED}}}&lt;br&gt;}}Avail: {{{SLOTSMAX}}}
+}}
+|-
+| Management Port:
+| {{{MGMTPORT}}} {{#if:{{{MGMTPORTCONN|}}}|to {{{MGMTPORTCONN}}}}}
+|-
+| Montage:
+| {{{MOUNTING}}}
+&lt;!-- begin Trivia --&gt;
+|-
+{{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
+{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}
+[[Category:{{{MODEL}}}]] [[Category:UPS]]
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>

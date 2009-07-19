@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+      </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:GenericServer</ns0:title>
+    <ns0:id>69</ns0:id>
+    <ns0:revision>
+      <ns0:id>12651</ns0:id>
+      <ns0:timestamp>2009-07-19T02:19:36Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
+|-
+| {{TableHeadingStyle}} colspan=2 | '''{{{NAME}}}'''
+&lt;!-- begin picture --&gt;
+{{#if:{{{MODELPICTURE|}}}|
+{{!}}-
+{{!}} class="noprint" colspan=2 align="center" {{!}} {{{MODELPICTURE}}} |}}
+&lt;!-- end picture --&gt;
+|-
+| style="width: 120px;" | Location:
+|[[{{{LOCATION}}}]]
+|-
+|Owner:
+|[[{{{OWNER}}}]]
+|-
+|Model:
+|[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
+|-
+{{#if:{{{HOSTED|}}}||
+{{!}} S/N / P/N:
+{{!}} {{{SN}}} / P/N: {{{PN}}}
+}}
+|-
+|Wartungsvertrag:
+|{{{CARE}}}
+|-
+|Vertragsdaten:
+|{{#contractref:{{{CONTRACT}}}}}
+&lt;!-- begin OOB --&gt;
+|-
+{{#if:{{{OOBTYPE|}}}|
+{{!}} OOB: [[{{{OOBTYPE}}}]]
+{{!}} {{ {{{OOBTYPE}}}|IP={{{OOBIP}}}|VLAN={{{OOBVLAN|}}}|AUTH={{{OOBAUTH|}}}|MAC={{{OOBMAC}}} }}
+}}
+&lt;!-- end OOB --&gt;
+{{MonitorLinks}}
+|-
+| {{TableHeadingStyle}} colspan=2 | Hardware
+|-
+{{#if:{{{HOSTED|}}}{{{BLADE|}}}||
+{{!}} Dimensions:
+{{!}} {{{HE}}} HE x {{{LENGTH}}} tief
+}}
+|-
+{{#if:{{{POWER|}}}{{{PMINIDLE|}}}{{{PMINBUSY|}}}{{{PMAXIDLE|}}}{{{PMAXBUSY|}}}|
+{{!}} Power:&lt;br&gt;min. HW&lt;br&gt;max. HW
+{{!}} {{{POWER|}}}&lt;br&gt;idle: {{{PMINIDLE}}} busy: {{{PMINBUSY}}}&lt;br&gt;idle: {{{PMAXIDLE}}} busy: {{{PMAXBUSY}}}
+}}
+&lt;!-- begin PSU --&gt;
+|-
+{{#if:{{{HOSTED|}}}{{{BLADE|}}}||
+{{!}} PSU:
+{{!}} {{{PSU}}} {{#ifeq:{{{PSU}}}|RPS|Used: {{{RPSUSED}}}/{{{RPSMAX}}}}}
+}}
+&lt;!-- end PSU --&gt;
+|-
+| Ethernet:&lt;br&gt;Used: {{{NICUSED}}}/{{{NICMAX}}}
+| {{#if:{{{NIC1|}}}|NIC1: MAC: {{{NICMAC1}}} {{{NIC1}}}&lt;br&gt; }}{{#if:{{{NIC2|}}}|NIC2: MAC: {{{NICMAC2}}} {{{NIC2}}}&lt;br&gt; }}{{#if:{{{NIC3|}}}|NIC3: MAC: {{{NICMAC3}}} {{{NIC3}}}&lt;br&gt; }}{{#if:{{{NIC4|}}}|NIC4: MAC: {{{NICMAC4}}} {{{NIC4}}}&lt;br&gt; }}
+|-
+| CPU:
+| {{{CPUUSED}}}&lt;br&gt;Max: {{{CPUMAX}}}
+|-
+| RAM:
+| {{{RAMUSED}}}&lt;br&gt;Max: {{{RAMMAX}}}
+&lt;!-- begin pci, pcie, pcix --&gt;
+|-
+{{#if:{{{PCIMAX|}}}|
+{{!}} PCI:
+{{!}} {{#if:{{{PCIUSED}}}|{{{PCIUSED}}}&lt;br&gt;}}Slots: {{{PCIMAX}}}
+|}}
+|-
+{{#if:{{{PCIEMAX|}}}|
+{{!}} PCIe:
+{{!}} {{#if:{{{PCIEUSED}}}|{{{PCIEUSED}}}&lt;br&gt;}}Slots: {{{PCIEMAX}}}
+|}}
+|-
+{{#if:{{{PCIXMAX|}}}|
+{{!}} PCI-X:
+{{!}} {{#if:{{{PCIXUSED}}}|{{{PCIXUSED}}}&lt;br&gt;}}Slots: {{{PCIXMAX}}}
+|}}
+|-
+{{#if:{{{MEZZMAX|}}}|
+{{!}} Mezzanine Cards:
+{{!}} {{#if:{{{MEZZUSED}}}|{{{MEZZUSED}}}&lt;br&gt;}}Slots: {{{MEZZMAX}}}
+|}}
+|-
+{{#if:{{{USBMAX|}}}|
+{{!}} USB:
+{{!}} {{#if:{{{USBUSED}}}|Used: {{{USBUSED}}}&lt;br&gt;}}Max: {{{USBMAX}}}
+}}
+|-
+{{#if:{{{VGAMAX|}}}|
+{{!}} VGA:
+{{!}} {{#if:{{{VGAUSED}}}|{{{VGAUSED}}}/}}{{{VGAMAX}}} max.
+}}
+|-
+{{#if:{{{SERIALMAX|}}}|
+{{!}} Serial:
+{{!}} {{#if:{{{SERIALUSED}}}|Used: {{{SERIALUSED}}}&lt;br&gt;}}Max: {{{SERIALMAX}}}
+}}
+&lt;!-- begin storage --&gt;
+|-
+| Storage:
+| Disks: {{{DISKSUSED}}}&lt;br&gt;Maximum: {{{DISKSMAX}}}&lt;br&gt;Controller: {{{STORCTRL}}}&lt;br&gt;{{{RAID}}}
+|-
+{{#if:{{{HOSTED|}}}||{{#if:{{{RMMMAX|}}}|
+{{!}} Removable Media:
+{{!}} {{#if:{{{RMMUSED}}}|Used: {{{RMMUSED}}}&lt;br&gt;}}Max: {{{RMMMAX}}}
+}}
+}}
+&lt;!-- end storage --&gt;
+|-
+{{#if:{{{HOSTED|}}}||
+{{!}} Montage:
+{{!}} {{{MOUNTING}}}
+}}
+&lt;!-- begin Trivia --&gt;
+|-
+{{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
+{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}&lt;includeonly&gt;[[Category:{{{MODEL}}}]] [[Category:Server]] [[Category:IP-Host]]&lt;/includeonly&gt;
+&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>
