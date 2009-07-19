@@ -1,5 +1,13 @@
-from wikitools import wiki
+import sys
 
+try:
+  import sicekit_wiki_exportimport.configuration
+except:
+  print "E: sicekit_wiki_exportimport.configuration not found."
+  print "Please set up src/sicekit_wiki_exportimport/configuration.py"
+  sys.exit(2)
+
+from wikitools import wiki
 from sicekit_wiki_exportimport.configuration import getWikiConfiguration
 from sicekit_wiki_exportimport.exporter import Exporter
 from sicekit_wiki_exportimport.importer import Importer
