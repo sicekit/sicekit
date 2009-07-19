@@ -20,6 +20,7 @@ import re
 import time
 import sys
 from urllib import quote_plus, _is_unicode
+from poster.encode import multipart_encode
 try:
 	import json
 except:
@@ -61,7 +62,8 @@ class APIRequest:
 		self.response = False
 		self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(wiki.cookies))
 		self.request = urllib2.Request(wiki.apibase, self.encodeddata, self.headers)
-		
+		self.request_is_multipart = False
+
 	def changeParam(self, param, value):
 		"""Change or add a parameter after making the request object
 		
@@ -71,10 +73,24 @@ class APIRequest:
 		if param == 'format':
 			raise APIError('You can not change the result format')
 		self.data[param] = value
-		self.encodeddata = urlencode(self.data, 1)
-		self.headers['Content-length'] = len(self.encodeddata)
-		self.request = urllib2.Request(wiki.apibase, self.encodeddata, self.headers)
-	
+		if self.request_is_multipart:
+			(datagen, headers) = multipart_encode(self.data)
+			self.headers.pop('Content-length')
+			self.headers.pop('Content-type')
+			self.headers.update(headers)
+			data = ''
+			for singledata in datagen:
+				data = data + singledata
+			self.encodeddata = data
+		else:
+			self.headers['Content-type'] = 'application/x-www-form-urlencoded'
+			self.encodeddata = urlencode(self.data, 1)
+			self.headers['Content-length'] = len(self.encodeddata)
+		self.request = urllib2.Request(self.wiki.apibase, self.encodeddata, self.headers)
+
+	def setMultipart(self, multipart=True):
+		self.request_is_multipart = multipart
+
 	def query(self, querycontinue=True):
 		"""Actually do the query here and return usable stuff
 		
