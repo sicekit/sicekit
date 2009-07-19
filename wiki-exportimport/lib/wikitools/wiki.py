@@ -194,6 +194,9 @@ class Wiki:
 			data['maxlag'] = 120
 		req = api.APIRequest(self, data)
 		info = req.query()
+		if not 'query' in info.keys() and 'userinfo' in info.keys():
+			# running against an ancient MediaWiki version, assume stuff works
+			return True
 		if info['query']['userinfo']['id'] == 0:
 			return False
 		elif username and info['query']['userinfo']['name'] != username:
