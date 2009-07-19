@@ -2,6 +2,7 @@ from wikitools import wiki
 
 from sicekit_wiki_exportimport.configuration import getWikiConfiguration
 from sicekit_wiki_exportimport.exporter import Exporter
+from sicekit_wiki_exportimport.importer import Importer
 
 class ExportImportMain(object):
 
@@ -27,7 +28,12 @@ class ExportImportMain(object):
 		# create a Wiki object
 		_wiki = wiki.Wiki(configuration.url)
 		_wiki.cookiepath = configuration.cookie_filename
-		_wiki.login(configuration.username, configuration.password, domain=configuration.domain, remember=True)
+		if not _wiki.login(configuration.username, configuration.password, domain=configuration.domain, remember=True):
+			print "E: Login failed early."
+			return 1
+		if not _wiki.isLoggedIn():
+			print "E: Login failed."
+			return 1
 
 		_argv = []
 		_argv.append(argv[0]+'_'+argv[1])

@@ -4,6 +4,7 @@ from wikitools import api
 from optparse import OptionParser
 import os
 import re
+import xml.etree.ElementTree
 
 class Exporter(object):
 	def __init__(self, configuration, wiki):
@@ -44,7 +45,16 @@ class Exporter(object):
 		request = api.APIRequest(self.wiki, params)
 		xmldump = request.query()['query']['export']['*']
 
-		self.writeDumpFile(page, xmldump)
+		doc = xml.etree.ElementTree.XML(xmldump)
+		contributor = doc.find('{http://www.mediawiki.org/xml/export-0.3/}page/{http://www.mediawiki.org/xml/export-0.3/}revision/{http://www.mediawiki.org/xml/export-0.3/}contributor')
+		contributor.find('{http://www.mediawiki.org/xml/export-0.3/}username').text = 'SICEKIT'
+		contributor.find('{http://www.mediawiki.org/xml/export-0.3/}id').text = '0'
+		siteinfo = doc.find('{http://www.mediawiki.org/xml/export-0.3/}siteinfo')
+		siteinfo.find('{http://www.mediawiki.org/xml/export-0.3/}sitename').text = 'SICEKIT'
+		siteinfo.find('{http://www.mediawiki.org/xml/export-0.3/}base').text = 'chrome:///sicekit'
+		siteinfo.find('{http://www.mediawiki.org/xml/export-0.3/}generator').text = 'SICEKIT'
+
+		self.writeDumpFile(page, xml.etree.ElementTree.tostring(doc))
 
 		self.pagecount = self.pagecount + 1
 		self.bytecount = self.bytecount + len(xmldump)
