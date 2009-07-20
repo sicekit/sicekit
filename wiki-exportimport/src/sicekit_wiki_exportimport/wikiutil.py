@@ -4,6 +4,7 @@ from wikitools.api import APIRequest
 import re
 import xml.etree.ElementTree
 from datetime import datetime
+import urllib2
 
 XMLNS = u'{http://www.mediawiki.org/xml/export-0.3/}'
 
@@ -60,4 +61,13 @@ class WikiUtil(object):
 		if '-1' in result['pages'].keys(): return None # page does not exist yet
 		xmlbytes = result['export']['*'].encode('utf-8') # convert to bytes
 		return xml.etree.ElementTree.XML(xmlbytes)
+
+	def downloadFile(self, url, path):
+		request = urllib2.Request(url)
+		opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.wiki.cookies))
+		data = opener.open(request)
+		f = file(path, 'w')
+		f.write(data.read())
+		f.close()
+
 
