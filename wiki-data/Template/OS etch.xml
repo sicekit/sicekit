@@ -10,8 +10,8 @@
     <ns0:title>Template:OS etch</ns0:title>
     <ns0:id>400</ns0:id>
     <ns0:revision>
-      <ns0:id>12644</ns0:id>
-      <ns0:timestamp>2009-07-19T02:18:30Z</ns0:timestamp>
+      <ns0:id>12761</ns0:id>
+      <ns0:timestamp>2009-07-19T23:23:23Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -19,8 +19,7 @@
       <ns0:text xml:space="preserve">[[:Category:Debian etch 4.0|Debian etch 4.0]]
 &lt;includeonly&gt;
 [[Category:Debian etch 4.0]][[Category:Debian]]
-&lt;/includeonly&gt;
-&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+&lt;/includeonly&gt;&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>

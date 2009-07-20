@@ -10,13 +10,12 @@
     <ns0:title>Template:Instance</ns0:title>
     <ns0:id>399</ns0:id>
     <ns0:revision>
-      <ns0:id>12628</ns0:id>
-      <ns0:timestamp>2009-07-18T21:43:28Z</ns0:timestamp>
+      <ns0:id>12766</ns0:id>
+      <ns0:timestamp>2009-07-20T00:37:27Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:comment>SICEKIT!</ns0:comment>
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
 | {{TableHeadingStyle}} colspan=2 | Instance
 |-
@@ -71,7 +70,7 @@ Use this Instance template. Fill in OS, ARCH, USAGE, AUTH, ETH, NFS, VOLS, PUPPE
 Currently understood:
 
 * localroot -&gt; "local, root only"
-* ldap -&gt; "Inqnet LDAP", also specify LDAPGROUP=hostgroup-foo
+* ldap -&gt; "LDAP", also specify LDAPGROUP=hostgroup-foo
 
 
 === ETH ===

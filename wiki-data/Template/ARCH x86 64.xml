@@ -10,8 +10,8 @@
     <ns0:title>Template:ARCH x86 64</ns0:title>
     <ns0:id>410</ns0:id>
     <ns0:revision>
-      <ns0:id>12635</ns0:id>
-      <ns0:timestamp>2009-07-19T02:17:13Z</ns0:timestamp>
+      <ns0:id>12763</ns0:id>
+      <ns0:timestamp>2009-07-19T23:24:00Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -19,8 +19,7 @@
       <ns0:text xml:space="preserve">[[:Category:Architecture x86 64bit|x86 64bit]]
 &lt;includeonly&gt;
 [[Category:Architecture x86 64bit]]
-&lt;/includeonly&gt;
-&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+&lt;/includeonly&gt;&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>
