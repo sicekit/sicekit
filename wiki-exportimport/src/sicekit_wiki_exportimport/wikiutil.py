@@ -67,7 +67,8 @@ class WikiUtil(object):
 		opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.wiki.cookies))
 		data = opener.open(request)
 		f = file(path, 'w')
-		f.write(data.read())
+		buffer = data.read()
+		f.write(buffer)
 		f.close()
-
+		return len(buffer)
 

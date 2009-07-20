@@ -75,14 +75,17 @@ class Exporter(object):
 		if not os.path.exists(directory): os.makedirs(directory)
 		image_path = os.path.join(*self.buildPageFilesystemPath(page, extension=''))
 		sha1_path = os.path.join(*self.buildPageFilesystemPath(page, extension='.sha1'))
-		self.wikiutil.downloadFile(url, image_path)
+		bytes = self.wikiutil.downloadFile(url, image_path)
 		f = file(sha1_path, 'w')
 		f.write(sha1.encode('ascii'))
 		f.close()
+		self.bytecount = self.bytecount + bytes + 40 #sha1 is 40byte
+		self.pagecount = self.pagecount + 2
 
 	def run(self):
-		print "I: Wiping export directory %s." % self.configuration.datapath
-		shutil.rmtree(self.configuration.datapath)
+		if os.path.exists(self.configuration.datapath):
+			print "I: Wiping export directory %s." % self.configuration.datapath
+			shutil.rmtree(self.configuration.datapath)
 		print "I: Exporting pages to %s." % self.configuration.datapath
 		pages = self.buildPageList()
 		self.pagecount = 0
@@ -92,5 +95,5 @@ class Exporter(object):
 		images = self.buildImageList(pages)
 		map(self.exportImage, images)
 
-		print "I: Exported %d bytes in %d pages." % (self.bytecount, self.pagecount)
+		print "I: Exported %d bytes in %d objects." % (self.bytecount, self.pagecount)
 		return 0
