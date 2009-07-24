@@ -39,6 +39,12 @@ Installing SICEKIT
 
 FIXME
 
+QuickStart FIXME:
+cp sicekitrc.example .sicekitrc
+vim .sicekitrc
+./bin/sicekit-wiki-exportimport --import -d ./wiki-data
+./bin/sicekit-wiki-configurerobots FIXME
+
 
 Testing the robots
 ==================
