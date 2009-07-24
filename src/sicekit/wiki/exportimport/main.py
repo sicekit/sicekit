@@ -1,5 +1,6 @@
 # vim: set et!:
 import sys
+import os
 
 from optparse import OptionParser
 from sicekit.configuration import getConfiguration
@@ -41,6 +42,7 @@ class ExportImportMain(object):
 		if configuration.datapath is None:
 			print "E: --data-path needs to be specified."
 			return 1
+		configuration.datapath = os.path.abspath(configuration.datapath)
 
 		wiki = getWiki(configuration)
 		return mainmodule(configuration, wiki).run()
