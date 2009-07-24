@@ -3,7 +3,7 @@
 import os
 import shutil
 import xml.etree.ElementTree
-from sicekit_wiki_exportimport.wikiutil import WikiUtil, XMLNS, APIRequest
+from sicekit.wiki.exportimport.wikiutil import WikiUtil, XMLNS, APIRequest
 
 class Exporter(object):
 	def __init__(self, configuration, wiki):
@@ -31,7 +31,10 @@ class Exporter(object):
 		xml = self.wikiutil.retrievePageExportXml(title)
 
 		# remove stuff we don't need / don't want to leak
-		contributor = xml.find(XMLNS+u'page/'+XMLNS+u'revision/'+XMLNS+u'contributor')
+		revision = xml.find(XMLNS+u'page/'+XMLNS+u'revision')
+		if revision.find(XMLNS+u'comment'):
+			revision.remove(revision.find(XMLNS+u'comment'))
+		contributor = revision.find(XMLNS+u'contributor')
 		contributor.find(XMLNS+u'username').text = u'SICEKIT'
 		contributor.find(XMLNS+u'id').text = u'0'
 		siteinfo = xml.find(XMLNS+u'siteinfo')

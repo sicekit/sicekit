@@ -6,6 +6,6 @@ p = os.path.dirname(os.path.abspath(__file__))
 if p.endswith('bin') and os.path.exists(os.path.join(p,'..','README')):
 	for dir in ['lib','src']: sys.path.insert(0, os.path.join(p,'..',dir))
 
-from sicekit_wiki_exportimport.main import ExportImportMain
+from sicekit.wiki.exportimport.main import ExportImportMain
 sys.exit(ExportImportMain().run(sys.argv))
 

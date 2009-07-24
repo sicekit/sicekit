@@ -3,9 +3,9 @@ import sys
 
 from wikitools import wiki
 from optparse import OptionParser
-from sicekit_wiki_exportimport.configuration import getConfiguration
-from sicekit_wiki_exportimport.exporter import Exporter
-from sicekit_wiki_exportimport.importer import Importer
+from sicekit.configuration import getConfiguration
+from sicekit.wiki.exportimport.exporter import Exporter
+from sicekit.wiki.exportimport.importer import Importer
 
 class ExportImportMain(object):
 

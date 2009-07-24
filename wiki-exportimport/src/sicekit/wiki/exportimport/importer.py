@@ -3,7 +3,7 @@
 import os
 import xml.etree.ElementTree
 from StringIO import StringIO
-from sicekit_wiki_exportimport.wikiutil import WikiUtil, XMLNS, APIRequest
+from sicekit.wiki.exportimport.wikiutil import WikiUtil, XMLNS, APIRequest
 
 class Importer(object):
 	def __init__(self, configuration, wiki):
