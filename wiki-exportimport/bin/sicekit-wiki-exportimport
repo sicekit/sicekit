@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# SICEKIT wiki export/import utility
+# Copyright (c) 2009 SICEKIT Development Team
 
 # prepare lib search path for source-based installations
 import os,sys
