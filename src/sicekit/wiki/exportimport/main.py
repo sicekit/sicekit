@@ -1,9 +1,9 @@
 # vim: set et!:
 import sys
 
-from wikitools import wiki
 from optparse import OptionParser
 from sicekit.configuration import getConfiguration
+from sicekit.wiki.wiki import getWiki
 from sicekit.wiki.exportimport.exporter import Exporter
 from sicekit.wiki.exportimport.importer import Importer
 
@@ -42,16 +42,6 @@ class ExportImportMain(object):
 			print "E: --data-path needs to be specified."
 			return 1
 
-		# create the Wiki object
-		_wiki = wiki.Wiki(configuration.wiki_apiurl)
-		_wiki.cookiepath = configuration.cookiejar
-		if not _wiki.login(configuration.wiki_username, configuration.wiki_password, domain=configuration.wiki_domain, remember=True):
-			print "E: Login failed early."
-			return 1
-		if not _wiki.isLoggedIn():
-			print "E: Login failed."
-			return 1
-
-		return mainmodule(configuration, _wiki).run()
-
+		wiki = getWiki(configuration)
+		return mainmodule(configuration, wiki).run()
 
