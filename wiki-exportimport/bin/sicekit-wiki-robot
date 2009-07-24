@@ -1,0 +1,13 @@
+#!/usr/bin/python
+# SICEKIT wiki robot launcher
+# Copyright (c) 2009 SICEKIT Development Team
+
+# prepare lib search path for source-based installations
+import os,sys
+p = os.path.dirname(os.path.abspath(__file__))
+if p.endswith('bin') and os.path.exists(os.path.join(p,'..','README')):
+	for dir in ['lib','src']: sys.path.insert(0, os.path.join(p,'..',dir))
+
+from sicekit.wiki.robot.wrapper import Wrapper
+sys.exit(Wrapper().run(sys.argv))
+
