@@ -3,11 +3,13 @@ Prerequisites
 
 You need 
 
-* A Webserver
+* A Webserver capable of running PHP scripts
 * PHP5 (for Mediawiki)
-* A database (for Mediawiki)
+* MySQL >= 4.0 or PostgreSQL >= 8.1  (for Mediawiki)
 * Python 2.5 (for the Robots)
+* A SVG converter (for MediaWiki)
 * A Cron daemon or similar job runner (for the Robots)
+
 
 
 MediaWiki
@@ -17,6 +19,28 @@ Install a current version of Mediawiki.
 
 See http://www.mediawiki.org/wiki/MediaWiki , the INSTALL file in the
 source directory will guide you through the installation.
+
+
+
+MediaWiki Features
+==================
+
+Your MediaWiki installation needs functioning SVG support. See 
+http://www.mediawiki.org/wiki/Manual:Image_Administration#SVG for
+instructions.
+
+
+You should also allow a few common filetypes you're going to encounter in
+daily business. In addition to SVG you should also allow PDF and similar
+formats to store contracts, scans, etc.
+
+See http://www.mediawiki.org/wiki/Manual:$wgFileExtensions for details on
+this topic.
+
+
+FIXME:
+*) Upload (File) API monkeypatching
+
 
 
 MediaWiki Extensions
@@ -34,6 +58,7 @@ LocalSettings.php file. You can check if they installed fine by checking
 the Special:Version page of your Wiki.
 
 
+
 Installing SICEKIT
 ==================
 
@@ -46,10 +71,12 @@ vim .sicekitrc
 ./bin/sicekit-wiki-configurerobots FIXME
 
 
+
 Testing the robots
 ==================
 
 FIXME
+
 
 
 Further information
