@@ -6,6 +6,9 @@ from StringIO import StringIO
 from sicekit.wiki.exportimport.wikiutil import WikiUtil, XMLNS, APIRequest
 
 class Importer(object):
+	"""The Importer ill import all articles and files from
+	configuration.datapath into the configured wiki."""
+
 	def __init__(self, configuration, wiki):
 		self.configuration = configuration
 		self.wikiutil = WikiUtil(wiki)
@@ -49,6 +52,7 @@ class Importer(object):
 		return {u'title': title, u'io':io, u'xmldoc': xmlEl}
 
 	def importPage(self, page):
+		"""Runs an XML import for page "page"."""
 		title = page[u'title']
 		print "I: Importing page %s." % title
 
@@ -84,12 +88,24 @@ class Importer(object):
 		self.changecount = self.changecount + result[u'import'][0][u'revisions']
 
 	def importFile(self, path):
+		"""Uploads a file from "path" to the wiki, first checking against the
+		stored sha1sums.
+		"""
 		prefix = os.path.commonprefix([path, os.path.join(self.configuration.datapath, 'File')])
 		title = path[len(prefix)+1:]
 		print "I: Importing image %s." % title
 
-		# FIXME: should compare sha1sum before posting, so we don't generate
-		# unnecessary file overwrites.
+		# get new sha1
+		new_sha1sum = file(path + '.sha1', 'r').read(40)
+		new_sha1dum = new_sha1sum.strip('\r\n ')
+
+		# get old sha1 from wiki, don't import if they match
+		old_image = self.wikiutil.retrieveImageInfo('File:%s' % title)
+		if not old_image.has_key('missing'):
+			old_sha1sum = old_image['imageinfo'][0][u'sha1']
+			if old_sha1sum == new_sha1sum:
+				print "I: Skipping, no changes."
+				return
 
 		# fetch import token
 		params = {'action':'query', 'prop':'info', 'intoken':'edit', 'titles':'File:%s'%title}
@@ -100,8 +116,9 @@ class Importer(object):
 		pages = result['pages']
 		token = pages[pages.keys()[0]]['edittoken']
 
+		# get us the file object, so we can attach it to our request
 		f = file(path, 'r')
-		# now post the page
+		# now post the real upload request
 		params = {'action':'upload', 'filename':title, 'token':token, 'comment':'Origin-SICEKIT', 'ignorewarnings':True}
 		request = APIRequest(self.wiki, params)
 		request.setMultipart()
@@ -117,6 +134,7 @@ class Importer(object):
 		self.changecount = self.changecount + 1
 
 	def run(self):
+		"""Main entry point for the Importer."""
 		self.pagecount = 0
 		self.changecount = 0
 
