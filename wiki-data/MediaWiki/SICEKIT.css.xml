@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+    </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>MediaWiki:SICEKIT.css</ns0:title>
+    <ns0:id>1928</ns0:id>
+    <ns0:revision>
+      <ns0:id>12792</ns0:id>
+      <ns0:timestamp>2009-07-25T22:37:02Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:comment>Created page with '/*   This CSS is part of SICEKIT, mark it as such:  [[Category:Origin-SICEKIT]]  */   #f-poweredbyico { display: none; } li#privacy, li#disclaimer, li#about { display: none; }   …'</ns0:comment>
+      <ns0:text xml:space="preserve">/* 
+ This CSS is part of SICEKIT, mark it as such:
+ [[Category:Origin-SICEKIT]] 
+*/
+
+
+#f-poweredbyico { display: none; }
+li#privacy, li#disclaimer, li#about { display: none; }
+
+
+/*** From WP ***/
+/* Article message box template styles */
+table.ambox {
+    margin: 0 10%;                       /* Will not overlap with other elements */
+    border-collapse: collapse; 
+    background: #fbfbfb; 
+    border: 1px solid #aaa; 
+    border-left: 10px solid #1e90ff;     /* Default "notice" blue */
+}
+table.ambox th.ambox-text, table.ambox td.ambox-text {      /* The message body cell(s) */
+    padding: 0.25em 0.5em;            /* 0.5em left/right */
+    width: 100%;                      /* Make all templates the same width regardless of text size */
+}
+table.ambox td.ambox-image {          /* The left image cell */
+    padding: 2px 0px 2px 0.5em;       /* 0.5em left, 0px right */
+    text-align: center; 
+}
+table.ambox td.ambox-imageright {     /* The right image cell */
+    padding: 2px 4px 2px 0px;         /* 0px left, 4px right */
+    text-align: center; 
+}
+table.ambox-notice {
+    border-left: 10px solid #1e90ff;     /* Blue */
+/* border-right: 10px solid #1e90ff; */  /* If you want two blue bars */
+}
+table.ambox-delete,
+table.ambox-serious {
+    border-left: 10px solid #b22222;     /* Red */
+}
+table.ambox-content {
+    border-left: 10px solid #f28500;     /* Orange */
+}
+table.ambox-style {
+    border-left: 10px solid #f4c430;     /* Yellow */
+}
+table.ambox-merge {
+    border-left: 10px solid #9932cc;     /* Purple */
+}
+table.ambox-protection {
+    border-left: 10px solid #bba;        /* Gray */
+}
+table.ambox.ambox-mini {                 /* small floating box variant */
+    float: right;
+    clear: right;
+    margin: 0 0 0 1em;
+    width: 25%;
+}
+/***************/
+
+
+
+ /* aus Vorlage zur Entlastung, skinabhängigen Darstellung und Kombinierbarkeit hierher ausgelagert */
+ .wikitable,
+ .prettytable {
+  margin: 1em 1em 1em 0;
+  background: #f9f9f9;
+  border: 1px #AAA solid;
+  border-collapse: collapse;
+  empty-cells:show;
+ }
+ 
+ .wikitable th, .wikitable td,
+ .prettytable th, .prettytable td {
+  border: 1px #AAA solid;
+  padding: 0.3em;
+ }
+ 
+ .wikitable caption,
+ .prettytable caption {
+  margin-left: inherit;
+  margin-right: inherit;
+  font-weight: bold;
+ }
+ 
+ .float-left { float: left; clear: left; }
+ .float-right { float: right; clear: right; margin: 1em 0 1em 1em; }</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>
