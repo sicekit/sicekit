@@ -62,6 +62,13 @@ class WikiUtil(object):
 		xmlbytes = result['export']['*'].encode('utf-8') # convert to bytes
 		return xml.etree.ElementTree.XML(xmlbytes)
 
+	def retrieveImageInfo(self, title):
+		params = {'action':'query','prop':'imageinfo','iiprop':'timestamp|url|sha1|comment','titles':title}
+		request = APIRequest(self.wiki, params)
+		pages = request.query()['query']['pages']
+		page = pages[pages.keys()[0]]
+		return page
+
 	def downloadFile(self, url, path):
 		request = urllib2.Request(url)
 		opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(self.wiki.cookies))

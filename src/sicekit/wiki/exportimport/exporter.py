@@ -64,10 +64,7 @@ class Exporter(object):
 
 	def exportImage(self, title):
 		print "I: Exporting image %s." % title
-		params = {'action':'query','prop':'imageinfo','iiprop':'timestamp|url|sha1|comment','titles':title}
-		request = APIRequest(self.wiki, params)
-		pages = request.query()['query']['pages']
-		page = pages[pages.keys()[0]]
+		page = self.wikiutil.retrieveImageInfo(title)
 		if page.has_key('missing'):
 			print "W: Image %s does not exist." % title
 			return
