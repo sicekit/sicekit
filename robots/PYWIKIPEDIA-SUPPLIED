@@ -3,6 +3,7 @@ catlib.py
 config.py
 date.py
 family.py
+generate_user_files.py
 login.py
 pagegenerators.py
 query.py
@@ -22,6 +23,7 @@ userinterfaces/tkinter_interface.py
 userinterfaces/transliteration.py
 userinterfaces/wxpython_interface.py
 version.py
+watchlist.py
 wikipedia.py
 wikipediatools.py
 xmlreader.py

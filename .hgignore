@@ -4,4 +4,6 @@ login-data
 user-config.py
 .sicekitrc
 *.log
+robots/families/sicekit_family.py
+robots/watchlists/watchlist-sicekit-en.dat
 
