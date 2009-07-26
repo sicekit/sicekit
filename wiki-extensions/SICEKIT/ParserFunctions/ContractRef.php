@@ -1,22 +1,36 @@
 <?php
+/*
+ This file is part of SICEKIT, http://oss.inqnet.at/trac/sicekit.
+ SICEKIT CSS Extension
+ Copyright (c) 2009 SICEKIT Development Team.
+*/
 
-# Define a setup function
-$wgExtensionFunctions[] = 'efContractRef_Setup';
-# Add a hook to initialise the magic word
-$wgHooks['LanguageGetMagic'][]       = 'efContractRef_Magic';
+if (!defined('MEDIAWIKI')) {
+        die(-1);
+}
 
-function efContractRef_Setup() {
+//Avoid unstubbing $wgParser on setHook() too early on modern (1.12+) MW versions, as per r35980
+if (defined('MW_SUPPORTS_PARSERFIRSTCALLINIT')) {
+        $wgHooks['ParserFirstCallInit'][] = 'SICEKIT_ParserFunctions_ContractRef_Setup';
+} else { // Otherwise do things the old fashioned way
+        $wgExtensionFunctions[] = 'SICEKIT_ParserFunctions_ContractRef_Setup';
+}
+
+$wgHooks['LanguageGetMagic'][] = 'SICEKIT_ParserFunctions_ContractRef_Magic';
+
+function SICEKIT_ParserFunctions_ContractRef_Setup() {
         global $wgParser;
-        $wgParser->setFunctionHook( 'contractref', 'efContractRefRender' );
+        $wgParser->setFunctionHook('contractref', 'SICEKIT_ParserFunctions_ContractRef_Render');
         return true;
 }
 
-function efContractRef_Magic(&$magicWords, $langCode) {
-        $magicWords['contractref'] = array(0,'contractref');
+function SICEKIT_ParserFunctions_ContractRef_Magic(&$magicWords, $langCode) {
+        // register our magic word
+        $magicWords['contractref'] = array(0, 'contractref');
         return true;
 }
 
-function efContractRefRender( &$parser, $param1 = '' ) {
+function SICEKIT_ParserFunctions_ContractRef_Render(&$parser, $param1 = '') {
         // Nothing exciting here, just escape the user-provided
         // input and throw it back out again
         $contract = $param1;

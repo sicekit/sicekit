@@ -5,6 +5,18 @@
  Copyright (c) 2009 SICEKIT Development Team.
 */
 
+if (!defined('MEDIAWIKI')) {
+        die(-1);
+}
+
+$wgExtensionCredits['other'][] = array(
+        'name'         => 'SICEKIT: CSS',
+        'version'      => '0.0',
+        'author'       => 'SICEKIT Development Team <team@sicekit.org>', 
+        'url'          => 'http://sicekit.org',
+        'description'  => 'Adds SICEKIT CSS to HTML output'
+);
+
 $wgHooks['SkinTemplateSetupPageCss'][] = 'SICEKIT_CSS_HookSkinTemplateSetupPageCss';
 
 function SICEKIT_CSS_GetCssImport($css_page_name, $media = '') {
