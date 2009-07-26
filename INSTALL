@@ -76,6 +76,11 @@ vim .sicekitrc
 ./bin/sicekit-wiki-exportimport --import -d ./wiki-data
 ./bin/sicekit-wiki-configurerobots FIXME
 
+Robots:
+cd robots
+cp sicekit_family.template families/sicekit_family.py
+vim families/sicekit_family.py
+python login.py
 
 
 Testing the robots
