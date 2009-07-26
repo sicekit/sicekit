@@ -12,7 +12,7 @@ class Exporter(object):
 		self.wiki = self.wikiutil.wiki
 
 	def buildPageList(self):
-		return self.wikiutil.retrieveCategoryMemberList('Origin-SICEKIT')
+		return self.wikiutil.retrieveCategoryMemberList(self.configuration.export_category)
 
 	def buildPageFilesystemPath(self, page, extension='.xml'):
 		tmp = page[u'title'].replace(':','/').rsplit('/', 1)

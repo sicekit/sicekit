@@ -15,13 +15,16 @@ class ExportImportMain(object):
 
 	def parseopts(self):
 		op = OptionParser()
-		op.add_option("-d", "--datapath", dest="datapath",
+		op.add_option("-d", "--data-path", dest="datapath",
 				help="directory where import files are stored",
 				metavar="DIRECTORY")
 		op.add_option("--export", action="store_true", dest="mode_export",
 				help="export pages from wiki into files")
 		op.add_option("--import", action="store_true", dest="mode_import",
 				help="import pages from files into the wiki")
+		op.add_option("--export-category", dest="export_category",
+				help="category to export", default="Origin-SICEKIT",
+				metavar="CATEGORY")
 		return op.parse_args(self.argv)
 
 	def run(self, argv):
@@ -43,6 +46,7 @@ class ExportImportMain(object):
 			print "E: --data-path needs to be specified."
 			return 1
 		configuration.datapath = os.path.abspath(configuration.datapath)
+		configuration.export_category = cmdlineopts.export_category
 
 		wiki = getWiki(configuration)
 		return mainmodule(configuration, wiki).run()
