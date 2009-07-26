@@ -18,3 +18,4 @@ $wgExtensionCredits['parserhook'][] = array(
 );
 
 require("extensions/SICEKIT/ParserFunctions/ContractRef.php");
+require("extensions/SICEKIT/ParserFunctions/GoogleMapEmbed.php");
