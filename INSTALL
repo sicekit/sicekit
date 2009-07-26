@@ -39,7 +39,13 @@ this topic.
 
 
 FIXME:
-*) Upload (File) API monkeypatching
+*) Upload (File) API monkeypatching:
+includes/AutoLoader.php
+includes/api/ApiMain.php
+includes/api/ApiUpload.php
+includes/upload/
+
+*) SICEKIT css stuff
 
 
 
