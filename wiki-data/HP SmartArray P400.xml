@@ -7,18 +7,24 @@
     <ns0:case>first-letter</ns0:case>
     </ns0:siteinfo>
   <ns0:page>
-    <ns0:title>HP BladeSystem c-Class</ns0:title>
-    <ns0:id>1305</ns0:id>
+    <ns0:title>HP SmartArray P400</ns0:title>
+    <ns0:id>107</ns0:id>
     <ns0:revision>
-      <ns0:id>7829</ns0:id>
-      <ns0:timestamp>2009-02-23T12:55:44Z</ns0:timestamp>
+      <ns0:id>12805</ns0:id>
+      <ns0:timestamp>2009-07-26T14:52:30Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">{{Category:HP BladeSystem c-Class}}
+      <ns0:text xml:space="preserve">[[Image:Sap400.jpg|right]]
+The mid-range series of the SAS SmartArrays. P400 is a PCIe card, P400i is the integrated version for [[HP DL360 G5]] servers.
 
-Also see [[:Category:HP BladeSystem c-Class]].</ns0:text>
+[http://h18004.www1.hp.com/products/servers/proliantstorage/arraycontrollers/smartarrayp400/index.html Product Overview]
+
+[http://h18004.www1.hp.com/products/quickspecs/12400_div/12400_div.html QuickSpecs]
+
+[[Category:HP]] [[Category:HP SmartArray]]
+[[Category:Origin-SICEKIT]]</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>

@@ -7,18 +7,17 @@
     <ns0:case>first-letter</ns0:case>
     </ns0:siteinfo>
   <ns0:page>
-    <ns0:title>HP BladeSystem c-Class</ns0:title>
-    <ns0:id>1305</ns0:id>
+    <ns0:title>HP SmartArray P400i</ns0:title>
+    <ns0:id>186</ns0:id>
     <ns0:revision>
-      <ns0:id>7829</ns0:id>
-      <ns0:timestamp>2009-02-23T12:55:44Z</ns0:timestamp>
+      <ns0:id>12801</ns0:id>
+      <ns0:timestamp>2009-07-26T14:46:58Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">{{Category:HP BladeSystem c-Class}}
-
-Also see [[:Category:HP BladeSystem c-Class]].</ns0:text>
+      <ns0:text xml:space="preserve">#REDIRECT [[HP SmartArray P400]]
+[[Category:Origin-SICEKIT]]</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>
