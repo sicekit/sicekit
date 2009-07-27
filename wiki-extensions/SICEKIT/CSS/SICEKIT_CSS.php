@@ -1,6 +1,6 @@
 <?php
 /*
- This file is part of SICEKIT, http://oss.inqnet.at/trac/sicekit.
+ This file is part of SICEKIT, http://sicekit.org/trac/sicekit.
  SICEKIT CSS Extension
  Copyright (c) 2009 SICEKIT Development Team.
 */
