@@ -5,17 +5,18 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:GenericHardware</ns0:title>
-    <ns0:id>226</ns0:id>
+    <ns0:id>94</ns0:id>
     <ns0:revision>
-      <ns0:id>12650</ns0:id>
-      <ns0:timestamp>2009-07-19T02:19:30Z</ns0:timestamp>
+      <ns0:id>349</ns0:id>
+      <ns0:timestamp>2009-07-26T16:01:41Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>-&gt; english</ns0:comment>
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
 |-
 | style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{PAGENAME}}
@@ -39,14 +40,14 @@
 {{!}} {{{SN}}}
 }}
 |-
-|Wartungsvertrag:
+|Maintenance Contract:
 | {{{CARE|None}}}
 |-
-|Kaufdatum:
+|Purchase Date:
 |{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
 |-
 {{#if:{{{MOUNTING|}}}|
-{{!}} Montage:
+{{!}} Mounting:
 {{!}} {{{MOUNTING}}}
 }}
 |-
@@ -58,7 +59,7 @@
 &lt;!-- begin Trivia --&gt;
 |-
 {{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
-{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+{{!}} colspan=2 {{!}} &lt;b&gt;Trivia:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
 |}
 &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>

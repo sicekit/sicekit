@@ -5,21 +5,22 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:SwitchPorts P</ns0:title>
-    <ns0:id>82</ns0:id>
+    <ns0:id>125</ns0:id>
     <ns0:revision>
-      <ns0:id>12701</ns0:id>
-      <ns0:timestamp>2009-07-19T02:28:41Z</ns0:timestamp>
+      <ns0:id>457</ns0:id>
+      <ns0:timestamp>2009-07-27T20:26:58Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>use monitoring parserfunc</ns0:comment>
       <ns0:text xml:space="preserve">|-
-|align="right" | [http://its-torrus01.in.inqnet.at/torrus/snmp?path=%2FRouters%2F{{PAGENAME}}%2FInterface_Counters%2F{{{1}}}%2FInOut_bps&amp;view=default-rrd-html {{{1}}}]
+|align="right" | {{monitoring:switchport|1|{{PAGENAME}}|{{{1}}}}}
 | | {{#if:{{{2|}}}|[[{{{2}}}|{{#explode:{{{2}}}|.|0}}]]}} {{#if:{{{3|}}}|{{#ifeq:{{{3}}}|iLO|iLO|p{{{3}}}}}}}
-| | {{#if:{{{VU}}}| [[VLAN{{{VU}}}|u{{{VU}}}]]{{#if:{{{VT|}}}|, }} }} {{#if:{{{VT|}}}| t{{#replace:{{{VT}}}|,|, t}} }}
+| | {{#if:{{{VU}}}| [[VLAN{{{VU}}}|u{{{VU}}}]]{{#if:{{{VT|}}}|, }} }} {{#if:{{{VT|}}}| t{{#replace:{{{VT}}}|,|, t}} }} 
 &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>

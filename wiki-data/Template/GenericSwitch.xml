@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:GenericSwitch</ns0:title>
-    <ns0:id>77</ns0:id>
+    <ns0:id>71</ns0:id>
     <ns0:revision>
-      <ns0:id>12656</ns0:id>
-      <ns0:timestamp>2009-07-19T02:20:27Z</ns0:timestamp>
+      <ns0:id>520</ns0:id>
+      <ns0:timestamp>2009-07-28T17:33:46Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -34,19 +34,19 @@
 |Model:
 |[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
 |-
-|Serial Number:
-|{{{SN}}}
+|S/N / P/N:
+|{{{SN}}} / {{{PN}}}
 |-
-|Wartungsvertrag:
+|Maintenance Contract:
 |{{{CARE}}}
 |-
 |Management:
-|{{{MGMTIP}}} @VLAN {{{MGMTVLAN}}}
+|{{{MGMTIP}}} @[[VLAN{{{MGMTVLAN}}}]]
 |-
 |... Auth:
 |{{AUTH_{{{AUTH}}}}}
 |-
-|Kaufdatum:
+|Purchase Date:
 |{{#contractref:{{{CONTRACT}}}}}
 |-
 | Hosts:
@@ -56,14 +56,14 @@
 | {{{MACRANGE}}}
 &lt;!-- begin Links --&gt;
 |-
-| class="noprint" style="text-align:center;" colspan=2 | [http://its-monitor01.in.inqnet.at/cgi-bin/nagios2/status.cgi?navbarsearch=1&amp;host={{#explode:{{PAGENAME}}|.|0}} Nagios] [http://its-torrus01.in.inqnet.at/torrus/snmp?path=%2FRouters%2F{{PAGENAME}}%2FInterface_Counters%2F Torrus]
+| class="noprint" align=center colspan=2 | {{monitoring:switch}}
 &lt;!-- end Links --&gt;
 |-
 | style="background: #b2d8d8; text-align:center;" colspan=2 | Hardware
 {{#if:{{{BLADE|}}}||
-|-
-| Dimensions:
-| {{{HE}}} HE x {{{LENGTH}}} tief
+{{!}}-
+{{!}} Dimensions:
+{{!}} {{{HE}}} U x {{{LENGTH}}} depth
 }}
 |-
 | Power:
@@ -89,14 +89,13 @@
 | Console:
 | {{{CONSOLE}}}
 |-
-| Montage:
+| Mounting:
 | {{{MOUNTING}}}
 &lt;!-- begin Trivia --&gt;
 |-
 {{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
-{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
-|}[[Category:{{{MODEL}}}]] [[Category:Switch]] [[Category:IP-Host]]
-&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+{{!}} colspan=2 {{!}} &lt;b&gt;Trivia:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}[[Category:{{{MODEL}}}]] [[Category:Switch]] [[Category:IP-Host]] &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>

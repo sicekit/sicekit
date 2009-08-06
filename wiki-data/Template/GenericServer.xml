@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:GenericServer</ns0:title>
     <ns0:id>69</ns0:id>
     <ns0:revision>
-      <ns0:id>12651</ns0:id>
-      <ns0:timestamp>2009-07-19T02:19:36Z</ns0:timestamp>
+      <ns0:id>453</ns0:id>
+      <ns0:timestamp>2009-07-27T20:07:54Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -39,10 +39,10 @@
 {{!}} {{{SN}}} / P/N: {{{PN}}}
 }}
 |-
-|Wartungsvertrag:
+|Maintenance:
 |{{{CARE}}}
 |-
-|Vertragsdaten:
+|Contract Data:
 |{{#contractref:{{{CONTRACT}}}}}
 &lt;!-- begin OOB --&gt;
 |-
@@ -51,13 +51,14 @@
 {{!}} {{ {{{OOBTYPE}}}|IP={{{OOBIP}}}|VLAN={{{OOBVLAN|}}}|AUTH={{{OOBAUTH|}}}|MAC={{{OOBMAC}}} }}
 }}
 &lt;!-- end OOB --&gt;
-{{MonitorLinks}}
+|-
+| colspan=2 align=center | {{monitoring:server}}
 |-
 | {{TableHeadingStyle}} colspan=2 | Hardware
 |-
 {{#if:{{{HOSTED|}}}{{{BLADE|}}}||
 {{!}} Dimensions:
-{{!}} {{{HE}}} HE x {{{LENGTH}}} tief
+{{!}} {{{HE}}} U x {{{LENGTH}}} depth
 }}
 |-
 {{#if:{{{POWER|}}}{{{PMINIDLE|}}}{{{PMINBUSY|}}}{{{PMAXIDLE|}}}{{{PMAXBUSY|}}}|
@@ -129,15 +130,14 @@
 &lt;!-- end storage --&gt;
 |-
 {{#if:{{{HOSTED|}}}||
-{{!}} Montage:
+{{!}} Mounting:
 {{!}} {{{MOUNTING}}}
 }}
 &lt;!-- begin Trivia --&gt;
 |-
 {{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
-{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
-|}&lt;includeonly&gt;[[Category:{{{MODEL}}}]] [[Category:Server]] [[Category:IP-Host]]&lt;/includeonly&gt;
-&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+{{!}} colspan=2 {{!}} &lt;b&gt;Trivia:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+|}&lt;includeonly&gt;[[Category:{{{MODEL}}}]] [[Category:Server]] [[Category:IP-Host]]&lt;/includeonly&gt;&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>

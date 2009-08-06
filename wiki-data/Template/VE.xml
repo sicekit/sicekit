@@ -5,17 +5,18 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:VE</ns0:title>
-    <ns0:id>415</ns0:id>
+    <ns0:id>68</ns0:id>
     <ns0:revision>
-      <ns0:id>12703</ns0:id>
-      <ns0:timestamp>2009-07-19T02:28:54Z</ns0:timestamp>
+      <ns0:id>452</ns0:id>
+      <ns0:timestamp>2009-07-27T19:49:30Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>first user of new monitoring parserfunc</ns0:comment>
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
 |-
 | {{TableHeadingStyle}} colspan=2 | '''{{PAGENAME}}'''
@@ -29,7 +30,7 @@
 |Preferred HN:
 |[[{{{HN}}}]]
 |-
-{{MonitorLinks}}
+| colspan=2 align=center | {{monitoring:server}}
 |}
 &lt;includeonly&gt;
 [[Category:VE]]
