@@ -7,21 +7,21 @@
     <ns0:case>first-letter</ns0:case>
     </ns0:siteinfo>
   <ns0:page>
-    <ns0:title>Category:Debian lenny 5.0</ns0:title>
-    <ns0:id>48</ns0:id>
+    <ns0:title>Category:Debian squeeze 6.0</ns0:title>
+    <ns0:id>223</ns0:id>
     <ns0:revision>
-      <ns0:id>545</ns0:id>
-      <ns0:timestamp>2009-08-05T19:31:38Z</ns0:timestamp>
+      <ns0:id>546</ns0:id>
+      <ns0:timestamp>2009-08-05T19:32:14Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
       <ns0:text xml:space="preserve">[[Image:Debian_Logo.png|right]]
-[[Image:Debian lenny mascot.jpg|right]]
+[[Image:Debian squeeze mascot.jpg|right]]
 
-Version 5.0 of Debian, codenamed "lenny". Currently supported/maintained. The next version will be [[:Category:Debian squeeze 6.0|Debian squeeze 6.0]].
+Version 6.0 of Debian, codenamed "squeeze". Currently still under development/testing.
 
-http://www.debian.org/releases/lenny/
+http://www.debian.org/releases/squeeze/
 
 [[Category:Debian]]
 [[Category:Origin-SICEKIT]]</ns0:text>

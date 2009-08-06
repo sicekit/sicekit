@@ -5,20 +5,21 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:Debian sarge 3.1</ns0:title>
-    <ns0:id>758</ns0:id>
+    <ns0:id>39</ns0:id>
     <ns0:revision>
-      <ns0:id>12715</ns0:id>
-      <ns0:timestamp>2009-07-19T02:31:16Z</ns0:timestamp>
+      <ns0:id>544</ns0:id>
+      <ns0:timestamp>2009-08-05T19:30:48Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">[[Image:Debian sarge mascot.jpg|right]]
+      <ns0:text xml:space="preserve">[[Image:Debian_Logo.png|right]]
+[[Image:Debian sarge mascot.jpg|right]]
 
-The old one. No longer supported.
+Version 3.1 of Debian, codenamed "sarge". Superseded by [[:Category:Debian etch 4.0|Debian etch 4.0]]. No longer supported/maintained.
 
 http://www.debian.org/releases/sarge/
 

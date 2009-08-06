@@ -5,20 +5,21 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:Debian etch 4.0</ns0:title>
-    <ns0:id>401</ns0:id>
+    <ns0:id>13</ns0:id>
     <ns0:revision>
-      <ns0:id>12713</ns0:id>
-      <ns0:timestamp>2009-07-19T02:31:07Z</ns0:timestamp>
+      <ns0:id>543</ns0:id>
+      <ns0:timestamp>2009-08-05T19:30:07Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">[[Image:Debian etch mascot.jpg|right]]
+      <ns0:text xml:space="preserve">[[Image:Debian_Logo.png|right]]
+[[Image:Debian etch mascot.jpg|right]]
 
-Our beloved one.
+Version 4.0 of Debian, codenamed "etch". Superseded by [[:Category:Debian lenny 5.0|Debian lenny 5.0]].
 
 http://www.debian.org/releases/etch/
 
