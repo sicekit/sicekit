@@ -10,17 +10,13 @@
     <ns0:title>Template:OS win2k3</ns0:title>
     <ns0:id>613</ns0:id>
     <ns0:revision>
-      <ns0:id>12680</ns0:id>
-      <ns0:timestamp>2009-07-19T02:23:58Z</ns0:timestamp>
+      <ns0:id>12862</ns0:id>
+      <ns0:timestamp>2009-08-04T09:46:42Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">[[:Category:Windows Server 2003|Windows Server 2003]]
-&lt;includeonly&gt;
-[[Category:Windows Server 2003]]
-&lt;/includeonly&gt;
-&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+      <ns0:text xml:space="preserve">[[:Category:Windows Server 2003|Windows Server 2003]]&lt;includeonly&gt;[[Category:Windows Server 2003]]&lt;/includeonly&gt;&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>
