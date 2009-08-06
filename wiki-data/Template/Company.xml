@@ -5,34 +5,36 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:Company</ns0:title>
-    <ns0:id>9</ns0:id>
+    <ns0:id>67</ns0:id>
     <ns0:revision>
-      <ns0:id>12641</ns0:id>
-      <ns0:timestamp>2009-07-19T02:18:14Z</ns0:timestamp>
+      <ns0:id>469</ns0:id>
+      <ns0:timestamp>2009-07-27T20:53:37Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:minor />
+      <ns0:comment>more english</ns0:comment>
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="330"
 |-
 | style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{{NAME}}}
 |-
-| style="width: 60px;" | Art:
+| style="width: 60px;" | Relation:
 |{{{TYPE}}}
 |-
-|FN:
+|Commercial Register ID:
 |{{{FN}}}
 |-
-|UID:
+|VAT ID:
 |{{{UID}}}
 |-
 |URL:
 |{{{URL}}}
 |-
-|Offiz.&lt;br&gt;Adresse:
+|Address:
 |{{{ADDRESS}}}
 |}
 

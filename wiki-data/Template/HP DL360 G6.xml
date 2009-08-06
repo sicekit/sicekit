@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:HP DL360 G6</ns0:title>
-    <ns0:id>1893</ns0:id>
+    <ns0:id>66</ns0:id>
     <ns0:revision>
-      <ns0:id>12667</ns0:id>
-      <ns0:timestamp>2009-07-19T02:21:48Z</ns0:timestamp>
+      <ns0:id>361</ns0:id>
+      <ns0:timestamp>2009-07-26T16:15:05Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -29,7 +29,7 @@
 |HE=1
 |LENGTH=70.5cm
 |OOBTYPE=ILO2|OOBIP={{{OOBIP}}}|OOBAUTH={{{OOBAUTH|}}}|OOBVLAN={{{OOBVLAN|}}}|OOBMAC={{{OOBMAC}}}
-|MODELTRIVIA=Je nach Modell passen 4 oder 8 Disken.
+|MODELTRIVIA=Depending on the backplane, 4 or 8 SFF disks are supported
 |PSU=RPS
 |RPSMAX=2
 |RPSUSED={{{RPSUSED}}}
@@ -56,7 +56,7 @@
 |VGAUSED={{{VGAUSED|}}}
 |SERIALMAX=1 DB9
 |SERIALUSED={{{SERIALUSED|}}}
-|DISKSMAX=4x oder 8x [[HP SAS 2.5" HotPlug]]
+|DISKSMAX=4x or 8x [[HP SAS 2.5" HotPlug]]
 |DISKSUSED={{{DISKSUSED}}}
 |STORCTRL={{{STORCTRL|[[HP SmartArray ?]]}}}
 |RAID={{{RAID|RAID 1}}}

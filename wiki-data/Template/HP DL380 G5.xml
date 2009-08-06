@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:HP DL380 G5</ns0:title>
-    <ns0:id>93</ns0:id>
+    <ns0:id>81</ns0:id>
     <ns0:revision>
-      <ns0:id>12668</ns0:id>
-      <ns0:timestamp>2009-07-19T02:21:53Z</ns0:timestamp>
+      <ns0:id>363</ns0:id>
+      <ns0:timestamp>2009-07-26T16:16:15Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -47,7 +47,7 @@
 |CPUUSED={{{CPUUSED}}}
 |RAMMAX=8x, 32GB
 |RAMUSED={{{RAMUSED}}}
-|PCIEMAX=3 full + 2 lowp.; 1 for SA, see QuickSpecs
+|PCIEMAX=3 full + 2 lowp.; 1 for Smart Array, see QuickSpecs
 |PCIEUSED={{{PCIEUSED|}}}
 |USBMAX=2 rear + 2 front + 1 internal
 |USBUSED={{{USBUSED|}}}
