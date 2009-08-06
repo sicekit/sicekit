@@ -5,18 +5,18 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
-    <ns0:title>Template:ETH</ns0:title>
-    <ns0:id>411</ns0:id>
+    <ns0:title>Template:ETH IPLink</ns0:title>
+    <ns0:id>1930</ns0:id>
     <ns0:revision>
-      <ns0:id>12828</ns0:id>
-      <ns0:timestamp>2009-07-29T07:56:27Z</ns0:timestamp>
+      <ns0:id>12847</ns0:id>
+      <ns0:timestamp>2009-07-31T09:12:46Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">{{{1}}}: {{ETH_IPLink|NET={{{2}}}|LASTPART={{{3}}}}}&lt;br&gt;&lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+      <ns0:text xml:space="preserve">{{#ifeq:{{#explode:{{{NET}}}|:|1}}|| &lt;!-- IPv4 --&gt; [[{{{NET}}}|{{#explode:{{{NET}}}|.|0}}.{{#explode:{{{NET}}}|.|1}}.{{#explode:{{{NET}}}|.|2}}.{{{LASTPART}}}]] | &lt;!-- IPv6 --&gt; v6: [[{{{NET}}}]] }}&lt;noinclude&gt;This is used internally by the ETH Templates to format an IP address. [[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>
   </ns0:page>
 </ns0:mediawiki>
