@@ -5,24 +5,20 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
-    <ns0:title>Category:HP DL360 G5</ns0:title>
-    <ns0:id>67</ns0:id>
+    <ns0:title>Category:HP DL360 G6</ns0:title>
+    <ns0:id>1952</ns0:id>
     <ns0:revision>
-      <ns0:id>12909</ns0:id>
-      <ns0:timestamp>2009-08-06T09:51:02Z</ns0:timestamp>
+      <ns0:id>12911</ns0:id>
+      <ns0:timestamp>2009-08-06T09:52:29Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">[[Image:Dl360g5.jpg|right]]
-[http://h18004.www1.hp.com/products/quickspecs/12476_div/12476_div.html QuickSpecs]
+      <ns0:text xml:space="preserve">[http://h18004.www1.hp.com/products/quickspecs/13235_div/13235_div.html QuickSpecs]
 
-Memory population guidelines:
-* Use HP Memory Options
-* Always populate in pairs. HP Memory Kits for G5 already come in pairs (2GB Kit = 2x1GB)
-* Note the information on the inner side of the machine's top cover.
+Memory population guidelines have changed since G5, please take a look at the QuickSpecs for details.
 
 [[Category:HP]]
 [[Category:Origin-SICEKIT]]</ns0:text>
