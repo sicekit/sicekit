@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:HP BladeSystem c-Class</ns0:title>
-    <ns0:id>1374</ns0:id>
+    <ns0:id>30</ns0:id>
     <ns0:revision>
-      <ns0:id>12729</ns0:id>
-      <ns0:timestamp>2009-07-19T02:33:03Z</ns0:timestamp>
+      <ns0:id>523</ns0:id>
+      <ns0:timestamp>2009-07-28T17:37:30Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -20,8 +20,8 @@
 
 There are two enclosures (chassis) available:
 
-* [[HP BladeSystem c7000 Enclosure]]
-* [[HP BladeSystem c3000 Enclosure]]
+* [[:Category:HP BladeSystem c7000 Enclosure|HP BladeSystem c7000 Enclosure]]
+* [[:Category:HP BladeSystem c3000 Enclosure|HP BladeSystem c3000 Enclosure]]
 
 HP Links:
 * [http://h20195.www2.hp.com/v2/GetDocument.aspx?docname=4aa0-5978enw Family Overview]

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:mediawiki version="0.3" ns1:schemaLocation="http://www.mediawiki.org/xml/export-0.3/ http://www.mediawiki.org/xml/export-0.3.xsd" xml:lang="en" xmlns:ns0="http://www.mediawiki.org/xml/export-0.3/" xmlns:ns1="http://www.w3.org/2001/XMLSchema-instance">
+  <ns0:siteinfo>
+    <ns0:sitename>SICEKIT</ns0:sitename>
+    <ns0:base>chrome:///sicekit</ns0:base>
+    <ns0:generator>SICEKIT</ns0:generator>
+    <ns0:case>first-letter</ns0:case>
+    </ns0:siteinfo>
+  <ns0:page>
+    <ns0:title>Template:HP c7000 Front</ns0:title>
+    <ns0:id>215</ns0:id>
+    <ns0:revision>
+      <ns0:id>512</ns0:id>
+      <ns0:timestamp>2009-07-28T17:06:53Z</ns0:timestamp>
+      <ns0:contributor>
+        <ns0:username>SICEKIT</ns0:username>
+        <ns0:id>0</ns0:id>
+      </ns0:contributor>
+      <ns0:text xml:space="preserve">&lt;table class="prettytable"&gt;
+&lt;tr&gt;
+&lt;td&gt;Device&lt;br&gt;Bays&lt;/td&gt;
+&lt;td&gt;
+{| class="prettytable" width=100% height=100%
+|-
+| style="height:50%;" | Top Row
+{{#ifeq:{{{DB1U|}}}|x|| {{!}} colspan={{{DB1W|1}}} rowspan={{{DB1H|1}}} {{!}} {{{DB1D|}}} }}
+{{#ifeq:{{{DB2U|}}}|x|| {{!}} colspan={{{DB2W|1}}} rowspan={{{DB2H|1}}} {{!}} {{{DB2D|}}} }}
+{{#ifeq:{{{DB3U|}}}|x|| {{!}} colspan={{{DB3W|1}}} rowspan={{{DB3H|1}}} {{!}} {{{DB3D|}}} }}
+{{#ifeq:{{{DB4U|}}}|x|| {{!}} colspan={{{DB4W|1}}} rowspan={{{DB4H|1}}} {{!}} {{{DB4D|}}} }}
+{{#ifeq:{{{DB5U|}}}|x|| {{!}} colspan={{{DB5W|1}}} rowspan={{{DB5H|1}}} {{!}} {{{DB5D|}}} }}
+{{#ifeq:{{{DB6U|}}}|x|| {{!}} colspan={{{DB6W|1}}} rowspan={{{DB6H|1}}} {{!}} {{{DB6D|}}} }}
+{{#ifeq:{{{DB7U|}}}|x|| {{!}} colspan={{{DB7W|1}}} rowspan={{{DB7H|1}}} {{!}} {{{DB7D|}}} }}
+{{#ifeq:{{{DB8U|}}}|x|| {{!}} colspan={{{DB8W|1}}} rowspan={{{DB8H|1}}} {{!}} {{{DB8D|}}} }}
+|-
+| style="height:50%;" | Bottom
+{{#ifeq:{{{DB9U|}}}|x|| {{!}} colspan={{{DB9W|1}}} rowspan={{{DB9H|1}}} {{!}} {{{DB9D|}}} }}
+{{#ifeq:{{{DB10U|}}}|x|| {{!}} colspan={{{DB10W|1}}} rowspan={{{DB10H|1}}} {{!}} {{{DB10D|}}} }}
+{{#ifeq:{{{DB11U|}}}|x|| {{!}} colspan={{{DB11W|1}}} rowspan={{{DB11H|1}}} {{!}} {{{DB11D|}}} }}
+{{#ifeq:{{{DB12U|}}}|x|| {{!}} colspan={{{DB12W|1}}} rowspan={{{DB12H|1}}} {{!}} {{{DB12D|}}} }}
+{{#ifeq:{{{DB13U|}}}|x|| {{!}} colspan={{{DB13W|1}}} rowspan={{{DB13H|1}}} {{!}} {{{DB13D|}}} }}
+{{#ifeq:{{{DB14U|}}}|x|| {{!}} colspan={{{DB14W|1}}} rowspan={{{DB14H|1}}} {{!}} {{{DB14D|}}} }}
+{{#ifeq:{{{DB15U|}}}|x|| {{!}} colspan={{{DB15W|1}}} rowspan={{{DB15H|1}}} {{!}} {{{DB15D|}}} }}
+{{#ifeq:{{{DB16U|}}}|x|| {{!}} colspan={{{DB16W|1}}} rowspan={{{DB16H|1}}} {{!}} {{{DB16D|}}} }}
+|}
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;PSUs&lt;/td&gt;&lt;td&gt;
+{| class="prettytable" width=100% height=100%
+| {{{PSU1|(empty)}}}
+| {{{PSU2|(empty)}}}
+| {{{PSU3|(empty)}}}
+| {{{PSU4|(empty)}}}
+| {{{PSU5|(empty)}}}
+| {{{PSU6|(empty)}}}
+|-
+|}&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;noinclude&gt;[[Category:HP]] [[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
+    </ns0:revision>
+  </ns0:page>
+</ns0:mediawiki>
