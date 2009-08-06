@@ -8,19 +8,20 @@
     </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:HP 2910al-48G-POE</ns0:title>
-    <ns0:id>1691</ns0:id>
+    <ns0:id>184</ns0:id>
     <ns0:revision>
-      <ns0:id>12812</ns0:id>
-      <ns0:timestamp>2009-07-26T15:01:12Z</ns0:timestamp>
+      <ns0:id>385</ns0:id>
+      <ns0:timestamp>2009-07-26T16:58:16Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>-&gt; english</ns0:comment>
       <ns0:text xml:space="preserve">[[Image:Hp2910al-48G-POE_small.jpg|right]]
 HP Part Number: J9148A
 
 Specs:
-* 48x 10/100/1000MBit, 45-48 davon shared mit Mini-GBIC Slots.
+* 48x 10/100/1000MBit, 45-48 shared with Mini-GBIC Slots.
 * All TP ports/speeds autosensing and PoE+ enabled
 * 2x "al" Module Slots
 

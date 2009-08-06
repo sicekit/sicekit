@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:HP 2810-48G</ns0:title>
-    <ns0:id>283</ns0:id>
+    <ns0:id>21</ns0:id>
     <ns0:revision>
-      <ns0:id>12725</ns0:id>
-      <ns0:timestamp>2009-07-19T02:32:44Z</ns0:timestamp>
+      <ns0:id>356</ns0:id>
+      <ns0:timestamp>2009-07-26T16:08:00Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -20,7 +20,7 @@
 HP Part Number: J9022A
 
 Specs:
-* 48x 10/100/1000MBit, 45-48 davon shared mit Fibre ports
+* 48x 10/100/1000MBit, 45-48 are shared with Mini-GBIC ports
 * All TP ports/speeds autosensing
 
 * [http://www.hp.com/rnd/products/switches/ProCurve_Switch_2810_Series/overview.htm Procurve 2810 Series Overview]

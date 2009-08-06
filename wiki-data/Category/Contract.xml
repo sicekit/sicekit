@@ -5,20 +5,19 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:Contract</ns0:title>
-    <ns0:id>43</ns0:id>
+    <ns0:id>37</ns0:id>
     <ns0:revision>
-      <ns0:id>12711</ns0:id>
-      <ns0:timestamp>2009-07-19T02:30:54Z</ns0:timestamp>
+      <ns0:id>382</ns0:id>
+      <ns0:timestamp>2009-07-26T16:56:20Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">Verträge.
+      <ns0:text xml:space="preserve">Contracts.
 
-Mangels besserem Benennungsschema, benennen wir die Verträge mit einer fortlaufenden Nummer, und formatieren diese so: "V%04i"
 [[Category:Origin-SICEKIT]]</ns0:text>
     </ns0:revision>
   </ns0:page>

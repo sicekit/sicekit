@@ -5,22 +5,23 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:HP 2810-24G</ns0:title>
-    <ns0:id>80</ns0:id>
+    <ns0:id>42</ns0:id>
     <ns0:revision>
-      <ns0:id>12724</ns0:id>
-      <ns0:timestamp>2009-07-19T02:32:41Z</ns0:timestamp>
+      <ns0:id>355</ns0:id>
+      <ns0:timestamp>2009-07-26T16:07:22Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>-&gt; english</ns0:comment>
       <ns0:text xml:space="preserve">[[Image:Hp2810-24G_small.gif|right]]
 HP Part Number: J9021A
 
 Specs:
-* 24x 10/100/1000MBit, 21-24 davon shared mit Mini-GBIC Slots.
+* 24x 10/100/1000MBit, 21-24 are shared with Mini-GBIC Slots.
 * All TP ports/speeds autosensing
 
 * [http://www.hp.com/rnd/products/switches/ProCurve_Switch_2810_Series/overview.htm Procurve 2810 Series Overview]

@@ -5,24 +5,20 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Category:RHEL4AS</ns0:title>
-    <ns0:id>1545</ns0:id>
+    <ns0:id>31</ns0:id>
     <ns0:revision>
-      <ns0:id>12744</ns0:id>
-      <ns0:timestamp>2009-07-19T02:35:35Z</ns0:timestamp>
+      <ns0:id>370</ns0:id>
+      <ns0:timestamp>2009-07-26T16:35:12Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
       <ns0:text xml:space="preserve">[[Image:Redhat_400.gif|right]]
 
-Hatred by many
-
 RedHat Enterprise Linux 4 Advanced Server
-
-RHEL4 benötigt AS weil wir mehr Cores Supported haben möchten.
 
 http://www.redhat.com/
 
