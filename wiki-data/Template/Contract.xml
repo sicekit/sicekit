@@ -5,60 +5,61 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:Contract</ns0:title>
-    <ns0:id>40</ns0:id>
+    <ns0:id>98</ns0:id>
     <ns0:revision>
-      <ns0:id>12642</ns0:id>
-      <ns0:timestamp>2009-07-19T02:18:21Z</ns0:timestamp>
+      <ns0:id>348</ns0:id>
+      <ns0:timestamp>2009-07-26T15:59:13Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
-      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="330"
+      <ns0:comment>bumped col sizes a bit</ns0:comment>
+      <ns0:text xml:space="preserve">{| class="prettytable float-right" width="350"
 |-
 | style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | Contract
 |-
-| style="width: 60px;" | Vertragspartner A:
+| style="width: 110px;" | Partner A:
 |[[{{{COMPANYA}}}]]
 |-
-|Vertragspartner B:
+|Partner B:
 |[[{{{COMPANYB}}}]]
 |-
 |Status:
 |{{{STATUS}}}
 |-
-|Startdatum:
+|Start Date:
 |{{{STARTDATE}}}
 |-
-|MVD:
+|Minimum Term:
 |{{{MVD}}}
 |-
-|Verlängerungs-&lt;br&gt;Intervall:
+|Renewal Period:
 |{{{RENEWALTIME}}}
 |-
-|Kündigungs-&lt;br&gt;Frist:
+|Cancelation Period:
 |{{{FRIST}}}
 |-
-|Vertrags-/Rechnungsnummern:
+|Conctract &amp; Invoice Numbers:
 |{{{NUMBERS}}}
 |-
 |Documents:
 |{{{DOCUMENTS}}}
 |-
-|Gegenstand:
-|Leistungen im Artikeltext
+|Subjects of contract:
+|Goods and services mentioned in the contract
 |-
-| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | Preise
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | Charges
 |-
-|Setup:
+|Initial:
 |{{{PRICINGSETUP}}}
 |-
-|Monatlich Fix:
+|Monthly fixed fee:
 |{{{PRICINGMONTH}}}
 |-
-|Variabel:
+|Variable rates:
 |{{{PRICINGVARYING}}}
 |}
 [[Category:Contract]]

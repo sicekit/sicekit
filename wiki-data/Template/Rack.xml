@@ -5,20 +5,22 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:Rack</ns0:title>
-    <ns0:id>17</ns0:id>
+    <ns0:id>123</ns0:id>
     <ns0:revision>
-      <ns0:id>12689</ns0:id>
-      <ns0:timestamp>2009-07-19T02:25:37Z</ns0:timestamp>
+      <ns0:id>426</ns0:id>
+      <ns0:timestamp>2009-07-26T18:31:20Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:minor />
+      <ns0:comment>more english</ns0:comment>
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="370"
 |-
-| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{{HE}}}HE-Rack:&lt;br&gt;{{{NAME}}}
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | {{{HE}}}U-Rack:&lt;br&gt;{{{NAME}}}
 |-
 | style="width: 60px;" | Owner:
 |[[{{{OWNER}}}]]
@@ -26,17 +28,17 @@
 |Location:
 |[[{{{LOCATION}}}]]
 |-
-|... genauer:
+|... detailed:
 |{{{LOCATIONDETAIL}}}
 |-
-|Zutritt:
+|Access:
 |{{{ENTRY}}} (also see [[{{{LOCATION}}}]]!)
 |-
-|Vertrag:
-|[[{{{CONTRACT}}}]]
+|Contract:
+|{{#contractref:{{{CONTRACT}}}}}
 |-
 |Dimensions:
-|{{{HE}}} HE&lt;br&gt;{{#if:{{{DIMENSIONS|}}}|{{{DIMENSIONS}}}| {{{LENGTH}}} tief / {{{WIDTH}}} breit}}
+|{{{HE}}} U&lt;br&gt;{{#if:{{{DIMENSIONS|}}}|{{{DIMENSIONS}}}| {{{LENGTH}}} depth / {{{WIDTH}}} width}}
 |-
 |Rack Model:
 |{{{MODEL}}}
@@ -50,11 +52,12 @@
 |}
 
 &lt;noinclude&gt;
-AWARENESS:
+Please pay attention to:
 
-* Attached Racks (fehlende Trennwände o.ä.)
-* HE-Plan (Nomenklatur Vorne/Hinten!)
-* Color Conventions Plan (wenn abweichend vom Std) 
+* Attached Racks (missing dividers, etc.)
+* Color Conventions for cabling 
+
+while documenting things.
 
 [[Category:Origin-SICEKIT]]
 &lt;/noinclude&gt;

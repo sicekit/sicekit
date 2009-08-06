@@ -5,23 +5,25 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:RackRack</ns0:title>
-    <ns0:id>21</ns0:id>
+    <ns0:id>63</ns0:id>
     <ns0:revision>
-      <ns0:id>12688</ns0:id>
-      <ns0:timestamp>2009-07-19T02:25:25Z</ns0:timestamp>
+      <ns0:id>427</ns0:id>
+      <ns0:timestamp>2009-07-26T18:32:19Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:minor />
+      <ns0:comment>title-beautification</ns0:comment>
       <ns0:text xml:space="preserve">&lt;includeonly&gt;
 {| class="prettytable" width="460"
 |-
-| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | Rackplan für {{{HE}}} HE
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | {{{HE}}}U-Rack
 |-
-| width=10 | &lt;b&gt;U&lt;/b&gt; || width=250 | &lt;b&gt;Vorne&lt;/b&gt; || width=250 align=right | &lt;b&gt;Hinten&lt;/b&gt;
+| width=10 | &lt;b&gt;U&lt;/b&gt; || width=250 | &lt;b&gt;Front&lt;/b&gt; || width=250 align=right | &lt;b&gt;Back&lt;/b&gt;
 |-
 {{RackUnit|1|{{{V1|}}}|{{{H1|}}}|U={{{U1|}}}|F={{{F1|}}}}}
 {{RackUnit|2|{{{V2|}}}|{{{H2|}}}|U={{{U2|}}}|F={{{F2|}}}}}
@@ -80,20 +82,20 @@
 |}
 &lt;/includeonly&gt;
 &lt;noinclude&gt;
-Dieses Template erzeugt eine Tabelle, für ein Rack mit 10, 21, 42 oder 48 Höheneinheiten.
+This template creates a table for Racks with 10, 21, 42 or 48 Rack Units.
 
 Parameter:
 
-* HE: gibt die Anzahl der Höheneinheiten an, z.B. HE=48
+* HE: defines the amount of Rack Units, e.g. HE=48
 
 n = 1...48:
 
-* Vn=: Vorne eingebautes Gerät in der HE n
-* Hn=: Hinten eingebautes Gerät in der HE n
-* Un=X: In der HE n eingebautes Gerät benötigt X HE
-* Fn=: Spezielle Flags für diese Höheneinheit, as follows:
-** f: Full-size: Nur ein Gerät kann eingebaut werden, entweder hinten oder vorne
-** x: eXclude: in die HE kann nichts eingebaut werden, weil schon ein anderes Gerät diese HE blockiert
+* Vn=: Front-Mounted half-depth device in Rack Unit n 
+* Hn=: Back-Mounted half-depth device in Rack Unit n
+* Un=X: Device mounted in Rack Unit N, requires X Units
+* Fn=: Special flags for this Rack Unit, as follows:
+** f: Full-size: Device is full-depth; only one device can be mounted in this Rack Unit (either front or back)
+** x: eXclude: This Rack Unit can't be used, because it's blocked by something.
 [[Category:Origin-SICEKIT]]
 &lt;/noinclude&gt;</ns0:text>
     </ns0:revision>

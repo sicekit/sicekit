@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:Project</ns0:title>
-    <ns0:id>37</ns0:id>
+    <ns0:id>62</ns0:id>
     <ns0:revision>
-      <ns0:id>12686</ns0:id>
-      <ns0:timestamp>2009-07-19T02:24:56Z</ns0:timestamp>
+      <ns0:id>376</ns0:id>
+      <ns0:timestamp>2009-07-26T16:40:08Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -20,7 +20,7 @@
 |-
 | style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | Project:&lt;br&gt;{{{NAME}}}
 |-
-| style="width: 60px;" | Vertragspartner:
+| style="width: 60px;" | Contract Partner:
 |[[{{{OWNER}}}]]
 |-
 |Status:

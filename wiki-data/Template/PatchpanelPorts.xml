@@ -5,21 +5,23 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:PatchpanelPorts</ns0:title>
-    <ns0:id>241</ns0:id>
+    <ns0:id>61</ns0:id>
     <ns0:revision>
-      <ns0:id>12683</ns0:id>
-      <ns0:timestamp>2009-07-19T02:24:13Z</ns0:timestamp>
+      <ns0:id>533</ns0:id>
+      <ns0:timestamp>2009-07-29T21:54:19Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:minor />
+      <ns0:comment>-&gt; english</ns0:comment>
       <ns0:text xml:space="preserve">&lt;includeonly&gt;
 {| class="prettytable" width="460"
 |-
-| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | Patchpanel-Plan für {{{PORTS}}} Ports
+| style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=3 | Patchpanel-Plan for {{{PORTS}}} Ports
 |-
 | width=10 | &lt;b&gt;Port&lt;/b&gt; || width=60 | &lt;b&gt;ID&lt;/b&gt; || width=450 | &lt;b&gt;Description&lt;/b&gt;
 |-

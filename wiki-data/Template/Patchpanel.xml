@@ -5,13 +5,13 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:Patchpanel</ns0:title>
-    <ns0:id>238</ns0:id>
+    <ns0:id>78</ns0:id>
     <ns0:revision>
-      <ns0:id>12682</ns0:id>
-      <ns0:timestamp>2009-07-19T02:24:07Z</ns0:timestamp>
+      <ns0:id>375</ns0:id>
+      <ns0:timestamp>2009-07-26T16:38:51Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
@@ -34,20 +34,20 @@
 |Model:
 |[[:Category:{{{MODEL}}}|{{{MODEL}}}]]
 |-
-|Kaufdatum:
+|Purchase Date:
 |{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
 |-
 | style="background: #b2d8d8; text-align:center;" colspan=2 | Hardware
 |-
 | Dimensions:
-| {{{HE|1}}} HE {{#if:{{{LENGTH|}}}| x {{{LENGTH}}} tief}}
+| {{{HE|1}}} U {{#if:{{{LENGTH|}}}| x {{{LENGTH}}} depth}}
 |-
 | Ports:
 | {{{PORTS}}}x CAT{{{CAT}}}
 &lt;!-- begin Trivia --&gt;
 |-
 {{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
-{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+{{!}} colspan=2 {{!}} &lt;b&gt;Trivia:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
 |}
 [[Category:Patchpanel]]
 &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>

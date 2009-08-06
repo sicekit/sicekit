@@ -5,17 +5,18 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:IPNetwork</ns0:title>
-    <ns0:id>320</ns0:id>
+    <ns0:id>119</ns0:id>
     <ns0:revision>
-      <ns0:id>12672</ns0:id>
-      <ns0:timestamp>2009-07-19T02:22:28Z</ns0:timestamp>
+      <ns0:id>367</ns0:id>
+      <ns0:timestamp>2009-07-26T16:32:09Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:comment>-&gt; english</ns0:comment>
       <ns0:text xml:space="preserve">{{#ifeq: RIPE | {{{SOURCE}}} | &lt;div style="float: right;"&gt;
 [http://www.db.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext={{{NET}}}/{{{MASK}}}&amp;do_search=Search RIPE Whois {{{NET}}}/{{{MASK}}}]&lt;br&gt;
 [http://www.db.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext={{{NETNAME}}}&amp;do_search=Search RIPE Whois {{{NETNAME}}}]&lt;br&gt;
@@ -40,7 +41,7 @@
 |Router:
 |[[{{{ROUTER}}}]]
 |}
-{{#ifeq: RIPE | {{{SOURCE}}} | '''Achtung: RIPE-Assigned - Änderungen nur via RIPE DB!!!'''&lt;br&gt;RIPE netname: {{{NETNAME}}}&lt;br&gt;&lt;br&gt;  | }}{{{DESC}}}
+{{#ifeq: RIPE | {{{SOURCE}}} | '''Achtung: RIPE-Assigned - Changes only via RIPE DB!!!'''&lt;br&gt;RIPE netname: {{{NETNAME}}}&lt;br&gt;&lt;br&gt;  | }}{{{DESC}}}
 &lt;includeonly&gt;[[Category:IP-Network]]&lt;/includeonly&gt;
 &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
     </ns0:revision>

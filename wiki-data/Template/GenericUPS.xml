@@ -5,17 +5,18 @@
     <ns0:base>chrome:///sicekit</ns0:base>
     <ns0:generator>SICEKIT</ns0:generator>
     <ns0:case>first-letter</ns0:case>
-      </ns0:siteinfo>
+    </ns0:siteinfo>
   <ns0:page>
     <ns0:title>Template:GenericUPS</ns0:title>
-    <ns0:id>215</ns0:id>
+    <ns0:id>117</ns0:id>
     <ns0:revision>
-      <ns0:id>12655</ns0:id>
-      <ns0:timestamp>2009-07-19T02:20:22Z</ns0:timestamp>
+      <ns0:id>345</ns0:id>
+      <ns0:timestamp>2009-07-26T15:48:03Z</ns0:timestamp>
       <ns0:contributor>
         <ns0:username>SICEKIT</ns0:username>
         <ns0:id>0</ns0:id>
       </ns0:contributor>
+      <ns0:minor />
       <ns0:text xml:space="preserve">{| class="prettytable float-right" width="450"
 |-
 | style="background: #b2d8d8; font-weight:bold; text-align:center;" colspan=2 | UPS {{{NAME}}}
@@ -37,10 +38,10 @@
 |Serial Number:
 |{{{SN}}}
 |-
-|Wartungsvertrag:
+|Maintenance Contract:
 |{{{CARE}}}
 |-
-|Kaufdatum:
+|Purchase Date:
 |{{{PURCHASEDATE}}}, [[{{{CONTRACT}}}]]
 &lt;!-- begin OOB --&gt;
 {{#if:{{{OOBTYPE|}}}|
@@ -53,7 +54,7 @@
 | style="background: #b2d8d8; text-align:center;" colspan=2 | Hardware
 |-
 | Dimensions:
-| {{{HE}}} HE x {{{LENGTH}}} tief
+| {{{HE}}} U x {{{LENGTH}}} depth
 |-
 | Output:
 | Max. {{{MAXLOAD}}} @ {{{OUTNET}}}&lt;br&gt;{{{OUTPUT}}}
@@ -75,12 +76,12 @@
 | Management Port:
 | {{{MGMTPORT}}} {{#if:{{{MGMTPORTCONN|}}}|to {{{MGMTPORTCONN}}}}}
 |-
-| Montage:
+| Mounting:
 | {{{MOUNTING}}}
 &lt;!-- begin Trivia --&gt;
 |-
 {{#if:{{{MODELTRIVIA|}}}{{{TRIVIA|}}}|
-{{!}} colspan=2 {{!}} &lt;b&gt;Besonderheiten:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
+{{!}} colspan=2 {{!}} &lt;b&gt;Trivia:&lt;/b&gt;&lt;br&gt;{{#if:{{{MODELTRIVIA|}}}|{{{MODELTRIVIA|}}}&lt;br&gt;}} {{{TRIVIA|}}} |}}
 |}
 [[Category:{{{MODEL}}}]] [[Category:UPS]]
 &lt;noinclude&gt;[[Category:Origin-SICEKIT]]&lt;/noinclude&gt;</ns0:text>
