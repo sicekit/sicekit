@@ -220,7 +220,6 @@ class ILO2InventoryBot:
 					if this['cores'] == 2: this['corestr'] = 'Dual-Core'
 					if this['cores'] == 4: this['corestr'] = 'Quad-Core'
 					this['cpufamily'] = ord(smbios_data[0x6])
-					if this['cpufamily'] == 0xb3: this['cpufamstr'] = 'Xeon'
 					this['fsb'] = struct.unpack('H', smbios_data[0x12:0x14])[0]
 					this['speed'] = struct.unpack('H', smbios_data[0x16:0x18])[0]
 					this['sockettype'] = ord(smbios_data[0x19])
@@ -229,6 +228,8 @@ class ILO2InventoryBot:
 					this['l2cachesize'] = cachestructs[struct.unpack('H', smbios_data[0x1C:0x1E])[0]]
 
 					# this is mad guesswork.
+					if this['cpufamily'] in (0xb3,0xaa): this['cpufamstr'] = 'Xeon'
+
 					if this['cpufamily'] == 0xb3 and this['fsb'] == 1066:
 						if this['cores'] == 2 and this['l2cachesize'] == 4096:
 							if this['speed'] == 2400: this['model'] = '3060'
@@ -250,6 +251,11 @@ class ILO2InventoryBot:
 								if this['speed'] == 2666: this['model'] = 'E5430'
 								if this['speed'] == 2833: this['model'] = 'E5440'
 								if this['speed'] == 3000: this['model'] = 'E5450'
+
+					# Nehalem
+					if this['cpufamily'] == 0xaa and this['fsb'] == 133:
+						if this['cores'] == 4 and this['l2cachesize'] == 1024:
+							if this['speed'] == 2533: this['model'] = 'E5540'
 
 					if not this.has_key('model'):
 						print 'Unknown CPU, details: speed=%s, cores=%s, fsb=%s, family=%x, l2cache=%s' % (this['speed'], this['cores'], this['fsb'], this['cpufamily'], this['l2cachesize'])
