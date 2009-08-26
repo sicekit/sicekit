@@ -6,6 +6,7 @@ You need
 * A Webserver capable of running PHP scripts
 * PHP5 (for Mediawiki)
 * MySQL >= 4.0 or PostgreSQL >= 8.1  (for Mediawiki)
+* MediaWiki >= 1.15
 * Python 2.5 (for the Robots)
 * A SVG converter (for MediaWiki)
 * A Cron daemon or similar job runner (for the Robots)
@@ -15,7 +16,7 @@ You need
 MediaWiki
 =========
 
-Install a current version of Mediawiki.
+Install a current version (>= 1.15) of Mediawiki.
 
 See http://www.mediawiki.org/wiki/MediaWiki , the INSTALL file in the
 source directory will guide you through the installation.
