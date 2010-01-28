@@ -1,0 +1,30 @@
+$wgEnableEmail      = false;
+$wgEnableUserEmail  = false; # UPO
+
+$wgUseTeX           = false;
+
+$wgLocalInterwiki   = strtolower( $wgSitename );
+
+$wgLanguageCode = "en";
+
+
+$wgFileExtensions = array_merge( $wgFileExtensions, array( 'pdf', 'svg' ) );
+
+
+$wgUseCopyrightUpload = true;
+
+
+$wgSVGConverter = "rsvg";
+$wgRawHtml = true;
+
+
+require("extensions/ParserFunctions/ParserFunctions.php");
+require("extensions/StringFunctions/StringFunctions.php");
+require("extensions/include/include.php");
+require("extensions/SyntaxHighlight_GeSHi/SyntaxHighlight_GeSHi.php");
+require("extensions/SICEKIT/SICEKIT.php");
+
+$wgLogo = "https://sicekit.org/sicekit.png";
+
+
+$wgEnableUploads       = true;

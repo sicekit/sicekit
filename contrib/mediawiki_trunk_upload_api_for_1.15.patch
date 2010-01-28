@@ -1,0 +1,1822 @@
+diff -Nuri a/includes/api/ApiMain.php b/includes/api/ApiMain.php
+--- a/includes/api/ApiMain.php	2009-05-20 20:10:47.000000000 +0000
++++ b/includes/api/ApiMain.php	2009-07-24 22:33:58.000000000 +0000
+@@ -80,6 +80,7 @@
+ 		'watch' => 'ApiWatch',
+ 		'patrol' => 'ApiPatrol',
+ 		'import' => 'ApiImport',
++		'upload' => 'ApiUpload',
+ 	);
+ 
+ 	/**
+diff -Nuri a/includes/api/ApiUpload.php b/includes/api/ApiUpload.php
+--- a/includes/api/ApiUpload.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/api/ApiUpload.php	2009-07-24 22:35:35.000000000 +0000
+@@ -0,0 +1,348 @@
++<?php
++
++/*
++ * Created on Aug 21, 2008
++ * API for MediaWiki 1.8+
++ *
++ * Copyright (C) 2008 - 2009 Bryan Tong Minh <Bryan.TongMinh@Gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, write to the Free Software Foundation, Inc.,
++ * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++
++if ( !defined( 'MEDIAWIKI' ) ) {
++	// Eclipse helper - will be ignored in production
++	require_once("ApiBase.php");
++}
++
++/**
++ * @ingroup API
++ */
++class ApiUpload extends ApiBase {
++	var $mUpload = null;
++
++	public function __construct( $main, $action ) {
++		parent::__construct( $main, $action );
++	}
++
++	public function execute() {
++		global $wgUser;
++
++		$this->getMain()->isWriteMode();
++		$this->mParams = $this->extractRequestParams();
++		$request = $this->getMain()->getRequest();
++
++		// do token checks:
++		if( is_null( $this->mParams['token'] ) )
++			$this->dieUsageMsg( array( 'missingparam', 'token' ) );
++		if( !$wgUser->matchEditToken( $this->mParams['token'] ) )
++			$this->dieUsageMsg( array( 'sessionfailure' ) );
++
++
++		// Add the uploaded file to the params array
++		$this->mParams['file'] = $request->getFileName( 'file' );
++
++		// Check whether upload is enabled
++		if( !UploadBase::isEnabled() )
++			$this->dieUsageMsg( array( 'uploaddisabled' ) );
++
++		wfDebug( __METHOD__ . "running require param\n" );
++		// One and only one of the following parameters is needed
++		$this->requireOnlyOneParameter( $this->mParams,
++			'sessionkey', 'file', 'url', 'enablechunks' );
++
++		if( $this->mParams['enablechunks'] ){
++			// chunks upload enabled
++			$this->mUpload = new UploadFromChunks();
++			$this->mUpload->initializeFromParams( $this->mParams, $request );
++
++			//if getAPIresult did not exit report the status error:
++			if( isset( $this->mUpload->status['error'] ) )
++				$this->dieUsageMsg( $this->mUpload->status['error'] );
++
++		} else if( $this->mParams['internalhttpsession'] ){
++			$sd = & $_SESSION['wsDownload'][$this->mParams['internalhttpsession']];
++
++			// get the params from the init session:
++			$this->mUpload = new UploadFromFile();
++
++			$this->mUpload->initialize( $this->mParams['filename'],
++				$sd['target_file_path'],
++				filesize( $sd['target_file_path'] )
++			);
++
++			if( !isset( $this->mUpload ) )
++				$this->dieUsage( 'No upload module set', 'nomodule' );
++
++		} else if( $this->mParams['httpstatus'] && $this->mParams['sessionkey'] ){
++			// return the status of the given upload session_key:
++			if( !isset( $_SESSION['wsDownload'][ $this->mParams['sessionkey'] ] ) ){
++					return $this->dieUsageMsg( array( 'invalid-session-key' ) );
++			}
++			$sd = & $_SESSION['wsDownload'][$this->mParams['sessionkey']];
++			// keep passing down the upload sessionkey
++			$statusResult = array(
++				'upload_session_key' => $this->mParams['sessionkey']
++			);
++
++			// put values into the final apiResult if available
++			if( isset( $sd['apiUploadResult'] ) ) $statusResult['apiUploadResult'] = $sd['apiUploadResult'];
++			if( isset( $sd['loaded'] ) ) $statusResult['loaded'] = $sd['loaded'];
++			if( isset( $sd['content_length'] ) ) $statusResult['content_length'] = $sd['content_length'];
++
++			return $this->getResult()->addValue( null, $this->getModuleName(),
++						$statusResult
++			);
++		} else if( $this->mParams['sessionkey'] ) {
++			// Stashed upload
++			$this->mUpload = new UploadFromStash();
++			$this->mUpload->initialize( $this->mParams['filename'], $_SESSION['wsUploadData'][$this->mParams['sessionkey']] );
++		} else {
++			// Upload from url or file
++			// Parameter filename is required
++			if( !isset( $this->mParams['filename'] ) )
++				$this->dieUsageMsg( array( 'missingparam', 'filename' ) );
++
++			// Initialize $this->mUpload
++			if( isset( $this->mParams['file'] ) ) {
++				$this->mUpload = new UploadFromFile();
++				$this->mUpload->initialize(
++					$request->getFileName( 'file' ),
++					$request->getFileTempName( 'file' ),
++					$request->getFileSize( 'file' )
++				);
++			} elseif( isset( $this->mParams['url'] ) ) {
++
++				$this->mUpload = new UploadFromUrl();
++				$this->mUpload->initialize( $this->mParams['filename'], $this->mParams['url'], $this->mParams['asyncdownload'] );
++
++				$status = $this->mUpload->fetchFile();
++				if( !$status->isOK() ){
++					return $this->dieUsage( 'fetchfileerror', $status->getWikiText() );
++				}
++				//check if we doing a async request set session info and return the upload_session_key)
++				if( $this->mUpload->isAsync() ){
++					$upload_session_key = $status->value;
++					// update the session with anything with the params we will need to finish up the upload later on:
++					if( !isset( $_SESSION['wsDownload'][$upload_session_key] ) )
++						$_SESSION['wsDownload'][$upload_session_key] = array();
++
++					$sd =& $_SESSION['wsDownload'][$upload_session_key];
++
++					// copy mParams for finishing up after:
++					$sd['mParams'] = $this->mParams;
++
++					return $this->getResult()->addValue( null, $this->getModuleName(),
++									array( 'upload_session_key' => $upload_session_key
++							));
++				}
++				//else the file downloaded in place continue with validation:
++			}
++		}
++
++		if( !isset( $this->mUpload ) )
++			$this->dieUsage( 'No upload module set', 'nomodule' );
++
++		//finish up the exec command:
++		$this->doExecUpload();
++	}
++
++	function doExecUpload(){
++		global $wgUser;
++		// Check whether the user has the appropriate permissions to upload anyway
++		$permission = $this->mUpload->isAllowed( $wgUser );
++
++		if( $permission !== true ) {
++			if( !$wgUser->isLoggedIn() )
++				$this->dieUsageMsg( array( 'mustbeloggedin', 'upload' ) );
++			else
++				$this->dieUsageMsg( array( 'badaccess-groups' ) );
++		}
++		// Perform the upload
++		$result = $this->performUpload();
++		// Cleanup any temporary mess
++		$this->mUpload->cleanupTempFile();
++		$this->getResult()->addValue( null, $this->getModuleName(), $result );
++	}
++
++	private function performUpload() {
++		global $wgUser;
++		$result = array();
++		$resultDetails = null;
++		$permErrors = $this->mUpload->verifyPermissions( $wgUser );
++		if( $permErrors !== true ) {
++			$result['result'] = 'Failure';
++			$result['error'] = 'permission-denied';
++			return $result;
++		}
++		$verification = $this->mUpload->verifyUpload( $resultDetails );
++		if( $verification != UploadBase::OK ) {
++			$result['result'] = 'Failure';
++			switch( $verification ) {
++				case UploadBase::EMPTY_FILE:
++					$result['error'] = 'empty-file';
++					break;
++				case UploadBase::FILETYPE_MISSING:
++					$result['error'] = 'filetype-missing';
++					break;
++				case UploadBase::FILETYPE_BADTYPE:
++					global $wgFileExtensions;
++					$result['error'] = 'filetype-banned';
++					$result['filetype'] = $resultDetails['finalExt'];
++					$result['allowed-filetypes'] = $wgFileExtensions;
++					break;
++				case UploadBase::MIN_LENGHT_PARTNAME:
++					$result['error'] = 'filename-tooshort';
++					break;
++				case UploadBase::ILLEGAL_FILENAME:
++					$result['error'] = 'illegal-filename';
++					$result['filename'] = $resultDetails['filtered'];
++					break;
++				case UploadBase::OVERWRITE_EXISTING_FILE:
++					$result['error'] = 'overwrite';
++					break;
++				case UploadBase::VERIFICATION_ERROR:
++					$result['error'] = 'verification-error';
++					$args = $resultDetails['veri'];
++					$code = array_shift( $args );
++					$result['verification-error'] = $code;
++					$result['args'] = $args;
++					$this->getResult()->setIndexedTagName( $result['args'], 'arg' );
++					break;
++				case UploadBase::UPLOAD_VERIFICATION_ERROR:
++					$result['error'] = 'upload-verification-error';
++					$result['upload-verification-error'] = $resultDetails['error'];
++					break;
++				default:
++					$result['error'] = 'unknown-error';
++					$result['code'] = $verification;
++					break;
++			}
++			return $result;
++		}
++
++		if( !$this->mParams['ignorewarnings'] ) {
++			$warnings = $this->mUpload->checkWarnings();
++			if( $warnings ) {
++				$this->getResult()->setIndexedTagName( $warnings, 'warning' );
++
++				$result['result'] = 'Warning';
++				$result['warnings'] = $warnings;
++				if( isset( $result['filewasdeleted'] ) )
++					$result['filewasdeleted'] = $result['filewasdeleted']->getDBkey();
++
++				$sessionKey = $this->mUpload->stashSession();
++				if( $sessionKey )
++					$result['sessionkey'] = $sessionKey;
++				return $result;
++			}
++		}
++
++		// do the upload
++		$status = $this->mUpload->performUpload( $this->mParams['comment'],
++			$this->mParams['comment'], $this->mParams['watch'], $wgUser );
++
++		if( !$status->isGood() ) {
++			$result['result'] = 'Failure';
++			$result['error'] = 'internal-error';
++			$result['details'] = $status->getErrorsArray();
++			$this->getResult()->setIndexedTagName( $result['details'], 'error' );
++			return $result;
++		}
++
++		$file = $this->mUpload->getLocalFile();
++		$result['result'] = 'Success';
++		$result['filename'] = $file->getName();
++
++		// Append imageinfo to the result
++
++		// might be a cleaner way to call this:
++		$imParam = ApiQueryImageInfo::getAllowedParams();
++		$imProp = $imParam['prop'][ApiBase::PARAM_TYPE];
++		$result['imageinfo'] = ApiQueryImageInfo::getInfo( $file,
++			array_flip( $imProp ),
++			$this->getResult() );
++
++		wfDebug( "\n\n return result: " . print_r( $result, true ) );
++
++		return $result;
++	}
++
++	public function mustBePosted() {
++		return true;
++	}
++	public function isWriteMode() {
++		return true;
++	}
++
++	public function getAllowedParams() {
++		return array(
++			'filename' => null,
++			'file' => null,
++			'chunk' => null,
++			'url' => null,
++			'token' => null,
++			'enablechunks' => null,
++			'comment' => array(
++				ApiBase::PARAM_DFLT => ''
++			),
++			'asyncdownload' => false,
++			'watch' => false,
++			'ignorewarnings' => false,
++			'done' => false,
++			'sessionkey' => null,
++			'httpstatus' => false,
++			'chunksessionkey' => null,
++			'internalhttpsession' => null,
++		);
++	}
++
++	public function getParamDescription() {
++		return array(
++			'filename' => 'Target filename',
++			'file' => 'File contents',
++			'chunk'=> 'Chunk File Contents',
++			'url' => 'Url to upload from',
++			'comment' => 'Upload comment or initial page text',
++			'token' => 'Edit token. You can get one of these through prop=info (this helps avoid remote ajax upload requests with your credentials)',
++			'enablechunks' => 'Boolean If we are in chunk mode; accepts many small file POSTs',
++			'asyncdownload' => 'If we should download the url asyncrously usefull for large http downloads (returns a upload session key to get status updates in subquent calls)',
++			'watch' => 'Watch the page',
++			'ignorewarnings' => 'Ignore any warnings',
++			'done'	=> 'When used with "chunks", Is sent to notify the api The last chunk is being uploaded.',
++			'sessionkey' => 'Session key in case there were any warnings.',
++			'httpstatus' => 'When set to true, will return the status of a given sessionKey (used for progress meters)',
++			'chunksessionkey' => 'Used to sync uploading of chunks',
++			'internalhttpsession' => 'Used internally for http session downloads',
++		);
++	}
++
++	public function getDescription() {
++		return array(
++			'Upload a file'
++		);
++	}
++
++	protected function getExamples() {
++		return array(
++			'api.php?action=upload&filename=Wiki.png&url=http%3A//upload.wikimedia.org/wikipedia/en/b/bc/Wiki.png&ignorewarnings'
++		);
++	}
++
++	public function getVersion() {
++		return __CLASS__ . ': $Id: ApiUpload.php 51812 2009-06-12 23:45:20Z dale $';
++	}
++}
++
+diff -Nuri a/includes/AutoLoader.php b/includes/AutoLoader.php
+--- a/includes/AutoLoader.php	2009-05-01 06:24:09.000000000 +0000
++++ b/includes/AutoLoader.php	2009-07-24 23:40:40.000000000 +0000
+@@ -197,6 +197,11 @@
+ 	'TransformParameterError' => 'includes/MediaTransformOutput.php',
+ 	'TurckBagOStuff' => 'includes/BagOStuff.php',
+ 	'UnlistedSpecialPage' => 'includes/SpecialPage.php',
++	'UploadBase' => 'includes/upload/UploadBase.php',
++	'UploadFromStash' => 'includes/upload/UploadFromStash.php',
++	'UploadFromFile' => 'includes/upload/UploadFromFile.php',
++	'UploadFromUrl' => 'includes/upload/UploadFromUrl.php',
++	'UploadFromChunks' => 'includes/upload/UploadFromChunks.php',
+ 	'User' => 'includes/User.php',
+ 	'UserArray' => 'includes/UserArray.php',
+ 	'UserArrayFromResult' => 'includes/UserArray.php',
+@@ -289,6 +294,7 @@
+ 	'ApiResult' => 'includes/api/ApiResult.php',
+ 	'ApiRollback' => 'includes/api/ApiRollback.php',
+ 	'ApiUnblock' => 'includes/api/ApiUnblock.php',
++	'ApiUpload' => 'includes/api/ApiUpload.php',
+ 	'ApiUndelete' => 'includes/api/ApiUndelete.php',
+ 	'ApiWatch' => 'includes/api/ApiWatch.php',
+ 	'Services_JSON' => 'includes/api/ApiFormatJson_json.php',
+diff -Nuri a/includes/upload/UploadBase.php b/includes/upload/UploadBase.php
+--- a/includes/upload/UploadBase.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/upload/UploadBase.php	2009-07-24 23:40:12.000000000 +0000
+@@ -0,0 +1,984 @@
++<?php
++
++class UploadBase {
++	var $mTempPath;
++	var $mDesiredDestName, $mDestName, $mRemoveTempFile, $mSourceType;
++	var $mTitle = false, $mTitleError = 0;
++	var $mFilteredName, $mFinalExtension;
++
++	const SUCCESS = 0;
++	const OK = 0;
++	const BEFORE_PROCESSING = 1;
++	const LARGE_FILE_SERVER = 2;
++	const EMPTY_FILE = 3;
++	const MIN_LENGTH_PARTNAME = 4;
++	const ILLEGAL_FILENAME = 5;
++	const PROTECTED_PAGE = 6;
++	const OVERWRITE_EXISTING_FILE = 7;
++	const FILETYPE_MISSING = 8;
++	const FILETYPE_BADTYPE = 9;
++	const VERIFICATION_ERROR = 10;
++	const UPLOAD_VERIFICATION_ERROR = 11;
++	const UPLOAD_WARNING = 12;
++	const INTERNAL_ERROR = 13;
++	const MIN_LENGHT_PARTNAME = 14;
++
++	const SESSION_VERSION = 2;
++
++	/**
++	 * Returns true if uploads are enabled.
++	 * Can be override by subclasses.
++	 */
++	static function isEnabled() {
++		global $wgEnableUploads;
++		if ( !$wgEnableUploads )
++			return false;
++
++		# Check php's file_uploads setting
++		if( !wfIniGetBool( 'file_uploads' ) ) {
++			return false;
++		}
++		return true;
++	}
++
++	/**
++	 * Returns true if the user can use this upload module or else a string
++	 * identifying the missing permission.
++	 * Can be overriden by subclasses.
++	 */
++	static function isAllowed( $user ) {
++		if( !$user->isAllowed( 'upload' ) )
++			return 'upload';
++		return true;
++	}
++
++	// Upload handlers. Should probably just be a global
++	static $uploadHandlers = array( 'Stash', 'File', 'Url' );
++
++	/**
++	 * Create a form of UploadBase depending on wpSourceType and initializes it
++	 */
++	static function createFromRequest( &$request, $type = null ) {
++		$type = $type ? $type : $request->getVal( 'wpSourceType' );
++
++		if( !$type )
++			return null;
++
++		$type = ucfirst( $type );
++		$className = 'UploadFrom' . $type;
++		wfDebug( __METHOD__ . ": class name: $className\n" );
++		if( !in_array( $type, self::$uploadHandlers ) )
++			return null;
++
++		if( !call_user_func( array( $className, 'isEnabled' ) ) )
++			return null;
++
++		if( !call_user_func( array( $className, 'isValidRequest' ), $request ) )
++			return null;
++
++		$handler = new $className;
++
++		$handler->initializeFromRequest( $request );
++		return $handler;
++	}
++
++	/**
++	 * Check whether a request if valid for this handler
++	 */
++	static function isValidRequest( $request ) {
++		return false;
++	}
++
++	function __construct() {}
++
++	/**
++	 * Do the real variable initialization
++	 */
++	function initialize( $name, $tempPath, $fileSize, $removeTempFile = false ) {
++		$this->mDesiredDestName = $name;
++		$this->mTempPath = $tempPath;
++		$this->mFileSize = $fileSize;
++		$this->mRemoveTempFile = $removeTempFile;
++	}
++
++	/**
++	 * Fetch the file. Usually a no-op
++	 */
++	function fetchFile() {
++		return Status::newGood();
++	}
++
++	/**
++	 * Return the file size
++	 */
++	function isEmptyFile(){
++		return empty( $this->mFileSize );
++	}
++
++	/**
++	 * Verify whether the upload is sane.
++	 * Returns self::OK or else an array with error information
++	 */
++	function verifyUpload() {
++		/**
++		 * If there was no filename or a zero size given, give up quick.
++		 */
++		if( $this->isEmptyFile() )
++			return array( 'status' => self::EMPTY_FILE );
++
++		$nt = $this->getTitle();
++		if( is_null( $nt ) ) {
++			$result = array( 'status' => $this->mTitleError );
++			if( $this->mTitleError == self::ILLEGAL_FILENAME )
++				$result['filtered'] = $this->mFilteredName;
++			if ( $this->mTitleError == self::FILETYPE_BADTYPE )
++				$result['finalExt'] = $this->mFinalExtension;
++			return $result;
++		}
++		$this->mLocalFile = wfLocalFile( $nt );
++		$this->mDestName = $this->mLocalFile->getName();
++
++		/**
++		 * In some cases we may forbid overwriting of existing files.
++		 */
++		$overwrite = $this->checkOverwrite();
++		if( $overwrite !== true )
++			return array( 'status' => self::OVERWRITE_EXISTING_FILE, 'overwrite' => $overwrite );
++
++		/**
++		 * Look at the contents of the file; if we can recognize the
++		 * type but it's corrupt or data of the wrong type, we should
++		 * probably not accept it.
++		 */
++		$verification = $this->verifyFile( $this->mTempPath );
++
++		if( $verification !== true ) {
++			if( !is_array( $verification ) )
++				$verification = array( $verification );
++			$verification['status'] = self::VERIFICATION_ERROR;
++			return $verification;
++		}
++
++		$error = '';
++		if( !wfRunHooks( 'UploadVerification',
++				array( $this->mDestName, $this->mTempPath, &$error ) ) ) {
++			return array( 'status' => self::UPLOAD_VERIFICATION_ERROR, 'error' => $error );
++		}
++
++		return self::OK;
++	}
++
++	/**
++	 * Verifies that it's ok to include the uploaded file
++	 *
++	 * this function seems to intermixes tmpfile and $this->mTempPath .. no idea why this is
++	 *
++	 * @param string $tmpfile the full path of the temporary file to verify
++	 * @return mixed true of the file is verified, a string or array otherwise.
++	 */
++	protected function verifyFile( $tmpfile ) {
++		$this->mFileProps = File::getPropsFromPath( $this->mTempPath, $this->mFinalExtension );
++		$this->checkMacBinary();
++
++		#magically determine mime type
++		$magic = MimeMagic::singleton();
++		$mime = $magic->guessMimeType( $tmpfile, false );
++
++		#check mime type, if desired
++		global $wgVerifyMimeType;
++		if( isset( $wgMimeTypeBlacklist ) && !is_null( $wgMimeTypeBlacklist ) ) {
++			if ( $this->checkFileExtension( $mime, $wgMimeTypeBlacklist ) )
++				return array( 'filetype-badmime', $mime );
++
++			# Check IE type
++			$fp = fopen( $tmpfile, 'rb' );
++			$chunk = fread( $fp, 256 );
++			fclose( $fp );
++			$extMime = $magic->guessTypesForExtension( $this->mFinalExtension );
++			$ieTypes = $magic->getIEMimeTypes( $tmpfile, $chunk, $extMime );
++			foreach ( $ieTypes as $ieType ) {
++				if ( $this->checkFileExtension( $ieType, $wgMimeTypeBlacklist ) ) {
++					return array( 'filetype-bad-ie-mime', $ieType );
++				}
++			}
++		}
++
++		#check for htmlish code and javascript
++		if( $this->detectScript( $tmpfile, $mime, $this->mFinalExtension ) ) {
++			return 'uploadscripted';
++		}
++		if( $this->mFinalExtension == 'svg' || $mime == 'image/svg+xml' ) {
++			if( $this->detectScriptInSvg( $tmpfile ) ) {
++				return 'uploadscripted';
++			}
++		}
++
++		/**
++		* Scan the uploaded file for viruses
++		*/
++		$virus = $this->detectVirus( $tmpfile );
++		if ( $virus ) {
++			return array( 'uploadvirus', $virus );
++		}
++		wfDebug( __METHOD__ . ": all clear; passing.\n" );
++		return true;
++	}
++
++	/**
++	 * Check whether the user can edit, upload and create the image
++	 */
++	function verifyPermissions( $user ) {
++		/**
++		 * If the image is protected, non-sysop users won't be able
++		 * to modify it by uploading a new revision.
++		 */
++		$nt = $this->getTitle();
++		if( is_null( $nt ) )
++			return true;
++		$permErrors = $nt->getUserPermissionsErrors( 'edit', $user );
++		$permErrorsUpload = $nt->getUserPermissionsErrors( 'upload', $user );
++		$permErrorsCreate = ( $nt->exists() ? array() : $nt->getUserPermissionsErrors( 'create', $user ) );
++		if( $permErrors || $permErrorsUpload || $permErrorsCreate ) {
++			$permErrors = array_merge( $permErrors, wfArrayDiff2( $permErrorsUpload, $permErrors ) );
++			$permErrors = array_merge( $permErrors, wfArrayDiff2( $permErrorsCreate, $permErrors ) );
++			return $permErrors;
++		}
++		return true;
++	}
++
++	/**
++	 * Check for non fatal problems with the file
++	 */
++	function checkWarnings() {
++		$warning = array();
++
++		$filename = $this->mLocalFile->getName();
++		$n = strrpos( $filename, '.' );
++		$partname = $n ? substr( $filename, 0, $n ) : $filename;
++
++		/*
++		 * Check whether the resulting filename is different from the desired one,
++		 * but ignore things like ucfirst() and spaces/underscore things
++		 */
++		$comparableName = str_replace( ' ', '_', $this->mDesiredDestName );
++		global $wgCapitalLinks, $wgContLang;
++		if ( $wgCapitalLinks ) {
++			$comparableName = $wgContLang->ucfirst( $comparableName );
++		}
++		if( $this->mDesiredDestName != $filename && $comparableName != $filename )
++			$warning['badfilename'] = $filename;
++
++		// Check whether the file extension is on the unwanted list
++		global $wgCheckFileExtensions, $wgFileExtensions;
++		if ( $wgCheckFileExtensions ) {
++			if ( !$this->checkFileExtension( $this->mFinalExtension, $wgFileExtensions ) )
++				$warning['filetype-unwanted-type'] = $this->mFinalExtension;
++		}
++
++		global $wgUploadSizeWarning;
++		if ( $wgUploadSizeWarning && ( $this->mFileSize > $wgUploadSizeWarning ) )
++			$warning['large-file'] = $wgUploadSizeWarning;
++
++		if ( $this->mFileSize == 0 )
++			$warning['emptyfile'] = true;
++
++
++		$exists = self::getExistsWarning( $this->mLocalFile );
++		if( $exists !== false )
++			$warning['exists'] = $exists;
++
++		// Check whether this may be a thumbnail
++		if( $exists !== false && $exists[0] != 'thumb'
++				&& self::isThumbName( $this->mLocalFile->getName() ) ){
++			//make the title:
++			$nt = $this->getTitle();
++			$warning['file-thumbnail-no'] = substr( $filename, 0,
++				strpos( $nt->getText() , '-' ) +1 );
++		}
++
++		// Check dupes against existing files
++		$hash = File::sha1Base36( $this->mTempPath );
++		$dupes = RepoGroup::singleton()->findBySha1( $hash );
++		$title = $this->getTitle();
++		// Remove all matches against self
++		foreach ( $dupes as $key => $dupe ) {
++			if( $title->equals( $dupe->getTitle() ) )
++				unset( $dupes[$key] );
++		}
++		if( $dupes )
++			$warning['duplicate'] = $dupes;
++
++		// Check dupes against archives
++		$archivedImage = new ArchivedFile( null, 0, "{$hash}.{$this->mFinalExtension}" );
++		if ( $archivedImage->getID() > 0 )
++			$warning['duplicate-archive'] = $archivedImage->getName();
++
++		$filenamePrefixBlacklist = self::getFilenamePrefixBlacklist();
++		foreach( $filenamePrefixBlacklist as $prefix ) {
++			if ( substr( $partname, 0, strlen( $prefix ) ) == $prefix ) {
++				$warning['filename-bad-prefix'] = $prefix;
++				break;
++			}
++		}
++
++		# If the file existed before and was deleted, warn the user of this
++		# Don't bother doing so if the file exists now, however
++		if( $this->mLocalFile->wasDeleted() && !$this->mLocalFile->exists() )
++			$warning['filewasdeleted'] = $this->mLocalFile->getTitle();
++
++		return $warning;
++	}
++
++	/**
++	 * Really perform the upload.
++	 */
++	function performUpload( $comment, $pageText, $watch, $user ) {
++		wfDebug( "\n\n\performUpload: sum:" . $comment . ' c: ' . $pageText . ' w:' . $watch );
++		$status = $this->mLocalFile->upload( $this->mTempPath, $comment, $pageText,
++			File::DELETE_SOURCE, $this->mFileProps, false, $user );
++
++		if( $status->isGood() && $watch )
++			$user->addWatch( $this->mLocalFile->getTitle() );
++
++		if( $status->isGood() )
++			wfRunHooks( 'UploadComplete', array( &$this ) );
++
++		return $status;
++	}
++
++	/**
++	 * Returns a title or null
++	 */
++	function getTitle() {
++		if ( $this->mTitle !== false )
++			return $this->mTitle;
++
++		/**
++		 * Chop off any directories in the given filename. Then
++		 * filter out illegal characters, and try to make a legible name
++		 * out of it. We'll strip some silently that Title would die on.
++		 */
++		$basename = $this->mDesiredDestName;
++
++		$this->mFilteredName = wfStripIllegalFilenameChars( $basename );
++		/* Normalize to title form before we do any further processing */
++		$nt = Title::makeTitleSafe( NS_FILE, $this->mFilteredName );
++		if( is_null( $nt ) ) {
++			$this->mTitleError = self::ILLEGAL_FILENAME;
++			return $this->mTitle = null;
++		}
++		$this->mFilteredName = $nt->getDBkey();
++
++		/**
++		 * We'll want to blacklist against *any* 'extension', and use
++		 * only the final one for the whitelist.
++		 */
++		list( $partname, $ext ) = $this->splitExtensions( $this->mFilteredName );
++
++		if( count( $ext ) ) {
++			$this->mFinalExtension = trim( $ext[count( $ext ) - 1] );
++		} else {
++			$this->mFinalExtension = '';
++		}
++
++		/* Don't allow users to override the blacklist (check file extension) */
++		global $wgCheckFileExtensions, $wgStrictFileExtensions;
++		global $wgFileExtensions, $wgFileBlacklist;
++		if ( $this->mFinalExtension == '' ) {
++			$this->mTitleError = self::FILETYPE_MISSING;
++			return $this->mTitle = null;
++		} elseif ( $this->checkFileExtensionList( $ext, $wgFileBlacklist ) ||
++				( $wgCheckFileExtensions && $wgStrictFileExtensions &&
++					!$this->checkFileExtension( $this->mFinalExtension, $wgFileExtensions ) ) ) {
++			$this->mTitleError = self::FILETYPE_BADTYPE;
++			return $this->mTitle = null;
++		}
++
++		# If there was more than one "extension", reassemble the base
++		# filename to prevent bogus complaints about length
++		if( count( $ext ) > 1 ) {
++			for( $i = 0; $i < count( $ext ) - 1; $i++ )
++				$partname .= '.' . $ext[$i];
++		}
++
++		if( strlen( $partname ) < 1 ) {
++			$this->mTitleError =  self::MIN_LENGTH_PARTNAME;
++			return $this->mTitle = null;
++		}
++
++		$nt = Title::makeTitleSafe( NS_FILE, $this->mFilteredName );
++		if( is_null( $nt ) ) {
++			$this->mTitleError = self::ILLEGAL_FILENAME;
++			return $this->mTitle = null;
++		}
++		return $this->mTitle = $nt;
++	}
++
++	function getLocalFile() {
++		if( is_null( $this->mLocalFile ) ) {
++			$nt = $this->getTitle();
++			$this->mLocalFile = is_null( $nt ) ? null : wfLocalFile( $nt );
++		}
++		return $this->mLocalFile;
++	}
++
++	/**
++	 * Stash a file in a temporary directory for later processing
++	 * after the user has confirmed it.
++	 *
++	 * If the user doesn't explicitly cancel or accept, these files
++	 * can accumulate in the temp directory.
++	 *
++	 * @param string $saveName - the destination filename
++	 * @param string $tempName - the source temporary file to save
++	 * @return string - full path the stashed file, or false on failure
++	 * @access private
++	 */
++	function saveTempUploadedFile( $saveName, $tempName ) {
++		$repo = RepoGroup::singleton()->getLocalRepo();
++		$status = $repo->storeTemp( $saveName, $tempName );
++		return $status;
++	}
++
++	/* append to a stashed file */
++	function appendToUploadFile( $srcPath, $toAppendPath ){
++		$repo = RepoGroup::singleton()->getLocalRepo();
++		$status = $repo->append( $srcPath, $toAppendPath );
++		return $status;
++	}
++
++	/**
++	 * Stash a file in a temporary directory for later processing,
++	 * and save the necessary descriptive info into the session.
++	 * Returns a key value which will be passed through a form
++	 * to pick up the path info on a later invocation.
++	 *
++	 * @return int
++	 * @access private
++	 */
++	function stashSession() {
++		$status = $this->saveTempUploadedFile( $this->mDestName, $this->mTempPath );
++		if( !$status->isOK() ) {
++			# Couldn't save the file.
++			return false;
++		}
++		$mTempPath = $status->value;
++		if(!isset($_SESSION))
++			session_start(); // start up the session (might have been previously closed to prevent php session locking)
++		$key = $this->getSessionKey();
++		$_SESSION['wsUploadData'][$key] = array(
++			'mTempPath'       => $mTempPath,
++			'mFileSize'       => $this->mFileSize,
++			'mFileProps'      => $this->mFileProps,
++			'version'         => self::SESSION_VERSION,
++		);
++		session_write_close();
++		return $key;
++	}
++
++	/**
++	 * Pull session key gen from stash in cases where we want to start an upload without much information
++	 */
++	function getSessionKey(){
++		$key = mt_rand( 0, 0x7fffffff );
++		$_SESSION['wsUploadData'][$key] = array();
++		return $key;
++	}
++
++	/**
++	 * Remove a temporarily kept file stashed by saveTempUploadedFile().
++	 * @return success
++	 */
++	function unsaveUploadedFile() {
++		$repo = RepoGroup::singleton()->getLocalRepo();
++		$success = $repo->freeTemp( $this->mTempPath );
++		return $success;
++	}
++
++	/**
++	 * If we've modified the upload file we need to manually remove it
++	 * on exit to clean up.
++	 * @access private
++	 */
++	function cleanupTempFile() {
++		if ( $this->mRemoveTempFile && $this->mTempPath && file_exists( $this->mTempPath ) ) {
++			wfDebug( __METHOD__ . ": Removing temporary file {$this->mTempPath}\n" );
++			unlink( $this->mTempPath );
++		}
++	}
++
++	function getTempPath() {
++		return $this->mTempPath;
++	}
++
++	/**
++	 * Split a file into a base name and all dot-delimited 'extensions'
++	 * on the end. Some web server configurations will fall back to
++	 * earlier pseudo-'extensions' to determine type and execute
++	 * scripts, so the blacklist needs to check them all.
++	 *
++	 * @return array
++	 */
++	public static function splitExtensions( $filename ) {
++		$bits = explode( '.', $filename );
++		$basename = array_shift( $bits );
++		return array( $basename, $bits );
++	}
++
++	/**
++	 * Perform case-insensitive match against a list of file extensions.
++	 * Returns true if the extension is in the list.
++	 *
++	 * @param string $ext
++	 * @param array $list
++	 * @return bool
++	 */
++	public static function checkFileExtension( $ext, $list ) {
++		return in_array( strtolower( $ext ), $list );
++	}
++
++	/**
++	 * Perform case-insensitive match against a list of file extensions.
++	 * Returns true if any of the extensions are in the list.
++	 *
++	 * @param array $ext
++	 * @param array $list
++	 * @return bool
++	 */
++	public static function checkFileExtensionList( $ext, $list ) {
++		foreach( $ext as $e ) {
++			if( in_array( strtolower( $e ), $list ) ) {
++				return true;
++			}
++		}
++		return false;
++	}
++
++	/**
++	 * Checks if the mime type of the uploaded file matches the file extension.
++	 *
++	 * @param string $mime the mime type of the uploaded file
++	 * @param string $extension The filename extension that the file is to be served with
++	 * @return bool
++	 */
++	public static function verifyExtension( $mime, $extension ) {
++		$magic = MimeMagic::singleton();
++
++		if ( !$mime || $mime == 'unknown' || $mime == 'unknown/unknown' )
++			if ( !$magic->isRecognizableExtension( $extension ) ) {
++				wfDebug( __METHOD__ . ": passing file with unknown detected mime type; " .
++					"unrecognized extension '$extension', can't verify\n" );
++				return true;
++			} else {
++				wfDebug( __METHOD__ . ": rejecting file with unknown detected mime type; ".
++					"recognized extension '$extension', so probably invalid file\n" );
++				return false;
++			}
++
++		$match = $magic->isMatchingExtension( $extension, $mime );
++
++		if ( $match === NULL ) {
++			wfDebug( __METHOD__ . ": no file extension known for mime type $mime, passing file\n" );
++			return true;
++		} elseif( $match === true ) {
++			wfDebug( __METHOD__ . ": mime type $mime matches extension $extension, passing file\n" );
++
++			#TODO: if it's a bitmap, make sure PHP or ImageMagic resp. can handle it!
++			return true;
++
++		} else {
++			wfDebug( __METHOD__ . ": mime type $mime mismatches file extension $extension, rejecting file\n" );
++			return false;
++		}
++	}
++
++	/**
++	 * Heuristic for detecting files that *could* contain JavaScript instructions or
++	 * things that may look like HTML to a browser and are thus
++	 * potentially harmful. The present implementation will produce false positives in some situations.
++	 *
++	 * @param string $file Pathname to the temporary upload file
++	 * @param string $mime The mime type of the file
++	 * @param string $extension The extension of the file
++	 * @return bool true if the file contains something looking like embedded scripts
++	 */
++	function detectScript( $file, $mime, $extension ) {
++		global $wgAllowTitlesInSVG;
++
++		#ugly hack: for text files, always look at the entire file.
++		#For binary field, just check the first K.
++
++		if( strpos( $mime,'text/' ) === 0 )
++			$chunk = file_get_contents( $file );
++		else {
++			$fp = fopen( $file, 'rb' );
++			$chunk = fread( $fp, 1024 );
++			fclose( $fp );
++		}
++
++		$chunk = strtolower( $chunk );
++
++		if( !$chunk )
++			return false;
++
++		#decode from UTF-16 if needed (could be used for obfuscation).
++		if( substr( $chunk, 0, 2 ) == "\xfe\xff" )
++			$enc = "UTF-16BE";
++		elseif( substr( $chunk, 0, 2 ) == "\xff\xfe" )
++			$enc = "UTF-16LE";
++		else
++			$enc = NULL;
++
++		if( $enc )
++			$chunk = iconv( $enc, "ASCII//IGNORE", $chunk );
++
++		$chunk = trim( $chunk );
++
++		#FIXME: convert from UTF-16 if necessarry!
++		wfDebug( __METHOD__ . ": checking for embedded scripts and HTML stuff\n" );
++
++		#check for HTML doctype
++		if ( preg_match( "/<!DOCTYPE *X?HTML/i", $chunk ) )
++			return true;
++
++		/**
++		* Internet Explorer for Windows performs some really stupid file type
++		* autodetection which can cause it to interpret valid image files as HTML
++		* and potentially execute JavaScript, creating a cross-site scripting
++		* attack vectors.
++		*
++		* Apple's Safari browser also performs some unsafe file type autodetection
++		* which can cause legitimate files to be interpreted as HTML if the
++		* web server is not correctly configured to send the right content-type
++		* (or if you're really uploading plain text and octet streams!)
++		*
++		* Returns true if IE is likely to mistake the given file for HTML.
++		* Also returns true if Safari would mistake the given file for HTML
++		* when served with a generic content-type.
++		*/
++		$tags = array(
++			'<a',
++			'<body',
++			'<head',
++			'<html',   #also in safari
++			'<img',
++			'<pre',
++			'<script', #also in safari
++			'<table'
++		);
++
++		if( !$wgAllowTitlesInSVG && $extension !== 'svg' && $mime !== 'image/svg' ) {
++			$tags[] = '<title';
++		}
++
++		foreach( $tags as $tag ) {
++			if( false !== strpos( $chunk, $tag ) ) {
++				return true;
++			}
++		}
++
++		/*
++		 * look for JavaScript
++		 */
++
++		#resolve entity-refs to look at attributes. may be harsh on big files... cache result?
++		$chunk = Sanitizer::decodeCharReferences( $chunk );
++
++		#look for script-types
++		if( preg_match( '!type\s*=\s*[\'"]?\s*(?:\w*/)?(?:ecma|java)!sim', $chunk ) )
++			return true;
++
++		#look for html-style script-urls
++		if( preg_match( '!(?:href|src|data)\s*=\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk ) )
++			return true;
++
++		#look for css-style script-urls
++		if( preg_match( '!url\s*\(\s*[\'"]?\s*(?:ecma|java)script:!sim', $chunk ) )
++			return true;
++
++		wfDebug( __METHOD__ . ": no scripts found\n" );
++		return false;
++	}
++
++	function detectScriptInSvg( $filename ) {
++		$check = new XmlTypeCheck( $filename, array( $this, 'checkSvgScriptCallback' ) );
++		return $check->filterMatch;
++	}
++
++	/**
++	 * @todo Replace this with a whitelist filter!
++	 */
++	function checkSvgScriptCallback( $element, $attribs ) {
++		$stripped = $this->stripXmlNamespace( $element );
++
++		if( $stripped == 'script' ) {
++			wfDebug( __METHOD__ . ": Found script element '$element' in uploaded file.\n" );
++			return true;
++		}
++
++		foreach( $attribs as $attrib => $value ) {
++			$stripped = $this->stripXmlNamespace( $attrib );
++			if( substr( $stripped, 0, 2 ) == 'on' ) {
++				wfDebug( __METHOD__ . ": Found script attribute '$attrib'='value' in uploaded file.\n" );
++				return true;
++			}
++			if( $stripped == 'href' && strpos( strtolower( $value ), 'javascript:' ) !== false ) {
++				wfDebug( __METHOD__ . ": Found script href attribute '$attrib'='$value' in uploaded file.\n" );
++				return true;
++			}
++		}
++	}
++
++	private function stripXmlNamespace( $name ) {
++		// 'http://www.w3.org/2000/svg:script' -> 'script'
++		$parts = explode( ':', strtolower( $name ) );
++		return array_pop( $parts );
++	}
++
++	/**
++	 * Generic wrapper function for a virus scanner program.
++	 * This relies on the $wgAntivirus and $wgAntivirusSetup variables.
++	 * $wgAntivirusRequired may be used to deny upload if the scan fails.
++	 *
++	 * @param string $file Pathname to the temporary upload file
++	 * @return mixed false if not virus is found, NULL if the scan fails or is disabled,
++	 *         or a string containing feedback from the virus scanner if a virus was found.
++	 *         If textual feedback is missing but a virus was found, this function returns true.
++	 */
++	function detectVirus( $file ) {
++		global $wgAntivirus, $wgAntivirusSetup, $wgAntivirusRequired, $wgOut;
++
++		if ( !$wgAntivirus ) {
++			wfDebug( __METHOD__ . ": virus scanner disabled\n" );
++			return NULL;
++		}
++
++		if ( !$wgAntivirusSetup[$wgAntivirus] ) {
++			wfDebug( __METHOD__ . ": unknown virus scanner: $wgAntivirus\n" );
++			$wgOut->wrapWikiMsg( '<div class="error">$1</div>', array( 'virus-badscanner', $wgAntivirus ) );
++			return wfMsg( 'virus-unknownscanner' ) . " $wgAntivirus";
++		}
++
++		# look up scanner configuration
++		$command = $wgAntivirusSetup[$wgAntivirus]["command"];
++		$exitCodeMap = $wgAntivirusSetup[$wgAntivirus]["codemap"];
++		$msgPattern = isset( $wgAntivirusSetup[$wgAntivirus]["messagepattern"] ) ?
++			$wgAntivirusSetup[$wgAntivirus]["messagepattern"] : null;
++
++		if ( strpos( $command,"%f" ) === false ) {
++			# simple pattern: append file to scan
++			$command .= " " . wfEscapeShellArg( $file );
++		} else {
++			# complex pattern: replace "%f" with file to scan
++			$command = str_replace( "%f", wfEscapeShellArg( $file ), $command );
++		}
++
++		wfDebug( __METHOD__ . ": running virus scan: $command \n" );
++
++		# execute virus scanner
++		$exitCode = false;
++
++		#NOTE: there's a 50 line workaround to make stderr redirection work on windows, too.
++		#      that does not seem to be worth the pain.
++		#      Ask me (Duesentrieb) about it if it's ever needed.
++		$output = array();
++		if ( wfIsWindows() ) {
++			exec( "$command", $output, $exitCode );
++		} else {
++			exec( "$command 2>&1", $output, $exitCode );
++		}
++
++		# map exit code to AV_xxx constants.
++		$mappedCode = $exitCode;
++		if ( $exitCodeMap ) {
++			if ( isset( $exitCodeMap[$exitCode] ) ) {
++				$mappedCode = $exitCodeMap[$exitCode];
++			} elseif ( isset( $exitCodeMap["*"] ) ) {
++				$mappedCode = $exitCodeMap["*"];
++			}
++		}
++
++		if ( $mappedCode === AV_SCAN_FAILED ) {
++			# scan failed (code was mapped to false by $exitCodeMap)
++			wfDebug( __METHOD__ . ": failed to scan $file (code $exitCode).\n" );
++
++			if ( $wgAntivirusRequired ) {
++				return wfMsg( 'virus-scanfailed', array( $exitCode ) );
++			} else {
++				return NULL;
++			}
++		} else if ( $mappedCode === AV_SCAN_ABORTED ) {
++			# scan failed because filetype is unknown (probably imune)
++			wfDebug( __METHOD__ . ": unsupported file type $file (code $exitCode).\n" );
++			return NULL;
++		} else if ( $mappedCode === AV_NO_VIRUS ) {
++			# no virus found
++			wfDebug( __METHOD__ . ": file passed virus scan.\n" );
++			return false;
++		} else {
++			$output = join( "\n", $output );
++			$output = trim( $output );
++
++			if ( !$output ) {
++				$output = true; #if there's no output, return true
++			} elseif ( $msgPattern ) {
++				$groups = array();
++				if ( preg_match( $msgPattern, $output, $groups ) ) {
++					if ( $groups[1] ) {
++						$output = $groups[1];
++					}
++				}
++			}
++
++			wfDebug( __METHOD__ . ": FOUND VIRUS! scanner feedback: $output \n" );
++			return $output;
++		}
++	}
++
++	/**
++	 * Check if the temporary file is MacBinary-encoded, as some uploads
++	 * from Internet Explorer on Mac OS Classic and Mac OS X will be.
++	 * If so, the data fork will be extracted to a second temporary file,
++	 * which will then be checked for validity and either kept or discarded.
++	 *
++	 * @access private
++	 */
++	function checkMacBinary() {
++		$macbin = new MacBinary( $this->mTempPath );
++		if( $macbin->isValid() ) {
++			$dataFile = tempnam( wfTempDir(), 'WikiMacBinary' );
++			$dataHandle = fopen( $dataFile, 'wb' );
++
++			wfDebug( __METHOD__ . ": Extracting MacBinary data fork to $dataFile\n" );
++			$macbin->extractData( $dataHandle );
++
++			$this->mTempPath = $dataFile;
++			$this->mFileSize = $macbin->dataForkLength();
++
++			// We'll have to manually remove the new file if it's not kept.
++			$this->mRemoveTempFile = true;
++		}
++		$macbin->close();
++	}
++
++	/**
++	 * Check if there's an overwrite conflict and, if so, if restrictions
++	 * forbid this user from performing the upload.
++	 *
++	 * @return mixed true on success, WikiError on failure
++	 * @access private
++	 */
++	function checkOverwrite() {
++		global $wgUser;
++		// First check whether the local file can be overwritten
++		if( $this->mLocalFile->exists() )
++			if( !self::userCanReUpload( $wgUser, $this->mLocalFile ) )
++				return 'fileexists-forbidden';
++
++		// Check shared conflicts
++		$file = wfFindFile( $this->mLocalFile->getName() );
++		if ( $file && ( !$wgUser->isAllowed( 'reupload' ) ||
++				!$wgUser->isAllowed( 'reupload-shared' ) ) )
++			return 'fileexists-shared-forbidden';
++
++		return true;
++	}
++
++	/**
++	 * Check if a user is the last uploader
++	 *
++	 * @param User $user
++	 * @param string $img, image name
++	 * @return bool
++	 */
++	public static function userCanReUpload( User $user, $img ) {
++		if( $user->isAllowed( 'reupload' ) )
++			return true; // non-conditional
++		if( !$user->isAllowed( 'reupload-own' ) )
++			return false;
++		if( is_string( $img ) )
++			$img = wfLocalFile( $img );
++		if ( !( $img instanceof LocalFile ) )
++			return false;
++
++		return $user->getId() == $img->getUser( 'id' );
++	}
++
++	public static function getExistsWarning( $file ) {
++		if( $file->exists() )
++			return array( 'exists', $file );
++
++		if( $file->getTitle()->getArticleID() )
++			return array( 'page-exists', $file );
++
++		if( strpos( $file->getName(), '.' ) == false ) {
++			$partname = $file->getName();
++			$rawExtension = '';
++		} else {
++			$n = strrpos( $file->getName(), '.' );
++			$rawExtension = substr( $file->getName(), $n + 1 );
++			$partname = substr( $file->getName(), 0, $n );
++		}
++
++		if ( $rawExtension != $file->getExtension() ) {
++			// We're not using the normalized form of the extension.
++			// Normal form is lowercase, using most common of alternate
++			// extensions (eg 'jpg' rather than 'JPEG').
++			//
++			// Check for another file using the normalized form...
++			$nt_lc = Title::makeTitle( NS_FILE, $partname . '.' . $file->getExtension() );
++			$file_lc = wfLocalFile( $nt_lc );
++
++			if( $file_lc->exists() )
++				return array( 'exists-normalized', $file_lc );
++		}
++
++		if ( self::isThumbName( $file->getName() ) ) {
++			# Check for filenames like 50px- or 180px-, these are mostly thumbnails
++			$nt_thb = Title::newFromText( substr( $partname , strpos( $partname , '-' ) +1 ) . '.' . $rawExtension );
++			$file_thb = wfLocalFile( $nt_thb );
++			if( $file_thb->exists() )
++				return array( 'thumb', $file_thb );
++		}
++
++		return false;
++	}
++
++	public static function isThumbName( $filename ) {
++		$n = strrpos( $filename, '.' );
++		$partname = $n ? substr( $filename, 0, $n ) : $filename;
++		return (
++					substr( $partname , 3, 3 ) == 'px-' ||
++					substr( $partname , 2, 3 ) == 'px-'
++				) &&
++				preg_match( "/[0-9]{2}/" , substr( $partname , 0, 2 ) );
++	}
++
++	/**
++	 * Get a list of blacklisted filename prefixes from [[MediaWiki:filename-prefix-blacklist]]
++	 *
++	 * @return array list of prefixes
++	 */
++	public static function getFilenamePrefixBlacklist() {
++		$blacklist = array();
++		$message = wfMsgForContent( 'filename-prefix-blacklist' );
++		if( $message && !( wfEmptyMsg( 'filename-prefix-blacklist', $message ) || $message == '-' ) ) {
++			$lines = explode( "\n", $message );
++			foreach( $lines as $line ) {
++				// Remove comment lines
++				$comment = substr( trim( $line ), 0, 1 );
++				if ( $comment == '#' || $comment == '' ) {
++					continue;
++				}
++				// Remove additional comments after a prefix
++				$comment = strpos( $line, '#' );
++				if ( $comment > 0 ) {
++					$line = substr( $line, 0, $comment-1 );
++				}
++				$blacklist[] = trim( $line );
++			}
++		}
++		return $blacklist;
++	}
++
++}
+diff -Nuri a/includes/upload/UploadFromChunks.php b/includes/upload/UploadFromChunks.php
+--- a/includes/upload/UploadFromChunks.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/upload/UploadFromChunks.php	2009-07-24 23:40:12.000000000 +0000
+@@ -0,0 +1,239 @@
++<?php
++/**
++ * first destination checks are made (if ignorewarnings is not checked) errors / warning is returned.
++ *
++ * we return the uploadUrl
++ * we then accept chunk uploads from the client.
++ * return chunk id on each POSTED chunk
++ * once the client posts done=1 concatenated the files together.
++ * more info at: http://firefogg.org/dev/chunk_post.html
++ */
++class UploadFromChunks extends UploadBase {
++
++	var $chunk_mode; //init, chunk, done
++	var $mSessionKey = false;
++	var $status = array();
++
++	const INIT 	= 1;
++	const CHUNK = 2;
++	const DONE 	= 3;
++
++	function initializeFromParams( $param, &$request ) {
++		$this->initFromSessionKey( $param['chunksessionkey'], $request );
++		// set the chunk mode:
++		if( !$this->mSessionKey && !$param['done'] ){
++			// session key not set init the chunk upload system:
++			$this->chunk_mode = UploadFromChunks::INIT;
++			$this->mDesiredDestName = $param['filename'];
++		} else if( $this->mSessionKey && !$param['done'] ){
++			// this is a chunk piece
++			$this->chunk_mode = UploadFromChunks::CHUNK;
++		} else if( $this->mSessionKey && $param['done'] ){
++			// this is the last chunk
++			$this->chunk_mode = UploadFromChunks::DONE;
++		}
++		if( $this->chunk_mode == UploadFromChunks::CHUNK ||
++			$this->chunk_mode == UploadFromChunks::DONE ){
++				// set chunk related vars:
++				$this->mTempPath = $request->getFileTempName( 'chunk' );
++				$this->mFileSize = $request->getFileSize( 'chunk' );
++		}
++
++		return $this->status;
++	}
++
++	static function isValidRequest( $request ) {
++		$sessionData = $request->getSessionData( 'wsUploadData' );
++		if( !self::isValidSessionKey(
++			$request->getInt( 'wpSessionKey' ),
++			$sessionData ) )
++				return false;
++		// check for the file:
++		return (bool)$request->getFileTempName( 'file' );
++	}
++
++	/* check warnings depending on chunk_mode */
++	function checkWarnings(){
++		$warning = array();
++		return $warning;
++	}
++
++	function isEmptyFile(){
++		// does not apply to chunk init
++		if( $this->chunk_mode == UploadFromChunks::INIT ){
++			return false;
++		} else {
++			return parent::isEmptyFile();
++		}
++	}
++
++ 	/**
++	 * Verify whether the upload is sane.
++	 * Returns self::OK or else an array with error information
++	 */
++	function verifyUpload( $resultDetails ) {
++		// no checks on chunk upload mode:
++		if( $this->chunk_mode ==  UploadFromChunks::INIT )
++			return self::OK;
++
++		// verify on init and last chunk request
++		if(	$this->chunk_mode == UploadFromChunks::CHUNK ||
++			$this->chunk_mode == UploadFromChunks::DONE )
++			return parent::verifyUpload( $resultDetails );
++	}
++
++	// only run verifyFile on completed uploaded chunks
++	function verifyFile( $tmpFile ){
++		if( $this->chunk_mode == UploadFromChunks::DONE ){
++			// first append last chunk (so we can do a real verifyFile check... (check file type etc)
++			$status = $this->doChunkAppend();
++			if( $status->isOK() ){
++				$this->mTempPath = $this->getRealPath( $this->mTempAppendPath );
++				// verify the completed merged chunks as if it was the file that got uploaded:
++				return parent::verifyFile( $this->mTempPath );
++			} else {
++				// conflict of status returns (have to return the error ary) ... why we don't consistantly use a status object is beyond me..
++				return $status->getErrorsArray();
++			}
++		} else {
++			return true;
++		}
++	}
++
++	function getRealPath( $srcPath ){
++		$repo = RepoGroup::singleton()->getLocalRepo();
++		if ( $repo->isVirtualUrl( $srcPath ) ) {
++			return $repo->resolveVirtualUrl( $srcPath );
++		}
++	}
++
++	// pretty ugly inter-mixing of mParam and local vars
++	function setupChunkSession( $summary, $comment, $watch ) {
++		$this->mSessionKey = $this->getSessionKey();
++		$_SESSION['wsUploadData'][$this->mSessionKey] = array(
++			'mComment'			=> $comment,
++		    'mSummary'			=> $summary,
++			'mWatch'			=> $watch,
++			'mFilteredName'		=> $this->mFilteredName,
++			'mTempAppendPath'	=> null, // the repo append path (not temporary local node mTempPath)
++			'mDesiredDestName'	=> $this->mDesiredDestName,
++			'version'			=> self::SESSION_VERSION,
++		);
++		return $this->mSessionKey;
++	}
++
++	function initFromSessionKey( $sessionKey, $request ){
++		if( !$sessionKey || empty( $sessionKey ) ){
++			return false;
++		}
++		$this->mSessionKey = $sessionKey;
++		// load the sessionData array:
++		$sessionData = $request->getSessionData( 'wsUploadData' );
++
++		if( isset( $sessionData[$this->mSessionKey]['version'] ) &&
++			$sessionData[$this->mSessionKey]['version'] == self::SESSION_VERSION ) {
++			// update the local object from the session
++			$this->mComment          = $sessionData[$this->mSessionKey]['mComment'];
++			$this->mSummary          = $sessionData[$this->mSessionKey]['mSummary'];
++			$this->mWatch            = $sessionData[$this->mSessionKey]['mWatch'];
++			$this->mIgnorewarnings   = $sessionData[$this->mSessionKey]['mIgnorewarnings'];
++			$this->mFilteredName	 = $sessionData[$this->mSessionKey]['mFilteredName'];
++			$this->mTempAppendPath   = $sessionData[$this->mSessionKey]['mTempAppendPath'];
++			$this->mDesiredDestName	 = $sessionData[$this->mSessionKey]['mDesiredDestName'];
++		} else {
++			$this->status = array( 'error' => 'missing session data' );
++			return false;
++		}
++	}
++
++	// Lets us return an api result (as flow for chunk uploads is kind of different than others.
++	function performUpload( $summary = '', $comment = '', $watch = '', $user ){
++		global $wgServer, $wgScriptPath, $wgUser;
++
++		if( $this->chunk_mode == UploadFromChunks::INIT ){
++			// firefogg expects a specific result per:
++			// http://www.firefogg.org/dev/chunk_post.html
++
++			// it's okay to return the token here because
++			// a) the user must have requested the token to get here and
++			// b) should only happen over POST
++			// c) (we need the token to validate chunks are coming from a non-xss request)
++			$token = urlencode( $wgUser->editToken() );
++			ob_clean();
++			echo ApiFormatJson::getJsonEncode( array(
++					'uploadUrl' => "{$wgServer}{$wgScriptPath}/api.php?action=upload&".
++									"token={$token}&format=json&enablechunks=true&chunksessionkey=".
++									$this->setupChunkSession($summary, $comment, $watch ) ) );
++			exit( 0 );
++		} else if( $this->chunk_mode == UploadFromChunks::CHUNK ){
++			$status = $this->doChunkAppend();
++			if( $status->isOK() ){
++				// return success:
++				// firefogg expects a specific result per:
++				// http://www.firefogg.org/dev/chunk_post.html
++				ob_clean();
++				echo ApiFormatJson::getJsonEncode( array(
++						'result' => 1,
++						'filesize' => filesize( $this->getRealPath( $this->mTempAppendPath ) )
++					)
++				);
++				exit( 0 );
++				/*return array(
++					'result' => 1
++				);*/
++			} else {
++				return $status;
++			}
++		} else if( $this->chunk_mode == UploadFromChunks::DONE ){
++			// update the values from the local (session init) if not paseed again)
++			if( $summary == '' )
++				$summary = $this->mSummary;
++
++			if( $comment == '' )
++				$comment = $this->mComment;
++
++			if( $watch == '' )
++				$watch = $this->mWatch;
++			$status = parent::performUpload( $summary, $comment, $watch, $user );
++			if( !$status->isGood() ) {
++				return $status;
++			}
++			$file = $this->getLocalFile();
++			// firefogg expects a specific result per:
++			// http://www.firefogg.org/dev/chunk_post.html
++			ob_clean();
++			echo ApiFormatJson::getJsonEncode( array(
++					'result' => 1,
++					'done' => 1,
++					'resultUrl' => $file->getDescriptionUrl()
++				)
++			);
++			exit( 0 );
++
++		}
++	}
++
++	// append the given chunk to the temporary uploaded file. (if no temporary uploaded file exists created it.
++	function doChunkAppend(){
++		// if we don't have a mTempAppendPath to generate a file from the chunk packaged var:
++		if( !$this->mTempAppendPath ){
++			// get temp name:
++			// make a chunk store path. (append tmp file to chunk)
++			$status = $this->saveTempUploadedFile( $this->mDestName, $this->mTempPath );
++
++			if( $status->isOK() ) {
++				$this->mTempAppendPath = $status->value;
++				$_SESSION['wsUploadData'][$this->mSessionKey]['mTempAppendPath'] = $this->mTempAppendPath;
++			}
++			return $status;
++		} else {
++			if( is_file( $this->getRealPath( $this->mTempAppendPath ) ) ){
++				$status = $this->appendToUploadFile( $this->mTempAppendPath, $this->mTempPath );
++			} else {
++				$status->fatal( 'filenotfound', $this->mTempAppendPath );
++			}
++			return $status;
++		}
++	}
++
++}
+diff -Nuri a/includes/upload/UploadFromFile.php b/includes/upload/UploadFromFile.php
+--- a/includes/upload/UploadFromFile.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/upload/UploadFromFile.php	2009-07-24 23:40:12.000000000 +0000
+@@ -0,0 +1,19 @@
++<?php
++
++class UploadFromFile extends UploadBase {
++
++	function initializeFromRequest( &$request ) {
++		$desiredDestName = $request->getText( 'wpDestFile' );
++		if( !$desiredDestName )
++			$desiredDestName = $request->getText( 'wpUploadFile' );
++		return $this->initialize(
++			$desiredDestName,
++			$request->getFileTempName( 'wpUploadFile' ),
++			$request->getFileSize( 'wpUploadFile' )
++		);
++	}
++
++	static function isValidRequest( $request ) {
++		return (bool)$request->getFileTempName( 'wpUploadFile' );
++	}
++}
+diff -Nuri a/includes/upload/UploadFromStash.php b/includes/upload/UploadFromStash.php
+--- a/includes/upload/UploadFromStash.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/upload/UploadFromStash.php	2009-07-24 23:40:12.000000000 +0000
+@@ -0,0 +1,63 @@
++<?php
++
++class UploadFromStash extends UploadBase {
++
++	static function isValidSessionKey( $key, $sessionData ) {
++		return !empty( $key ) && 
++			is_array( $sessionData ) && 
++			isset( $sessionData[$key] ) && 
++			isset( $sessionData[$key]['version'] ) && 
++			$sessionData[$key]['version'] == self::SESSION_VERSION;
++	}
++
++	static function isValidRequest( $request ) {
++		$sessionData = $request->getSessionData( 'wsUploadData' );
++		return self::isValidSessionKey( 
++			$request->getInt( 'wpSessionKey' ),
++			$sessionData
++		);
++	}
++	/*
++	 * some $na vars for uploadBase method compatibility.
++	 */
++	function initialize( $name, $sessionData, $na, $na2=false ) {
++			/**
++			 * Confirming a temporarily stashed upload.
++			 * We don't want path names to be forged, so we keep
++			 * them in the session on the server and just give
++			 * an opaque key to the user agent.
++			 */
++			parent::initialize( $name,
++				$sessionData['mTempPath'],
++				$sessionData['mFileSize'],
++				false
++			);
++
++			$this->mFileProps = $sessionData['mFileProps'];
++	}
++
++	function initializeFromRequest( &$request ) {
++		$sessionKey = $request->getInt( 'wpSessionKey' );
++		$sessionData = $request->getSessionData('wsUploadData');
++
++		$desiredDestName = $request->getText( 'wpDestFile' );
++		if( !$desiredDestName )
++			$desiredDestName = $request->getText( 'wpUploadFile' );
++		return $this->initialize( $desiredDestName, $sessionData[$sessionKey], false );
++	}
++
++	/**
++	 * File has been previously verified so no need to do so again.
++	 */
++	protected function verifyFile( $tmpfile ) {
++		return true;
++	}
++
++	/**
++	 * We're here from "ignore warnings anyway" so return just OK
++	 */
++	function checkWarnings() {
++		return array();
++	}
++
++}
+\ No newline at end of file
+diff -Nuri a/includes/upload/UploadFromUrl.php b/includes/upload/UploadFromUrl.php
+--- a/includes/upload/UploadFromUrl.php	1970-01-01 00:00:00.000000000 +0000
++++ b/includes/upload/UploadFromUrl.php	2009-07-24 23:40:12.000000000 +0000
+@@ -0,0 +1,109 @@
++<?php
++
++class UploadFromUrl extends UploadBase {
++	protected $mTempDownloadPath;
++
++	// by default do a SYNC_DOWNLOAD
++	protected $dl_mode = null;
++
++	/**
++	 * Checks if the user is allowed to use the upload-by-URL feature
++	 */
++	static function isAllowed( $user ) {
++		if( !$user->isAllowed( 'upload_by_url' ) )
++			return 'upload_by_url';
++		return parent::isAllowed( $user );
++	}
++
++	/**
++	 * Checks if the upload from URL feature is enabled
++	 */
++	static function isEnabled() {
++		global $wgAllowCopyUploads;
++		return $wgAllowCopyUploads && parent::isEnabled();
++	}
++
++	/* entry point for API upload:: ASYNC_DOWNLOAD (if possible) */
++	function initialize( $name, $url, $asyncdownload, $na = false ) {
++		global $wgTmpDirectory, $wgPhpCli;
++
++		// check for $asyncdownload request:
++		if( $asyncdownload !== false){
++			if( $wgPhpCli && wfShellExecEnabled() ){
++				$this->dl_mode = Http::ASYNC_DOWNLOAD;
++			} else {
++				$this->dl_mode = Http::SYNC_DOWNLOAD;
++			}
++		}
++
++		$local_file = tempnam( $wgTmpDirectory, 'WEBUPLOAD' );
++		parent::initialize( $name, $local_file, 0, true );
++
++		$this->mUrl = trim( $url );
++	}
++
++	public function isAsync(){
++		return $this->dl_mode == Http::ASYNC_DOWNLOAD;
++	}
++
++	/**
++	 * Entry point for SpecialUpload no ASYNC_DOWNLOAD possible
++	 * @param $request Object: WebRequest object
++	 */
++	function initializeFromRequest( &$request ) {
++
++		// set dl mode if not set:
++		if( !$this->dl_mode )
++			$this->dl_mode = Http::SYNC_DOWNLOAD;
++
++		$desiredDestName = $request->getText( 'wpDestFile' );
++		if( !$desiredDestName )
++			$desiredDestName = $request->getText( 'wpUploadFile' );
++		return $this->initialize(
++			$desiredDestName,
++	 		$request->getVal( 'wpUploadFileURL' ),
++			false
++		);
++	}
++
++	/**
++	 * Do the real fetching stuff
++	 */
++	function fetchFile() {
++		// entry point for SpecialUplaod
++		if( self::isValidURI( $this->mUrl ) === false ) {
++			return Status::newFatal( 'upload-proto-error' );
++		}
++
++		// now do the actual download to the target file:
++		$status = Http::doDownload( $this->mUrl, $this->mTempPath, $this->dl_mode );
++
++		// update the local filesize var:
++		$this->mFileSize = filesize( $this->mTempPath );
++
++		return $status;
++	}
++
++	/**
++	 * @param $request Object: WebRequest object
++	 */
++	static function isValidRequest( $request ){
++		if( !$request->getVal( 'wpUploadFileURL' ) )
++			return false;
++		// check that is a valid url:
++		return self::isValidURI( $request->getVal( 'wpUploadFileURL' ) );
++	}
++
++	/**
++	 * Checks that the given URI is a valid one
++	 * @param $uri Mixed: URI to check for validity
++	 */
++	static function isValidURI( $uri ){
++		return preg_match(
++			'/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/',
++			$uri,
++			$matches
++		);
++	}
++
++}
+\ No newline at end of file

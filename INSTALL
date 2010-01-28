@@ -24,6 +24,8 @@ Install a current version (>= 1.15) of Mediawiki.
 See http://www.mediawiki.org/wiki/MediaWiki , the INSTALL file in the
 source directory will guide you through the installation.
 
+contrib/LocalSettings.php.example contains a few important settings.
+
 
 
 MediaWiki Features
@@ -44,10 +46,7 @@ this topic.
 
 FIXME:
 *) Upload (File) API monkeypatching:
-includes/AutoLoader.php
-includes/api/ApiMain.php
-includes/api/ApiUpload.php
-includes/upload/
+patch -p1 < mediawiki_trunk_upload_api_for_1.15.patch
 
 *) SICEKIT css stuff
 
@@ -76,7 +75,7 @@ FIXME
 
 QuickStart FIXME:
 Create Mediawiki Account (Bot, Administrator)
-cp sicekitrc.example .sicekitrc
+cp contrib/sicekitrc.example .sicekitrc
 vim .sicekitrc
 ./bin/sicekit-wiki-exportimport --import -d ./wiki-data
 ./bin/sicekit-wiki-configurerobots FIXME
