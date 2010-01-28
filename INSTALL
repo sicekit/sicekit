@@ -3,13 +3,16 @@ Prerequisites
 
 You need 
 
-* A Webserver capable of running PHP scripts
-* PHP5 (for Mediawiki)
-* MySQL >= 4.0 or PostgreSQL >= 8.1  (for Mediawiki)
-* MediaWiki >= 1.15
-* Python 2.5 (for the Robots)
-* A SVG converter (for MediaWiki)
-* A Cron daemon or similar job runner (for the Robots)
+for the Wiki:
+  * MediaWiki >= 1.15
+  * A Webserver capable of running PHP scripts
+  * PHP5
+  * MySQL >= 4.0 or PostgreSQL >= 8.1
+  * A SVG converter (e.g. librsvg)
+
+for the Robots:
+  * Python 2.5
+  * A Cron daemon or similar job runner
 
 
 
@@ -72,6 +75,7 @@ Installing SICEKIT
 FIXME
 
 QuickStart FIXME:
+Create Mediawiki Account (Bot, Administrator)
 cp sicekitrc.example .sicekitrc
 vim .sicekitrc
 ./bin/sicekit-wiki-exportimport --import -d ./wiki-data
