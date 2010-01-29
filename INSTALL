@@ -82,10 +82,12 @@ vim .sicekitrc
 
 Robots:
 sudo apt-get install python-iplib
+create sicekit robots user
 cd robots
 cp sicekit_family.template families/sicekit_family.py
-vim families/sicekit_family.py
+vim families/sicekit_family.py (replace all UPPERCASE labels with their correct values)
 python login.py
+add crontab
 
 
 Testing the robots
